@@ -1,0 +1,18 @@
+本项目展示如何把“有限配额”在高并发环境下安全受理而不超发。  
+面对抢资格、预约名额等场景，核心思路是：先在内存中做原子校验，再用队列削峰，最后异步落库并回写状态。
+
+核心链路可以把它想象成三段：
+1. **请求入口（FastAPI + Redis Lua）**  
+   用户调用 `/admission/requests`，FastAPI 交给 Redis Lua。Lua 会做幂等判断、限流检查、库存扣减，并把 `req_status:{request_id}` 写成 `PENDING`。这一切在 Redis 内部一次性完成，避免数据库“先查后改”的竞态。
+2. **Kafka 削峰**  
+   Lua 执行成功后立即把消息发到 Kafka 的 `order_create` topic，FastAPI 立刻返回 code=0（或其他业务码）并给客户端一个 `request_id`。Kafka 在高峰期起到缓冲作用，避免数据库同时收到爆炸级写入。
+3. **Worker 处理**  
+   `order_worker` 监听 Kafka，幂等写入 PostgreSQL 的 `orders` 表（`request_id` 唯一约束防止重复），写成功则把 Redis 状态更新为 `SUCCESS`，失败则写 `FAILED`，客户端可随时查询 `/admission/requests/{request_id}` 得到当前状态。
+
+管理端 `/admin/quota/*` 接口（X-Admin-Token）可预热/重置 `stock:{sku}` 并清理幂等 key，为压测或调试做准备。README 中已有 curl 实例可直接复现。
+
+为了展示性能指标，项目内集成了 Locust 脚本：启动前会自动调用管理接口把库存设为大值，然后模拟大量随机用户访问 `/admission/requests`，记录各类业务码和延迟，便于现场讲述吞吐与失败率。
+
+整个工程通过 `docker compose -f deploy/docker-compose.yml` 启动 Kafka（KRaft）、Redis、Postgres、Prometheus、Grafana。API 服务跑在 8000 端口，worker 用 `poetry run python app/main.py` 启动。README 给出完整步骤、环境变量（如 ADMIN_TOKEN、KAFKA_BOOTSTRAP_SERVERS、DATABASE_URL）与冒烟验证流程，面试官可现场复现。
+
+即便听众不熟悉 Redis/Kafka，也可以这样解释：先在 Redis 中“扣减配额并记录”，再把结果排队发到 Kafka，Worker 再把它写进数据库并更新状态。整个链路可观测、可压测、可 demo，非常适合讲“高并发+最终一致性”的工程方案。

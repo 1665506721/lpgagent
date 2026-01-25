@@ -1,0 +1,30 @@
+1. 请简述本项目（高并发请求受理系统）的核心流程和技术栈？
+   - 回答：FastAPI+Redis Lua 做前置校验与扣配额，成功写 `req_status=PENDING` 并发 Kafka 的 `order_create` topic，order_worker 消费写 PostgreSQL log 并更新 Redis 状态；Locust 负责编写压测脚本，Prometheus/Grafana 提供指标展示。
+2. Redis Lua 脚本在当前链路中解决了哪些问题？
+   - 回答：一次性执行幂等检查、限流判断、库存扣减与写 `req_status`，避免“先查后改”竞态和多节点并发冲突。
+3. Kafka 在系统中扮演什么角色？为什么要引入 Kafka？
+   - 回答：Kafka 担任削峰缓冲，FastAPI 接口只负责入队，order_worker 异步消费写数据库，减轻 PostgreSQL 在高峰期压力。
+4. 如何保证重复请求不会写入多条数据？
+   - 回答：Lua 用 `order_once:{sku}:{user}` 幂等，worker 写 orders 表时有 `request_id` 唯一约束，插入冲突直接忽略。
+5. 失败码 `code=1/2/3/4` 含义是什么？
+   - 回答：1=库存不足；2=重复请求；3=限流；4=Kafka 入队失败（比如 broker 不可达）。
+6. 状态查询如何实现？
+   - 回答：客户端调用 `/admission/requests/{request_id}`，FastAPI 读取 `req_status:{request_id}`，返回 `PENDING`/`SUCCESS`/`FAILED` 或 `NOT_FOUND`。
+7. 本地部署需要配置哪些环境变量？
+   - 回答：API 需要 `ADMIN_TOKEN`、`KAFKA_BOOTSTRAP_SERVERS`、`KAFKA_TOPIC_ORDER_CREATE`、`REDIS_HOST/REDIS_PORT/REDIS_DB`，worker 额外需要 `DATABASE_URL`、`KAFKA_CONSUMER_GROUP`。
+8. 如何确认 Kafka 入队是否成功？
+   - 回答：观察 `/metrics` 中的 `admission_requests_total` 与 `kafka_produce_fail_total`；入队失败会触发 Kafka counter 并把 `req_status` 写成 `FAILED`。
+9. Locust 脚本的作用与必需参数？
+   - 回答：Locust 自动调用管理员接口预热库存，再并发调用 `/admission/requests`；需设置 `ADMIN_TOKEN`、`PRELOAD_STOCK`、`BASE_URL`。
+10. 如何解释 worker 读历史消息的问题？
+   - 回答：Kafka Consumer 以 consumer group 记录 offset，默认 `auto.offset.reset=earliest`，可通过修改 `KAFKA_CONSUMER_GROUP` 跳过历史。
+11. 管理接口 `/admin/quota/reset` 有哪些副作用？
+   - 回答：会把 `stock:{resource}` 重置并删除对应 `order_once` 键，清空幂等记录后可反复压测。
+12. 为什么 Redis key 采用 `stock/order_once/req_status/rl`？
+   - 回答：`stock` 存配额，`order_once` 防幂等，`req_status` 存状态，`rl` 实现 1 秒窗口限流。
+13. 异常堆栈在哪里观察？
+   - 回答：uvicorn 日志输出，`app/core/logging.py` 配置了统一格式；`order_worker` 直接用 `logging.exception` 记录。
+14. 如何从代码角度讲解 “最终一致性”？
+   - 回答：Redis 先写 `PENDING` 作为准实时状态，Kafka 保证消息投递，worker 一旦写入 Postgres 就把状态改为 `SUCCESS`，可容忍延迟。
+15. 如何解释 metrics 指标的用途？
+   - 回答：`admission_requests_total{code}` 统计业务码分布，`kafka_produce_fail_total` 监控入队错误，`http_requests_total` 用于 Prometheus 可视化。

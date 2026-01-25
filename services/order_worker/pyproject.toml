@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "order-worker"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+readme = "../../README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.11"
+confluent-kafka = "^2.5.3"
+SQLAlchemy = "^2.0.32"
+psycopg = {version = "^3.1", extras = ["binary"]}
+redis = "^5.0.7"
+
+[build-system]
+requires = ["poetry-core>=1.8.0"]
+build-backend = "poetry.core.masonry.api"
