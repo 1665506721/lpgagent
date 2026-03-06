@@ -1,0 +1,37 @@
+﻿result_version,session_mode,id,category,message,intent_hint,status_code,ok,confirm_required,intent,run_id,latency_ms,tested_at,response,error
+v20260226-rootfix10,isolated,DQ037,下单-瓶装配送,先帮我算个总价，我确认后你再下。,ORDER_CREATE,200,True,False,CREATE_ORDER,9c2d4bd1-efc4-4254-980d-9dfd2964cdb5,19278,2026-02-26T15:11:57,没问题，我来一步步帮您下单。先确认服务类型：瓶装配送、换瓶、安装、安检、报修或配件。,
+v20260226-rootfix10,isolated,DQ062,下单-安装安检报修换瓶,我要装报警器+切断阀联动，按流程来。,ORDER_CREATE,200,True,True,CREATE_ORDER,3c31422f-01d1-43bc-abd9-813a3124bc73,622,2026-02-26T15:11:57,"我先把订单信息整理好了，您确认一下：
+1. 服务类型：配件
+2. 服务项目：燃气报警器×1
+3. 服务地址：默认地址
+4. 联系方式：用李姐 13800138000
+5. 预约时间：立即配送（系统自动分配）
+6. 是否加急：是
+7. 备注：无
+温馨提示：如需补充备注，请尽量在预计开始前30分钟告诉我。
+
+请确认上面的订单信息是否正确。回复“确认下单”我就为您提交；如需修改，直接告诉我要改哪一项。",
+v20260226-rootfix10,isolated,DQ066,下单-安装安检报修换瓶,疑似漏气，但还不确定，报修怎么下最稳妥？,ORDER_CREATE,200,True,False,SAFETY_GUIDE,14a5c2b5-6545-406f-8d6d-1f9595da6288,695,2026-02-26T15:11:58,"先按这个顺序处理：
+1) 立即关闭燃气阀门。
+2) 打开门窗通风，不要开关任何电器。
+3) 人员先撤到安全区域。
+4) 联系应急热线 400-888-0000。
+处理完应急后，您回复我“继续”，我再帮您安排后续处理。",
+v20260226-rootfix10,isolated,DQ084,配件商城与购物车,我要买报警器和软管，先加购物车。,ACCESSORIES_OR_CART,200,True,True,UNKNOWN,0929544c-ee82-498d-98b4-57c42256de40,693,2026-02-26T15:11:59,"将加入购物车：耐高温燃气软管（2m）×1、燃气报警器×1。
+
+确认的话回复“确认”，不执行回复“取消”。",
+v20260226-rootfix10,isolated,DQ086,配件商城与购物车,把购物车里报警器数量改成2个。,ACCESSORIES_OR_CART,200,True,True,UNKNOWN,bdd4696a-6384-4b9c-b2b8-baaeba63818a,630,2026-02-26T15:12:00,"将加入购物车：燃气报警器×2。
+
+确认的话回复“确认”，不执行回复“取消”。",
+v20260226-rootfix10,isolated,DQ089,配件商城与购物车,配件单我要开票，抬头是苏州XX餐饮。,ACCESSORIES_OR_CART,200,True,False,UNKNOWN,8b7da8b0-1d98-451e-bdf0-89f40ebcae63,636,2026-02-26T15:12:00,可以开票。我先记下您的开票要求；如果您是新下单，我会把发票信息一并写进备注里，后续只需要继续补齐下单信息即可。,
+v20260226-rootfix10,isolated,DQ110,订单查询,费用明细给我拆开看：小计、加急费、总价。,ORDER_QUERY,200,True,False,QUERY_ORDER,bc85076c-85df-49e2-8531-5c070dab99a4,685,2026-02-26T15:12:01,"我先按您最近一笔订单给您拆分：
+订单 LPG202602260630214485 费用明细：
+1) 小计：¥120.00
+2) 加急费：¥12.00
+3) 总计：¥132.00
+如果您想看其他订单，直接告诉我订单号即可。",
+v20260226-rootfix10,isolated,DQ125,取消改址支付,地址改成浦东新区XX路88号，能改就改。,ORDER_CHANGE,200,True,False,MODIFY_ORDER,c9ff9e3d-1be1-4289-93af-bd1ab9bbf08c,610,2026-02-26T15:12:02,按规则，服务开始前至少 1 小时才能改址。把订单号发我，我先帮您判断是否可改。,
+v20260226-rootfix10,isolated,DQ159,投诉与安全知识,我想表扬今天师傅服务好，也能提交吗？,COMPLAINT_OR_SAFETY,200,True,True,CREATE_TICKET,99924ff4-56aa-4ea4-bc65-4355fe2c247d,618,2026-02-26T15:12:03,"将提交一条建议反馈（线上服务）。
+
+确认的话回复“确认”，不执行回复“取消”。",
+v20260226-rootfix10,isolated,DQ173,下单-瓶装配送,"pls help: 先帮我算个总价，我确认后你再下。, confirm first",ORDER_CREATE,200,True,False,CREATE_ORDER,43847108-5c02-4f7c-a3ac-22eba3dc4a1f,618,2026-02-26T15:12:03,没问题，我来一步步帮您下单。先确认服务类型：瓶装配送、换瓶、安装、安检、报修或配件。,

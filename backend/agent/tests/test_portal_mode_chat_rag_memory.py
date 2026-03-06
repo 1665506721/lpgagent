@@ -1,14 +1,24 @@
 ﻿import json
+from datetime import timedelta
+from decimal import Decimal
 
 from django.contrib.auth import get_user_model
 from django.test import TestCase
+from django.utils import timezone
 
 from agent import portal_orchestrator as portal_orch
 from core.models import AgentRun
+from customer_portal.constants import (
+    DEFAULT_CURRENCY,
+    ORDER_STATUS_PAID,
+    ORDER_STATUS_SCHEDULED,
+    SERVICE_TYPE_LPG_CYLINDER_DELIVERY,
+)
 from customer_portal.models import (
     CustomerAddress,
     CustomerAuthToken,
     CustomerModelProviderProfile,
+    Order as PortalOrder,
     CustomerProfile,
 )
 from customer_portal.security import encrypt_api_key, mask_api_key
@@ -218,6 +228,77 @@ class PortalModeChatRagMemoryTests(TestCase):
         self.assertFalse(bool(routing.get("manual_handoff")))
         self.assertFalse(bool(routing.get("manual_queue")))
 
+    def test_pending_order_invoice_toggle_persists_across_turns(self):
+        first = self._chat("我要下单 15kg 1瓶", force_new_run=True)
+        self.assertEqual((first.get("pending_action") or {}).get("type"), "CREATE_ORDER")
+
+        second = self._chat("开票改成是", run_id=first.get("run_id"))
+        self.assertTrue(bool(((second.get("pending_action") or {}).get("draft") or {}).get("need_invoice")))
+
+        third = self._chat("不开票了", run_id=first.get("run_id"))
+        self.assertFalse(bool(((third.get("pending_action") or {}).get("draft") or {}).get("need_invoice")))
+
+    def test_modify_address_auto_selected_order_stays_stable_until_confirm(self):
+        now = timezone.localtime(timezone.now())
+        older_paid = PortalOrder.objects.create(
+            order_no="LPG2026030600110001",
+            user=self.user,
+            service_type=SERVICE_TYPE_LPG_CYLINDER_DELIVERY,
+            status=ORDER_STATUS_PAID,
+            eta_start=now + timedelta(hours=4),
+            eta_end=now + timedelta(hours=6),
+            cancel_deadline=now + timedelta(hours=3),
+            address_edit_deadline=now + timedelta(hours=3),
+            is_urgent=False,
+            notes="",
+            amount_subtotal=Decimal("120.00"),
+            amount_urgent_fee=Decimal("0.00"),
+            amount_total=Decimal("120.00"),
+            currency=DEFAULT_CURRENCY,
+            address_snapshot={"address_full": "Shanghai Pudong New Area 1", "door_note": "Room 101"},
+            contact_snapshot={"contact_name": "RagTester", "contact_phone": "13800990011"},
+            service_payload={"cylinder_type": "15kg", "quantity": 1},
+            expires_at=now + timedelta(minutes=30),
+        )
+        newer_scheduled = PortalOrder.objects.create(
+            order_no="LPG2026030600110002",
+            user=self.user,
+            service_type=SERVICE_TYPE_LPG_CYLINDER_DELIVERY,
+            status=ORDER_STATUS_SCHEDULED,
+            eta_start=now + timedelta(hours=5),
+            eta_end=now + timedelta(hours=7),
+            cancel_deadline=now + timedelta(hours=4),
+            address_edit_deadline=now + timedelta(hours=4),
+            is_urgent=False,
+            notes="",
+            amount_subtotal=Decimal("120.00"),
+            amount_urgent_fee=Decimal("0.00"),
+            amount_total=Decimal("120.00"),
+            currency=DEFAULT_CURRENCY,
+            address_snapshot={"address_full": "Shanghai Pudong New Area 1", "door_note": "Room 101"},
+            contact_snapshot={"contact_name": "RagTester", "contact_phone": "13800990011"},
+            service_payload={"cylinder_type": "15kg", "quantity": 1},
+            expires_at=now + timedelta(minutes=30),
+        )
+        PortalOrder.objects.filter(id=older_paid.id).update(created_at=now - timedelta(hours=3), updated_at=now - timedelta(hours=3))
+        PortalOrder.objects.filter(id=newer_scheduled.id).update(
+            created_at=now - timedelta(minutes=20),
+            updated_at=now - timedelta(minutes=20),
+        )
+
+        first = self._chat("把这单改址到上海市徐汇区漕溪北路9号，联系人Tester，电话13800990011", force_new_run=True)
+        pending = first.get("pending_action") or {}
+        routing = first.get("routing") or {}
+        self.assertEqual(pending.get("type"), "MODIFY_ADDRESS")
+        self.assertTrue(bool(routing.get("default_order_selected")))
+        selected_order_no = routing.get("default_order_no") or ((pending.get("payload") or {}).get("order_no") or "")
+        self.assertEqual(selected_order_no, newer_scheduled.order_no)
+
+        second = self._chat("确认", run_id=first.get("run_id"))
+        self.assertIn(selected_order_no, second.get("final_response", ""))
+        newer_scheduled.refresh_from_db()
+        self.assertIn("上海市徐汇区漕溪北路9号", (newer_scheduled.address_snapshot or {}).get("address_full", ""))
+
     def test_heuristic_route_general_safety_not_forced_to_leak(self):
         plan = portal_orch._heuristic_kb_route("使用煤气怎么注意安全")
         self.assertTrue(bool(plan.get("need_kb")))
@@ -253,6 +334,17 @@ class PortalModeChatRagMemoryTests(TestCase):
         self.assertIn(routing2.get("answer_source"), {"llm_direct", "typed_fallback"})
         self.assertNotIn("日常用气安全可以先记住这 5 点", second.get("final_response", ""))
 
+    def test_safety_scene_short_followup_uses_topic_continuation(self):
+        first = self._chat("燃气安全", force_new_run=True)
+        second = self._chat("餐饮", run_id=first.get("run_id"))
+        routing = second.get("routing") or {}
+        text = second.get("final_response", "")
+        self.assertFalse(bool(routing.get("clarify_needed")))
+        self.assertEqual(routing.get("safety_kind"), "general_qa")
+        self.assertIn(routing.get("answer_source"), {"llm_direct", "typed_fallback"})
+        self.assertNotIn("查询信息", text)
+        self.assertNotIn("直接办理业务", text)
+
     def test_safety_risk_upgrade_from_leak_assess_to_emergency(self):
         first = self._chat("如何判断燃气是否泄漏", force_new_run=True)
         self.assertEqual((first.get("routing") or {}).get("safety_kind"), "leak_assess")
@@ -261,4 +353,5 @@ class PortalModeChatRagMemoryTests(TestCase):
         self.assertEqual(routing.get("safety_kind"), "emergency")
         self.assertEqual(routing.get("answer_source"), "emergency_template")
         self.assertIn("400-888-0000", second.get("final_response", ""))
+
 

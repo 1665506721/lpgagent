@@ -1,0 +1,160 @@
+[
+  {
+    "id": "S001",
+    "title": "多轮瓶装配送下单（缺槽位补齐 + 确认）",
+    "steps": [
+      {
+        "user": "我要叫气，今天能送吗？",
+        "expect_intent": "CREATE_ORDER",
+        "expect_any": ["规格"],
+        "forbid_any": ["字段=", "payload"]
+      },
+      {
+        "user": "15kg，两瓶，用默认地址，不加急",
+        "expect_confirm_required": true,
+        "expect_all": ["确认", "服务类型"],
+        "forbid_any": ["字段=", "missing_fields"]
+      },
+      {
+        "user": "确认下单",
+        "expect_all": ["订单已生成", "预计"],
+        "forbid_any": ["失败"]
+      }
+    ]
+  },
+  {
+    "id": "S002",
+    "title": "订单查询 + 详情快照",
+    "steps": [
+      {
+        "user": "帮我查最近订单",
+        "expect_intent": "QUERY_ORDER",
+        "expect_any": ["订单"],
+        "forbid_any": ["字段=", "payload"]
+      },
+      {
+        "user": "给我看下这单的地址快照和联系人快照",
+        "expect_intent": "QUERY_ORDER",
+        "expect_any": ["快照", "联系人", "没有查到订单"],
+        "forbid_any": ["字段=", "payload"]
+      }
+    ]
+  },
+  {
+    "id": "S003",
+    "title": "改址规则先判定",
+    "steps": [
+      {
+        "user": "这单能改地址吗，你先按规则判断",
+        "expect_any": ["规则", "订单号"],
+        "forbid_any": ["字段=", "payload"]
+      }
+    ]
+  },
+  {
+    "id": "S004",
+    "title": "账户资料查看与昵称修改确认",
+    "steps": [
+      {
+        "user": "帮我看下我的个人资料",
+        "expect_any": ["资料", "手机号"],
+        "forbid_any": ["字段=", "payload"]
+      },
+      {
+        "user": "把我的显示名改成张建国（采购）",
+        "expect_confirm_required": true,
+        "expect_any": ["确认", "姓名"],
+        "forbid_any": ["字段=", "payload"]
+      },
+      {
+        "user": "确认",
+        "expect_any": ["已更新", "姓名"],
+        "forbid_any": ["失败", "字段="]
+      }
+    ]
+  },
+  {
+    "id": "S005",
+    "title": "地址新增 + 设默认 + 修改默认联系人",
+    "steps": [
+      {
+        "user": "新增地址：李华 13900001111 上海市徐汇区测试路100号3栋502",
+        "expect_confirm_required": true,
+        "expect_any": ["新增地址", "确认"],
+        "forbid_any": ["字段=", "payload"]
+      },
+      {
+        "user": "确认",
+        "expect_any": ["地址已新增"],
+        "forbid_any": ["失败"]
+      },
+      {
+        "user": "刚加的地址设成默认地址",
+        "expect_confirm_required": true,
+        "expect_any": ["默认地址", "确认"],
+        "forbid_any": ["字段=", "payload"]
+      },
+      {
+        "user": "确认",
+        "expect_any": ["设为默认地址"],
+        "forbid_any": ["失败"]
+      }
+    ]
+  },
+  {
+    "id": "S006",
+    "title": "安全应急话术完整性",
+    "steps": [
+      {
+        "user": "燃气泄漏了先做什么？",
+        "expect_intent": "SAFETY_GUIDE",
+        "expect_all": ["关闭燃气阀门", "通风", "不要开关任何电器"],
+        "forbid_any": ["字段=", "payload"]
+      }
+    ]
+  },
+  {
+    "id": "S007",
+    "title": "发票诉求自然承接",
+    "steps": [
+      {
+        "user": "我要开发票，抬头是上海禾川餐饮有限公司",
+        "expect_any": ["开票", "发票"],
+        "forbid_any": ["字段=", "payload", "missing_fields"]
+      }
+    ]
+  },
+  {
+    "id": "S008",
+    "title": "配件路径说明",
+    "steps": [
+      {
+        "user": "这个SKU我记不住，你按名称帮我下就行",
+        "expect_any": ["加购物车后统一下单", "软管2件"],
+        "forbid_any": ["字段=", "payload"]
+      }
+    ]
+  },
+  {
+    "id": "S009",
+    "title": "支付动作缺单号引导",
+    "steps": [
+      {
+        "user": "这笔单我现在付，付完你再帮我查状态",
+        "expect_any": ["订单号", "我马上处理", "确认的话回复“确认”"],
+        "forbid_any": ["字段=", "payload"]
+      }
+    ]
+  },
+  {
+    "id": "S010",
+    "title": "能力边界说明",
+    "steps": [
+      {
+        "user": "先告诉我你能做什么，不能做什么",
+        "expect_any": ["下单", "查订单", "改址", "投诉建议"],
+        "forbid_any": ["字段=", "payload"]
+      }
+    ]
+  }
+]

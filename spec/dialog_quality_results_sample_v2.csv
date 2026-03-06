@@ -1,0 +1,4 @@
+﻿result_version,id,category,message,intent_hint,status_code,ok,confirm_required,intent,run_id,latency_ms,tested_at,response,error
+v20260213-r2,DQ001,能力与流程,在吗？我第一次用这个系统，你大概能帮我干啥？,CLARIFY_OR_POLICY,200,True,False,UNKNOWN,335fd806-bae5-47da-968d-00b2ede38881,2607,2026-02-13T23:39:04,您好，我在。您可以直接告诉我需求，比如下单、查订单、取消订单、改地址、投诉建议。,
+v20260213-r2,DQ002,能力与流程,我不太会点网页，你能像真人客服那样一步一步带我吗？,CLARIFY_OR_POLICY,200,True,False,UNKNOWN,f148fd47-cabb-48a4-847d-66e2e89dcd78,2594,2026-02-13T23:39:07,我在这边可以直接帮您办理。您可以说“下单15kg两瓶”“查最近订单”或“取消某笔订单”。您现在想先处理哪一项？,
+v20260213-r2,DQ003,能力与流程,你这边是只管下单，还是投诉、改地址这些都能办？,CLARIFY_OR_POLICY,200,True,False,MODIFY_ORDER,ce30c8c5-2180-466e-a461-73a2ac552339,2600,2026-02-13T23:39:09,请提供要改址的订单号。,

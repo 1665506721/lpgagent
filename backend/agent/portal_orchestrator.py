@@ -596,6 +596,12 @@ PENDING_FEEDBACK_SIDE_QUERY_INTENTS = {
     "THEME_SET_LIGHT",
 }
 
+DEFAULT_MODIFIABLE_ORDER_STATUSES = (
+    ORDER_STATUS_PENDING_PAYMENT,
+    ORDER_STATUS_PAID,
+    ORDER_STATUS_SCHEDULED,
+)
+
 WRITE_ACTION_TYPES = {
     "BATCH_ACTION",
     "CREATE_ORDER",
@@ -1170,6 +1176,93 @@ def _ambiguity_fallback_reply(topic):
     return mapping.get(topic, mapping["general"])
 
 
+def _get_topic_followup_state():
+    memory = _portal_memory()
+    state = memory.get("topic_followup") if isinstance(memory, dict) else None
+    if not isinstance(state, dict):
+        return None
+    topic = str(state.get("topic") or "").strip().lower()
+    expected_slot = str(state.get("expected_slot") or "").strip().lower()
+    if not topic or not expected_slot:
+        return None
+    return {
+        "topic": topic,
+        "expected_slot": expected_slot,
+        "updated_at": str(state.get("updated_at") or ""),
+    }
+
+
+def _set_topic_followup_state(topic, expected_slot):
+    payload = {
+        "topic": str(topic or "").strip().lower(),
+        "expected_slot": str(expected_slot or "").strip().lower(),
+        "updated_at": timezone.now().isoformat(),
+    }
+    if not payload["topic"] or not payload["expected_slot"]:
+        return
+    _update_portal_memory({"topic_followup": payload})
+
+
+def _clear_topic_followup_state():
+    memory = _portal_memory()
+    if not isinstance(memory, dict) or "topic_followup" not in memory:
+        return
+    memory.pop("topic_followup", None)
+    PORTAL_MEMORY_CTX.set(memory)
+
+
+def _extract_safety_scene_slot(text):
+    value = _normalize_user_text(text)
+    if not value:
+        return ""
+    if _has_any(value, ["餐饮门店", "餐饮店"]):
+        return "餐饮门店"
+    if _has_any(value, ["餐饮", "后厨", "饭店", "餐馆"]):
+        return "餐饮"
+    if _has_any(value, ["家用", "家庭", "住宅"]):
+        return "家用"
+    if _has_any(value, ["商用", "门店", "店铺"]):
+        return "商用"
+    return ""
+
+
+def _should_set_safety_scene_followup(text, safety_kind):
+    if str(safety_kind or "") != "general_qa":
+        return False
+    value = _normalize_user_text(text)
+    if not value:
+        return False
+    if _extract_safety_scene_slot(value):
+        return False
+    if _has_any(value, ["软管", "平放", "横放", "倒放", "泄漏", "漏气", "检漏", "报警器", "减压阀", "阀门"]):
+        return False
+    return _has_any(value, ["燃气安全", "用气安全", "安全注意", "注意安全", "安全要点", "安全规范"])
+
+
+def _safety_scene_fallback_reply(scene):
+    scene_value = str(scene or "").strip()
+    if scene_value == "餐饮":
+        return (
+            "按餐饮场景，先抓 4 个要点：\n"
+            "1. 每日开店前检查软管、阀门和接口，异常先停用再报修。\n"
+            "2. 后厨保持持续通风，灶台周边不堆放易燃物。\n"
+            "3. 班后执行“先关灶、再关阀、再复核”并留记录。\n"
+            "4. 员工统一培训应急流程，闻到异味先关阀开窗撤离，再联系专业人员。"
+        )
+    if scene_value == "家用":
+        return (
+            "按家用场景，建议重点做这 4 点：\n"
+            "1. 做饭时保持通风，不让老人和孩子单独长时间用气。\n"
+            "2. 软管和阀门每月看一次，发现老化松动立即更换。\n"
+            "3. 外出或睡前执行“先关灶、再关阀”。\n"
+            "4. 出现异味先关阀开窗，不动电器开关，撤离后联系专业人员。"
+        )
+    return (
+        "这个场景下可先按通用原则执行：保持通风、定期检查接口与阀门、离场先关灶再关阀。"
+        "如果您再补一句具体设备（钢瓶/管道/报警器），我可以给更细的检查清单。"
+    )
+
+
 def _get_clarify_state():
     memory = _portal_memory()
     state = memory.get("clarify_state") if isinstance(memory, dict) else None
@@ -1239,7 +1332,13 @@ def _extract_order_ref(text):
 
 def _extract_address_id(text):
     value = text or ""
-    match = re.search(r"(?:地址\s*(?:id|ID|#|编号)?|address\s*(?:id|ID|#)?)\s*(\d{1,10})", value)
+    match = re.search(r"(?:地址\s*(?:id|ID|#|编号)?|address\s*(?:id|ID|#)?)\s*[:：#-]?\s*(\d{1,10})", value)
+    if not match and "地址" in value:
+        match = re.search(r"(?:id|ID|编号|#)\s*[:：#-]?\s*(\d{1,10})", value)
+    if not match and _has_any(value, ["删", "删除", "移除"]):
+        match = re.search(r"(?:id|ID|编号|#)\s*[:：#-]?\s*(\d{1,10})", value)
+    if not match and _has_any(value, ["删", "删除", "移除", "设为默认", "默认地址", "修改", "更新", "改成", "改为"]):
+        match = re.search(r"(\d{1,10})\s*号?\s*地址", value)
     if not match:
         return None
     try:
@@ -1898,6 +1997,31 @@ def _extract_address_payload(text):
     return payload
 
 
+def _sanitize_modify_address_text(address_text):
+    value = str(address_text or "").strip()
+    if not value:
+        return ""
+    cleaned = value
+    prefix_patterns = [
+        r"^(?:把)?(?:这单|那单|订单)?(?:的)?(?:地址)?(?:改址|改地址|改成|改为|修改为|修改成|变更为|变更成|调整为)(?:到|为|成)?",
+        r"^(?:地址)(?:改成|改为|改到|修改为|修改成)?(?:到|为|成)?",
+        r"^(?:改址|改地址)(?:到|为|成)?",
+    ]
+    for pattern in prefix_patterns:
+        cleaned = re.sub(pattern, "", cleaned).strip(" ：:,，。;；")
+    trailing_markers = ["联系人", "联系电话", "电话", "手机号", "收货人"]
+    cut_index = len(cleaned)
+    for marker in trailing_markers:
+        idx = cleaned.find(marker)
+        if idx > 0:
+            cut_index = min(cut_index, idx)
+    if cut_index < len(cleaned):
+        cleaned = cleaned[:cut_index].strip(" ：:,，。;；")
+    if len(cleaned) >= 6:
+        return cleaned
+    return value
+
+
 def _extract_notes(text):
     value = (text or "").strip()
     for marker in ["备注", "说明", "要求"]:
@@ -1911,6 +2035,8 @@ def _extract_notes(text):
 def _extract_invoice_note(text):
     value = (text or "").strip()
     if not value or not any(keyword in value for keyword in INVOICE_KEYWORDS):
+        return ""
+    if _has_any(value, ["不开票", "不要发票", "不需要发票", "不用开票", "先不开票"]):
         return ""
     parts = []
     if "普票" in value:
@@ -1931,6 +2057,23 @@ def _extract_invoice_note(text):
     return "发票信息：" + "；".join(parts)
 
 
+def _strip_invoice_note_from_notes(notes):
+    raw = str(notes or "").strip()
+    if not raw:
+        return ""
+    chunks = [chunk.strip() for chunk in re.split(r"[；;]", raw) if chunk and chunk.strip()]
+    kept = []
+    for chunk in chunks:
+        if "发票信息" in chunk:
+            continue
+        if _has_any(chunk, ["需要开票", "开票", "发票抬头", "税号"]) and len(chunks) > 1:
+            continue
+        kept.append(chunk)
+    if not kept:
+        return ""
+    return "；".join(kept)
+
+
 def _extract_invoice_fields(text):
     value = (text or "").strip()
     if not value:
@@ -1948,6 +2091,70 @@ def _extract_invoice_fields(text):
     if tax_match:
         output["invoice_tax_no"] = tax_match.group(1).strip().upper()
     return output
+
+
+def _looks_like_invoice_preference_update(text):
+    value = _normalize_user_text(text)
+    if not value:
+        return False
+    if not _has_any(value, INVOICE_KEYWORDS):
+        return False
+    if _has_any(value, ["不开票", "不要发票", "不需要发票", "不用开票", "先不开票"]):
+        return True
+    explicit_toggle_terms = [
+        "开票改成",
+        "开票改为",
+        "改成开票",
+        "改为开票",
+        "要开票",
+        "需要开票",
+        "开发票",
+        "开票",
+        "发票改成",
+        "发票改为",
+    ]
+    if _has_any(value, explicit_toggle_terms):
+        if _has_any(value, ["流程", "规则", "怎么", "如何", "补开", "税号怎么", "抬头怎么", "企业开票流程"]):
+            # 中文注释：存在明显咨询语义时，避免误当成“开关偏好”。
+            return _has_any(value, ["改成", "改为", "要", "需要", "不用", "不要"])
+        return True
+    return False
+
+
+def _pick_default_modifiable_order(run, portal_user_id):
+    candidates = []
+    for status_code in DEFAULT_MODIFIABLE_ORDER_STATUSES:
+        result = execute_tool(
+            run,
+            "portal_list_orders",
+            {"portal_user_id": portal_user_id, "status": status_code, "page": 1, "page_size": 1},
+        )
+        items = result.get("items") if isinstance(result, dict) else []
+        if not items:
+            continue
+        item = items[0] if isinstance(items[0], dict) else {}
+        created_at = item.get("created_at")
+        created_ts = datetime.min
+        if created_at:
+            try:
+                created_ts = datetime.fromisoformat(str(created_at).replace("Z", "+00:00"))
+            except Exception:
+                created_ts = datetime.min
+        candidates.append(
+            {
+                "id": item.get("id"),
+                "order_no": item.get("order_no"),
+                "status": item.get("status"),
+                "created_at": created_at,
+                "_created_ts": created_ts,
+            }
+        )
+    if not candidates:
+        return None
+    candidates.sort(key=lambda item: item.get("_created_ts") or datetime.min, reverse=True)
+    chosen = dict(candidates[0] or {})
+    chosen.pop("_created_ts", None)
+    return chosen
 
 
 def _filter_payload_by_service_type(service_type, payload):
@@ -3410,6 +3617,9 @@ def _intent_from_text(text, pending_action=None):
         or (_extract_quantity(value) and _has_any(value, ["下单", "送", "配送", "来一单", "订气"]))
         or ("下单" in value and "订单" not in value)
     )
+    address_id_only_delete = bool(
+        _has_any(value, ["删", "删除", "移除"]) and re.search(r"(?:id|ID|编号|#)\s*[:：#-]?\s*\d{1,10}", value)
+    )
     address_create_pattern = re.search(r"(新增|添加|加|新建|创建|新加|建(?:个|一条)?)(?:一个|个|条)?(?:收货)?地址", value_compact or "")
     address_query_pattern = re.search(
         r"(?:我|现在|目前|当前)?(?:有多少|有几个|有哪些|有哪几个|查看|查下|查一下|看看|列出|展示)(?:收货)?地址",
@@ -3442,6 +3652,7 @@ def _intent_from_text(text, pending_action=None):
         or _has_any(value_compact, ["我的地址", "地址列表", "全部地址", "所有地址"])
         or _has_any(value_compact, ["新增地址", "添加地址", "加地址", "新增收货地址", "添加收货地址", "新地址", "加个地址"])
         or bool(address_create_pattern)
+        or address_id_only_delete
     ) and not has_order_signal_for_address:
         if (
             _has_any(value, ["新增地址", "添加地址", "加地址", "新建地址", "创建地址", "建个地址", "新加地址", "建一条地址", "新增收货地址", "添加收货地址"])
@@ -3453,7 +3664,7 @@ def _intent_from_text(text, pending_action=None):
             return "ADDRESS_SET_DEFAULT"
         if _has_any(value, ["改", "修改"]) and "默认地址" in value:
             return "ADDRESS_UPDATE_DEFAULT"
-        if _has_any(value, ADDRESS_DELETE_KEYWORDS) or (_has_any(value, ["删", "删除"]) and "地址" in value):
+        if _has_any(value, ADDRESS_DELETE_KEYWORDS) or (_has_any(value, ["删", "删除"]) and "地址" in value) or address_id_only_delete:
             return "ADDRESS_DELETE"
         return "ADDRESS_QUERY"
     if _has_any(value, ["改名", "改名字", "修改名字", "修改昵称", "改用户名", "修改用户名", "用户名改", "昵称", "显示名改", "修改显示名"]):
@@ -4040,6 +4251,12 @@ def _merge_create_fields(draft, message):
     if invoice_fields:
         for key, val in invoice_fields.items():
             merged[key] = val
+        if invoice_fields.get("need_invoice") is False:
+            cleaned_notes = _strip_invoice_note_from_notes(merged.get("notes"))
+            if cleaned_notes:
+                merged["notes"] = cleaned_notes
+            else:
+                merged.pop("notes", None)
         touched.add("need_invoice")
 
     delivery_mode = _extract_delivery_mode(text)
@@ -4371,7 +4588,7 @@ def _create_summary(draft):
             f"2. 是否开票：{need_invoice}",
             f"3. 备注：{notes}",
             "",
-            "温馨提示：如需补充备注，请尽量在预计送达时间前 5 小时告知；加急订单请尽量在前 2 小时告知。",
+            "温馨提示：加急订单目标为 1 小时内开始服务（非服务时段将顺延到下一服务窗口）；加急单取消/改址窗口为下单后 30 分钟，普通订单以订单详情页截止时间为准。",
         ]
     )
     return "\n".join(lines)
@@ -4981,6 +5198,10 @@ def _handle_batch_action(run, message, portal_user_id, pending_action=None, seed
                 cart_items = list(data.get("items") or cart_items)
 
     text = message or ""
+    invoice_update = _extract_invoice_fields(text) if _looks_like_invoice_preference_update(text) else {}
+    invoice_pref_notice = ""
+    if isinstance(invoice_update, dict) and "need_invoice" in invoice_update:
+        invoice_pref_notice = f"已将本次组合单开票改为{'是' if invoice_update.get('need_invoice') else '否'}。"
     extracted_items = _extract_accessory_items(text)
     if extracted_items:
         cart_items = extracted_items
@@ -5056,6 +5277,8 @@ def _handle_batch_action(run, message, portal_user_id, pending_action=None, seed
             ask = f"已识别到您要“配件 + 多服务单”一起办理。{ask}"
         else:
             ask = f"已识别到您要“配件 + 多服务单”一起办理。{ask}"
+        if invoice_pref_notice:
+            ask = f"{invoice_pref_notice}\n{ask}"
         return _respond(
             run,
             ask,
@@ -5085,7 +5308,7 @@ def _handle_batch_action(run, message, portal_user_id, pending_action=None, seed
         action["service_candidates"] = service_candidates
     return _respond(
         run,
-        summary,
+        f"{(invoice_pref_notice + '\n') if invoice_pref_notice else ''}{summary}",
         IntentEnum.CREATE_ORDER,
         confirm_required=True,
         pending_action=action,
@@ -5106,6 +5329,9 @@ def _handle_create_order(run, message, portal_user_id, pending_action):
     draft = _ensure_create_draft(run, portal_user_id, draft)
     missing_fields = _create_missing_fields(draft)
     trace = _build_slot_trace(trace, touched_fields)
+    invoice_pref_notice = ""
+    if "need_invoice" in touched_fields:
+        invoice_pref_notice = f"已将本单开票改为{'是' if draft.get('need_invoice') else '否'}。"
 
     if missing_fields:
         next_field = missing_fields[0]
@@ -5141,6 +5367,8 @@ def _handle_create_order(run, message, portal_user_id, pending_action):
                 prompt_text = f"您要办理的是“{service_label}”。{question}"
             else:
                 prompt_text = f"好的，您要办理的是“{service_label}”。{question}"
+        if invoice_pref_notice:
+            prompt_text = f"{invoice_pref_notice}\n{prompt_text}"
         return _respond(
             run,
             prompt_text,
@@ -5166,7 +5394,7 @@ def _handle_create_order(run, message, portal_user_id, pending_action):
     }
     return _respond(
         run,
-        f"{summary}\n\n请确认上面的订单信息是否正确。回复“确认下单”我就为您提交；如需修改，直接告诉我要改哪一项。",
+        f"{(invoice_pref_notice + '\n') if invoice_pref_notice else ''}{summary}\n\n请确认上面的订单信息是否正确。回复“确认下单”我就为您提交；如需修改，直接告诉我要改哪一项。",
         IntentEnum.CREATE_ORDER,
         confirm_required=True,
         pending_action=action,
@@ -5600,8 +5828,39 @@ def _execute_pending_action(run, pending_action, portal_user_id):
             {"portal_user_id": portal_user_id, **(pending_action.get("payload") or {})},
         )
         if result.get("error"):
-            return _respond(run, f"改址失败：{result.get('code') or result.get('error')}。", IntentEnum.MODIFY_ORDER, cleared_action_id=pending_action.get("id"))
-        return _respond(run, f"订单 {result.get('order_no')} 地址已更新。", IntentEnum.MODIFY_ORDER, cleared_action_id=pending_action.get("id"))
+            code = result.get("code") or result.get("error")
+            if code == "ORDER_NOT_EDITABLE":
+                deadline_text = _format_eta_text(result.get("address_edit_deadline") or result.get("cancel_deadline"))
+                if deadline_text:
+                    return _respond(
+                        run,
+                        f"改址失败：订单已超过可修改时间（截止 {deadline_text}）。",
+                        IntentEnum.MODIFY_ORDER,
+                        cleared_action_id=pending_action.get("id"),
+                    )
+            return _respond(
+                run,
+                f"改址失败：{code}。",
+                IntentEnum.MODIFY_ORDER,
+                cleared_action_id=pending_action.get("id"),
+            )
+        address_snapshot = result.get("address_snapshot") if isinstance(result.get("address_snapshot"), dict) else {}
+        contact_snapshot = result.get("contact_snapshot") if isinstance(result.get("contact_snapshot"), dict) else {}
+        address_text = (address_snapshot.get("address_full") or "").strip()
+        contact_name = (contact_snapshot.get("contact_name") or "").strip()
+        contact_phone = (contact_snapshot.get("contact_phone") or "").strip()
+        detail_bits = []
+        if address_text:
+            detail_bits.append(f"新地址：{address_text}")
+        if contact_name or contact_phone:
+            detail_bits.append(f"联系人：{contact_name or '未提供'} {contact_phone}".strip())
+        detail_text = f"（{'；'.join(detail_bits)}）" if detail_bits else ""
+        return _respond(
+            run,
+            f"订单 {result.get('order_no')} 地址已更新{detail_text}。",
+            IntentEnum.MODIFY_ORDER,
+            cleared_action_id=pending_action.get("id"),
+        )
 
     if action_type == "CREATE_FEEDBACK":
         result = execute_tool(run, "portal_create_feedback", {"portal_user_id": portal_user_id, "payload": pending_action.get("payload") or {}})
@@ -6311,6 +6570,7 @@ def _handle_query_intent(run, text, portal_user_id, intent):
     entity = _query_entity_from_intent(intent_code)
     _set_lane("action")
     _clear_clarify_state()
+    _clear_topic_followup_state()
     _set_routing_extra(
         query_first_applied=True,
         clarify_needed=False,
@@ -6807,6 +7067,36 @@ def _answer_non_actionable_query(run, text, router_plan=None):
         )
         return _respond(run, direct_reply, IntentEnum.UNKNOWN, lane="smalltalk")
 
+    followup_state = _get_topic_followup_state()
+    if followup_state and followup_state.get("topic") == "safety_general" and followup_state.get("expected_slot") == "scene":
+        scene_slot = _extract_safety_scene_slot(text)
+        if scene_slot:
+            _clear_topic_followup_state()
+            _clear_clarify_state()
+            _set_routing_extra(clarify_needed=False, clarify_topic=None, clarify_round=0)
+            _set_rag_topic("safety_general")
+            scene_prompt = (
+                f"用户补充了场景：{scene_slot}。"
+                "请直接给这个场景的燃气安全可执行建议，避免再次反问“查询还是办理”。"
+            )
+            llm_scene_reply = _llm_general_reply(run, scene_prompt, stage0_signal=stage0_signal)
+            _append_event(
+                run,
+                AgentEvent.STATE_PLANNING,
+                output_json={
+                    "event": "portal_topic_followup_scene",
+                    "topic": "safety_general",
+                    "scene": scene_slot,
+                    "llm_hit": bool(llm_scene_reply),
+                },
+            )
+            if llm_scene_reply:
+                _set_routing_extra(safety_kind="general_qa", answer_source="llm_direct", llm_fallback=False)
+                return _respond(run, llm_scene_reply, IntentEnum.SAFETY_GUIDE, lane="smalltalk")
+            _set_routing_extra(safety_kind="general_qa", answer_source="typed_fallback", llm_fallback=True)
+            return _respond(run, _safety_scene_fallback_reply(scene_slot), IntentEnum.SAFETY_GUIDE, lane="smalltalk")
+        _clear_topic_followup_state()
+
     if _is_ambiguous_request(text) and _should_use_ambiguity_clarify(text, stage0_signal):
         clarify_topic = _clarify_topic_from_text(text)
         state = _get_clarify_state() or {}
@@ -6845,6 +7135,7 @@ def _answer_non_actionable_query(run, text, router_plan=None):
     _set_routing_extra(clarify_needed=False, clarify_topic=None, clarify_round=0)
 
     if safety_kind == "emergency":
+        _clear_topic_followup_state()
         _set_rag_topic("safety_leak")
         _set_routing_extra(answer_source="emergency_template", llm_fallback=False)
         return _respond(
@@ -6855,6 +7146,10 @@ def _answer_non_actionable_query(run, text, router_plan=None):
         )
 
     if safety_kind in {"leak_assess", "general_qa"}:
+        if _should_set_safety_scene_followup(text, safety_kind):
+            _set_topic_followup_state("safety_general", "scene")
+        else:
+            _clear_topic_followup_state()
         _set_rag_topic("safety_leak" if safety_kind == "leak_assess" else "safety_general")
         llm_safety_direct = _llm_general_reply(run, text, stage0_signal=stage0_signal)
         _append_event(
@@ -7145,6 +7440,7 @@ def run_portal_orchestrator(
         batch=False,
         hotline_suppressed=False,
         manual_handoff=False,
+        default_order_selected=False,
         query_first_applied=False,
         clarify_needed=False,
         clarify_round=0,
@@ -7306,6 +7602,7 @@ def run_portal_orchestrator(
             )
     if current_intent in QUERY_INTENT_CODES or _is_write_intent(current_intent):
         _clear_clarify_state()
+        _clear_topic_followup_state()
         _set_routing_extra(clarify_needed=False, clarify_topic=None, clarify_round=0)
 
     batch_seed = None
@@ -7385,6 +7682,12 @@ def run_portal_orchestrator(
                 IntentEnum.UNKNOWN,
                 cleared_action_id=pending_action.get("id"),
             )
+
+        if pending_action.get("type") == "CREATE_ORDER" and _looks_like_invoice_preference_update(text):
+            return _handle_create_order(run, text, portal_user_id, pending_action)
+
+        if pending_action.get("type") == "BATCH_ACTION" and _looks_like_invoice_preference_update(text):
+            return _handle_batch_action(run, text, portal_user_id, pending_action)
 
         if (
             pending_action.get("type") == "CREATE_ORDER"
@@ -7865,18 +8168,28 @@ def run_portal_orchestrator(
     if intent == "MODIFY_ADDRESS":
         _set_lane("action")
         order_id, order_no = _extract_order_ref(text)
-        address_full = _extract_address(text)
+        raw_address = _extract_address(text)
+        address_full = _sanitize_modify_address_text(raw_address)
         if not order_id and not order_no:
-            if _has_any(text, ["这单", "这笔单", "那单"]):
-                latest = execute_tool(run, "portal_list_orders", {"portal_user_id": portal_user_id, "page": 1, "page_size": 1})
-                latest_items = latest.get("items") or []
-                if latest_items:
-                    order_id = latest_items[0].get("id")
-                    order_no = latest_items[0].get("order_no")
+            chosen = _pick_default_modifiable_order(run, portal_user_id)
+            if chosen:
+                order_id = chosen.get("id")
+                order_no = chosen.get("order_no")
+                _set_routing_extra(default_order_selected=True, default_order_no=order_no or "")
+                _append_event(
+                    run,
+                    AgentEvent.STATE_PLANNING,
+                    output_json={
+                        "event": "portal_modify_order_default_selected",
+                        "order_no": order_no,
+                        "status": chosen.get("status"),
+                        "source": "auto_unshipped",
+                    },
+                )
             if not order_id and not order_no:
                 return _respond(
                     run,
-                    "按规则，服务开始前至少 1 小时才能改址。把订单号发我，我先帮您判断是否可改。",
+                    "未找到可修改的未配送订单，请补充订单号（例如：LPG2026020912345678）。",
                     IntentEnum.MODIFY_ORDER,
                 )
         if not address_full:

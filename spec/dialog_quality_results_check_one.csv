@@ -1,0 +1,2 @@
+﻿result_version,id,category,message,intent_hint,status_code,ok,confirm_required,intent,run_id,latency_ms,tested_at,response,error
+vcheck-one,DQ001,能力与流程,在吗？我第一次用这个系统，你大概能帮我干啥？,CLARIFY_OR_POLICY,200,True,False,UNKNOWN,90122825-f2c8-4333-8fa9-951a2726695a,4167,2026-02-25T08:26:29,您好，我在。您可以直接告诉我需求，比如下单、查订单、取消订单、改地址、投诉建议。,

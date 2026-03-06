@@ -1,0 +1,275 @@
+{
+  "generated_at": "2026-02-14T15:39:13",
+  "model": "qwen2.5-7B-instruct",
+  "summary": {
+    "scenario_total": 10,
+    "scenario_passed": 9,
+    "step_total": 18,
+    "step_passed": 17,
+    "pass_rate": 94.44
+  },
+  "scenarios": [
+    {
+      "id": "S001",
+      "title": "多轮瓶装配送下单（缺槽位补齐 + 确认）",
+      "passed": true,
+      "run_id": "ea11e49f-5666-4adf-868c-757b1dd3b2c9",
+      "steps": [
+        {
+          "index": 1,
+          "user": "我要叫气，今天能送吗？",
+          "status_code": 200,
+          "intent": "CREATE_ORDER",
+          "confirm_required": false,
+          "response": "好的，您要办理的是“瓶装配送”。收到。请问您要哪种规格：5kg、15kg 还是 45kg？",
+          "passed": true,
+          "reasons": []
+        },
+        {
+          "index": 2,
+          "user": "15kg，两瓶，用默认地址，不加急",
+          "status_code": 200,
+          "intent": "CREATE_ORDER",
+          "confirm_required": true,
+          "response": "我先把订单信息整理好了，您确认一下：\n1. 服务类型：瓶装配送\n2. 服务项目：15kg × 2瓶\n3. 服务地址：默认地址\n4. 联系方式：李华 13900001111\n5. 预约时间：尽快（系统自动分配）\n6. 是否加急：否\n7. 备注：无\n\n请确认上面的订单信息是否正确。回复“确认下单”我就为您提交；如需修改，直接告诉我要改哪一项。",
+          "passed": true,
+          "reasons": []
+        },
+        {
+          "index": 3,
+          "user": "确认下单",
+          "status_code": 200,
+          "intent": "CREATE_ORDER",
+          "confirm_required": false,
+          "response": "尊敬的李华，您的订单已生成（LPG202602140739224328）。我们预计在 2026-02-15 09:00 - 2026-02-15 11:00 为您提供服务。您可以随时让我查询订单进度，祝您生活愉快。",
+          "passed": true,
+          "reasons": []
+        }
+      ]
+    },
+    {
+      "id": "S002",
+      "title": "订单查询 + 详情快照",
+      "passed": true,
+      "run_id": "8e849884-2fe5-4e5a-8811-154cf44d2e56",
+      "steps": [
+        {
+          "index": 1,
+          "user": "帮我查最近订单",
+          "status_code": 200,
+          "intent": "QUERY_ORDER",
+          "confirm_required": false,
+          "response": "给您查到这些订单：\n1. LPG202602140739224328 | 瓶装配送 | 待支付 | 预计 2026-02-15 09:00\n要看某一单详情，直接把订单号发我。",
+          "passed": true,
+          "reasons": []
+        },
+        {
+          "index": 2,
+          "user": "给我看下这单的地址快照和联系人快照",
+          "status_code": 200,
+          "intent": "QUERY_ORDER",
+          "confirm_required": false,
+          "response": "订单 LPG202602140739224328 当前为“待支付”。\n服务时间：2026-02-15 09:00 - 2026-02-15 11:00\n地址快照：上海市徐汇区测试路100号3栋502\n联系人快照：李华 13900001111\n如需改址或取消，我可以继续帮您处理。",
+          "passed": true,
+          "reasons": []
+        }
+      ]
+    },
+    {
+      "id": "S003",
+      "title": "改址规则先判定",
+      "passed": true,
+      "run_id": "45a34095-70da-44d6-8fd0-8815f17c074e",
+      "steps": [
+        {
+          "index": 1,
+          "user": "这单能改地址吗，你先按规则判断",
+          "status_code": 200,
+          "intent": "MODIFY_ORDER",
+          "confirm_required": true,
+          "response": "将订单 LPG202602140739224328 改址为：吗，你先按规则判断。\n\n确认的话回复“确认”，不执行回复“取消”。",
+          "passed": true,
+          "reasons": []
+        }
+      ]
+    },
+    {
+      "id": "S004",
+      "title": "账户资料查看与昵称修改确认",
+      "passed": true,
+      "run_id": "b85928dd-126a-4cdf-849d-20320313443a",
+      "steps": [
+        {
+          "index": 1,
+          "user": "帮我看下我的个人资料",
+          "status_code": 200,
+          "intent": "UNKNOWN",
+          "confirm_required": false,
+          "response": "您当前资料：姓名/昵称“张建国（采购）”，手机号 123。如需修改，直接告诉我要改成什么。",
+          "passed": true,
+          "reasons": []
+        },
+        {
+          "index": 2,
+          "user": "把我的显示名改成张建国（采购）",
+          "status_code": 200,
+          "intent": "UNKNOWN",
+          "confirm_required": true,
+          "response": "将把您的姓名修改为“张建国（采购）”。\n\n确认的话回复“确认”，不执行回复“取消”。",
+          "passed": true,
+          "reasons": []
+        },
+        {
+          "index": 3,
+          "user": "确认",
+          "status_code": 200,
+          "intent": "UNKNOWN",
+          "confirm_required": false,
+          "response": "好的，您的姓名已更新为“张建国（采购）”。",
+          "passed": true,
+          "reasons": []
+        }
+      ]
+    },
+    {
+      "id": "S005",
+      "title": "地址新增 + 设默认 + 修改默认联系人",
+      "passed": true,
+      "run_id": "d8f0e7e8-b22c-4fab-8991-c74a9fa9dc4d",
+      "steps": [
+        {
+          "index": 1,
+          "user": "新增地址：李华 13900001111 上海市徐汇区测试路100号3栋502",
+          "status_code": 200,
+          "intent": "UNKNOWN",
+          "confirm_required": true,
+          "response": "将新增地址：上海市徐汇区测试路100号3栋502（李华 13900001111）。\n\n确认的话回复“确认”，不执行回复“取消”。",
+          "passed": true,
+          "reasons": []
+        },
+        {
+          "index": 2,
+          "user": "确认",
+          "status_code": 200,
+          "intent": "UNKNOWN",
+          "confirm_required": false,
+          "response": "地址已新增，地址ID 7。",
+          "passed": true,
+          "reasons": []
+        },
+        {
+          "index": 3,
+          "user": "刚加的地址设成默认地址",
+          "status_code": 200,
+          "intent": "UNKNOWN",
+          "confirm_required": true,
+          "response": "将把地址ID 7 设为默认地址。\n\n确认的话回复“确认”，不执行回复“取消”。",
+          "passed": true,
+          "reasons": []
+        },
+        {
+          "index": 4,
+          "user": "确认",
+          "status_code": 200,
+          "intent": "UNKNOWN",
+          "confirm_required": false,
+          "response": "已将地址ID 7 设为默认地址。",
+          "passed": true,
+          "reasons": []
+        }
+      ]
+    },
+    {
+      "id": "S006",
+      "title": "安全应急话术完整性",
+      "passed": true,
+      "run_id": "6b86aea4-4156-418b-9cc9-6f19a661cc5e",
+      "steps": [
+        {
+          "index": 1,
+          "user": "燃气泄漏了先做什么？",
+          "status_code": 200,
+          "intent": "SAFETY_GUIDE",
+          "confirm_required": false,
+          "response": "先按这个顺序处理：\n1) 立即关闭燃气阀门。\n2) 打开门窗通风，不要开关任何电器。\n3) 人员先撤到安全区域。\n4) 联系应急热线 400-888-0000。\n处理完应急后，您回复我“继续”，我再帮您安排后续处理。",
+          "passed": true,
+          "reasons": []
+        }
+      ]
+    },
+    {
+      "id": "S007",
+      "title": "发票诉求自然承接",
+      "passed": true,
+      "run_id": "4fc8f148-a192-42cf-9fe6-8c8613c95bee",
+      "steps": [
+        {
+          "index": 1,
+          "user": "我要开发票，抬头是上海禾川餐饮有限公司",
+          "status_code": 200,
+          "intent": "UNKNOWN",
+          "confirm_required": false,
+          "response": "可以开票。我先记下您的开票要求；如果您是新下单，我会把发票信息一并写进备注里，后续只需要继续补齐下单信息即可。",
+          "passed": true,
+          "reasons": []
+        }
+      ]
+    },
+    {
+      "id": "S008",
+      "title": "配件路径说明",
+      "passed": true,
+      "run_id": "14865092-a6ac-4a58-83ad-fab600eb3838",
+      "steps": [
+        {
+          "index": 1,
+          "user": "这个SKU我记不住，你按名称帮我下就行",
+          "status_code": 200,
+          "intent": "UNKNOWN",
+          "confirm_required": false,
+          "response": "配件这边目前是“加购物车后统一下单”，不走单品直购。\n您可以直接告诉我要加什么（例如：软管2件、减压阀1件），我来帮您整理并下单。",
+          "passed": true,
+          "reasons": []
+        }
+      ]
+    },
+    {
+      "id": "S009",
+      "title": "支付动作缺单号引导",
+      "passed": false,
+      "run_id": "9c2bfc45-010e-4f6e-981f-423cfcbcd17c",
+      "steps": [
+        {
+          "index": 1,
+          "user": "这笔单我现在付，付完你再帮我查状态",
+          "status_code": 200,
+          "intent": "QUERY_ORDER",
+          "confirm_required": true,
+          "response": "将为订单 LPG202602140739224328 发起支付（mock）。\n\n确认的话回复“确认”，不执行回复“取消”。",
+          "passed": false,
+          "reasons": [
+            "missing_any:订单号|我马上处理"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "S010",
+      "title": "能力边界说明",
+      "passed": true,
+      "run_id": "e296a43d-1b26-490e-8ac8-b2ff77602558",
+      "steps": [
+        {
+          "index": 1,
+          "user": "先告诉我你能做什么，不能做什么",
+          "status_code": 200,
+          "intent": "UNKNOWN",
+          "confirm_required": false,
+          "response": "可以的，我会按最少必要信息一步步问您，不会让您一次填很多项。\n我现在能直接处理：下单、查订单、支付、取消、改址、投诉建议、修改昵称。\n下单时我会默认带出您的常用联系人和默认地址，您只要说需要改哪一项就行。",
+          "passed": true,
+          "reasons": []
+        }
+      ]
+    }
+  ]
+}

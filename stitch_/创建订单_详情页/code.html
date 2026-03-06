@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>创建订单 - LPG 瓶装气服务</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "Noto Sans SC", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', 'Noto Sans SC', sans-serif; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#111418] dark:text-gray-100 min-h-screen flex flex-col">
+<!-- Fixed Top Header -->
+<header class="sticky top-0 z-50 bg-white dark:bg-background-dark border-b border-[#f0f2f4] dark:border-gray-800">
+<div class="max-w-[800px] mx-auto flex items-center justify-between px-4 py-3 md:px-6">
+<div class="flex items-center gap-3">
+<button class="flex items-center justify-center size-9 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+<span class="material-symbols-outlined text-xl">arrow_back</span>
+</button>
+<div class="flex flex-col">
+<h1 class="text-lg font-bold leading-tight">创建订单</h1>
+<span class="text-xs text-primary font-medium">瓶装气服务</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-4 py-1.5 text-sm font-medium rounded-lg bg-primary/10 text-primary hover:bg-primary/20 transition-colors">
+                    切换服务
+                </button>
+</div>
+</div>
+</header>
+<main class="flex-1 max-w-[800px] w-full mx-auto px-4 py-6 pb-32">
+<!-- Address Section -->
+<div class="bg-white dark:bg-gray-900 rounded-xl shadow-sm overflow-hidden border border-[#f0f2f4] dark:border-gray-800 mb-6 group">
+<div class="flex flex-col md:flex-row">
+<div class="flex-1 p-5">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-primary text-xl">location_on</span>
+<span class="text-sm font-medium text-gray-500 dark:text-gray-400">收货地址</span>
+</div>
+<div class="flex items-baseline gap-3 mb-2">
+<h3 class="text-xl font-bold">张三 </h3>
+<span class="text-base font-medium">138 0000 8888</span>
+</div>
+<p class="text-[#617589] dark:text-gray-400 text-sm leading-relaxed mb-4">
+                        上海市浦东新区张江高科技园区科苑路88号 <br/>
+                        3号楼 402室
+                    </p>
+<button class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-sm font-bold hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+<span class="material-symbols-outlined text-sm">edit_location_alt</span>
+                        切换地址
+                    </button>
+</div>
+<div class="w-full md:w-48 bg-gray-100 dark:bg-gray-800 border-l border-[#f0f2f4] dark:border-gray-800 relative">
+<div class="w-full h-full min-h-[120px] bg-cover bg-center" data-alt="Map location view of delivery address" data-location="Shanghai, China" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDXbWPMkmsEuHPae2Ye7IfinBjFX5HE8G8wx-AxvjAk-3V82ZlU3ibZXIfXj_S76k0oaN-14SIdhHLohQb_S_nyHzze-e92fJbvvlV7PzP4zGeek7Q_IMz5TcoDXUe-f1IEkN4Giisd4g8Tfiat6Nm7O2iM8Re4w7yvNy8npajt-JeGOsLV31yggGR5RDhrO1yN5i8K-lOd2s4PNddU2eZ8uiMmnzh2MBTModbYfwSzvVK6Kr_Oqhkyr6I1_uywlSqIULfdyMX7R_c');"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+</div>
+</div>
+</div>
+<!-- Order Details Card -->
+<div class="bg-white dark:bg-gray-900 rounded-xl shadow-sm border border-[#f0f2f4] dark:border-gray-800 mb-6 p-5">
+<h2 class="text-lg font-bold mb-5 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">shopping_basket</span>
+                订单详情
+            </h2>
+<!-- Cylinder Selection -->
+<div class="mb-6">
+<p class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-3">钢瓶规格</p>
+<div class="grid grid-cols-2 gap-4">
+<label class="cursor-pointer group">
+<input checked="" class="peer hidden" name="cylinder" type="radio"/>
+<div class="flex flex-col items-center justify-center p-4 rounded-xl border-2 border-gray-100 dark:border-gray-800 bg-gray-50 dark:bg-gray-800 peer-checked:border-primary peer-checked:bg-primary/5 transition-all">
+<span class="material-symbols-outlined text-3xl mb-1 text-gray-400 peer-checked:text-primary">propane_tank</span>
+<span class="font-bold text-gray-900 dark:text-gray-100">15kg 钢瓶</span>
+<span class="text-xs text-gray-500 mt-1">普通家用型</span>
+</div>
+</label>
+<label class="cursor-pointer group">
+<input class="peer hidden" name="cylinder" type="radio"/>
+<div class="flex flex-col items-center justify-center p-4 rounded-xl border-2 border-gray-100 dark:border-gray-800 bg-gray-50 dark:bg-gray-800 peer-checked:border-primary peer-checked:bg-primary/5 transition-all">
+<span class="material-symbols-outlined text-3xl mb-1 text-gray-400 peer-checked:text-primary">propane_tank</span>
+<span class="font-bold text-gray-900 dark:text-gray-100">50kg 钢瓶</span>
+<span class="text-xs text-gray-500 mt-1">餐饮商用型</span>
+</div>
+</label>
+</div>
+</div>
+<!-- Quantity & Options -->
+<div class="space-y-4">
+<div class="flex items-center justify-between py-2">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-gray-400">format_list_numbered</span>
+<p class="font-medium">购买数量</p>
+</div>
+<div class="flex items-center gap-3 bg-gray-100 dark:bg-gray-800 rounded-lg p-1">
+<button class="size-8 flex items-center justify-center rounded-md bg-white dark:bg-gray-700 shadow-sm text-gray-600 dark:text-gray-200 hover:text-primary active:scale-95 transition-all">-</button>
+<span class="w-8 text-center font-bold">1</span>
+<button class="size-8 flex items-center justify-center rounded-md bg-white dark:bg-gray-700 shadow-sm text-gray-600 dark:text-gray-200 hover:text-primary active:scale-95 transition-all">+</button>
+</div>
+</div>
+<div class="flex items-center justify-between py-2">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-gray-400">recycling</span>
+<p class="font-medium">回收空瓶</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="flex items-center justify-between py-2">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-gray-400">bolt</span>
+<div class="flex items-center gap-1">
+<p class="font-medium">加急配送</p>
+<span class="material-symbols-outlined text-base text-gray-400 cursor-help" title="加急费每单加收10元，预计30分钟内送达">info</span>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+<div class="mt-6">
+<p class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">订单备注</p>
+<textarea class="w-full rounded-lg border-gray-200 dark:border-gray-800 dark:bg-gray-800 focus:border-primary focus:ring-primary text-sm" placeholder="请输入特殊配送要求（如：电梯坏了、放在门口等）" rows="2"></textarea>
+</div>
+</div>
+<!-- Appointment Time Card -->
+<div class="bg-white dark:bg-gray-900 rounded-xl shadow-sm border border-[#f0f2f4] dark:border-gray-800 mb-6 p-5">
+<h2 class="text-lg font-bold mb-5 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">schedule</span>
+                预约送达时间
+            </h2>
+<div class="flex gap-2 p-1 bg-gray-100 dark:bg-gray-800 rounded-lg mb-4">
+<button class="flex-1 py-2 text-sm font-bold bg-white dark:bg-gray-700 shadow-sm rounded-md">今天 (周三)</button>
+<button class="flex-1 py-2 text-sm font-medium text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">明天 (周四)</button>
+</div>
+<div class="grid grid-cols-3 gap-3">
+<button class="py-3 px-2 border border-gray-100 dark:border-gray-800 rounded-lg text-sm text-gray-400 bg-gray-50 dark:bg-gray-800/50 cursor-not-allowed">09:00-11:00 <br/> <span class="text-[10px]">已约满</span></button>
+<button class="py-3 px-2 border border-primary bg-primary/5 rounded-lg text-sm font-bold text-primary">11:00-13:00</button>
+<button class="py-3 px-2 border border-gray-100 dark:border-gray-800 rounded-lg text-sm font-medium hover:border-primary hover:text-primary transition-colors">13:00-15:00</button>
+<button class="py-3 px-2 border border-gray-100 dark:border-gray-800 rounded-lg text-sm font-medium hover:border-primary hover:text-primary transition-colors">15:00-17:00</button>
+<button class="py-3 px-2 border border-gray-100 dark:border-gray-800 rounded-lg text-sm font-medium hover:border-primary hover:text-primary transition-colors">17:00-19:00</button>
+<button class="py-3 px-2 border border-gray-100 dark:border-gray-800 rounded-lg text-sm font-medium hover:border-primary hover:text-primary transition-colors">19:00-21:00</button>
+</div>
+</div>
+</main>
+<!-- Fixed Bottom Bar -->
+<div class="fixed bottom-0 left-0 right-0 bg-white dark:bg-background-dark border-t border-[#f0f2f4] dark:border-gray-800 shadow-[0_-4px_12px_rgba(0,0,0,0.05)] z-50">
+<div class="max-w-[800px] mx-auto px-4 py-4 md:px-6 flex items-center justify-between gap-4">
+<div class="flex-1">
+<div class="flex flex-col">
+<div class="flex items-center gap-1 group cursor-pointer">
+<span class="text-xs text-gray-500">费用合计</span>
+<span class="material-symbols-outlined text-sm text-gray-400 group-hover:text-primary">expand_less</span>
+</div>
+<div class="flex items-baseline gap-1">
+<span class="text-primary text-sm font-bold">¥</span>
+<span class="text-2xl font-bold text-primary">135.00</span>
+</div>
+<div class="hidden md:flex gap-3 mt-1">
+<span class="text-[10px] text-gray-400">瓶装气: ¥120</span>
+<span class="text-[10px] text-gray-400">配送费: ¥15</span>
+<span class="text-[10px] text-gray-400">加急: ¥0</span>
+</div>
+</div>
+</div>
+<button class="min-w-[160px] md:min-w-[200px] bg-primary text-white h-12 rounded-xl font-bold text-lg shadow-lg shadow-primary/20 hover:bg-primary/90 active:scale-[0.98] transition-all">
+                立即下单
+            </button>
+</div>
+</div>
+</body></html>

@@ -1,0 +1,459 @@
+{
+  "summary": {
+    "total_cases": 63,
+    "ok_cases": 63,
+    "http_success_rate": 100.0,
+    "rag_or_safety_hits": 1,
+    "rag_or_safety_hit_rate": 1.59,
+    "lane_distribution": {
+      "smalltalk": 50,
+      "action": 12,
+      "safety": 1
+    },
+    "avg_latency_ms": 1419.59,
+    "p95_latency_ms": 1902
+  },
+  "items": [
+    {
+      "id": "DQ001",
+      "status": 200,
+      "latency_ms": 867,
+      "lane": "smalltalk",
+      "intent_hint": "CLARIFY_OR_POLICY"
+    },
+    {
+      "id": "DQ002",
+      "status": 200,
+      "latency_ms": 652,
+      "lane": "smalltalk",
+      "intent_hint": "CLARIFY_OR_POLICY"
+    },
+    {
+      "id": "DQ003",
+      "status": 200,
+      "latency_ms": 604,
+      "lane": "action",
+      "intent_hint": "CLARIFY_OR_POLICY"
+    },
+    {
+      "id": "DQ004",
+      "status": 200,
+      "latency_ms": 1849,
+      "lane": "smalltalk",
+      "intent_hint": "CLARIFY_OR_POLICY"
+    },
+    {
+      "id": "DQ005",
+      "status": 200,
+      "latency_ms": 2129,
+      "lane": "smalltalk",
+      "intent_hint": "CLARIFY_OR_POLICY"
+    },
+    {
+      "id": "DQ006",
+      "status": 200,
+      "latency_ms": 655,
+      "lane": "smalltalk",
+      "intent_hint": "CLARIFY_OR_POLICY"
+    },
+    {
+      "id": "DQ007",
+      "status": 200,
+      "latency_ms": 702,
+      "lane": "action",
+      "intent_hint": "CLARIFY_OR_POLICY"
+    },
+    {
+      "id": "DQ008",
+      "status": 200,
+      "latency_ms": 672,
+      "lane": "action",
+      "intent_hint": "CLARIFY_OR_POLICY"
+    },
+    {
+      "id": "DQ009",
+      "status": 200,
+      "latency_ms": 690,
+      "lane": "action",
+      "intent_hint": "CLARIFY_OR_POLICY"
+    },
+    {
+      "id": "DQ010",
+      "status": 200,
+      "latency_ms": 614,
+      "lane": "smalltalk",
+      "intent_hint": "CLARIFY_OR_POLICY"
+    },
+    {
+      "id": "DQ011",
+      "status": 200,
+      "latency_ms": 616,
+      "lane": "action",
+      "intent_hint": "CLARIFY_OR_POLICY"
+    },
+    {
+      "id": "DQ012",
+      "status": 200,
+      "latency_ms": 685,
+      "lane": "smalltalk",
+      "intent_hint": "CLARIFY_OR_POLICY"
+    },
+    {
+      "id": "DQ013",
+      "status": 200,
+      "latency_ms": 1869,
+      "lane": "smalltalk",
+      "intent_hint": "CLARIFY_OR_POLICY"
+    },
+    {
+      "id": "DQ014",
+      "status": 200,
+      "latency_ms": 1788,
+      "lane": "smalltalk",
+      "intent_hint": "CLARIFY_OR_POLICY"
+    },
+    {
+      "id": "DQ015",
+      "status": 200,
+      "latency_ms": 1810,
+      "lane": "smalltalk",
+      "intent_hint": "CLARIFY_OR_POLICY"
+    },
+    {
+      "id": "DQ016",
+      "status": 200,
+      "latency_ms": 704,
+      "lane": "smalltalk",
+      "intent_hint": "CLARIFY_OR_POLICY"
+    },
+    {
+      "id": "DQ151",
+      "status": 200,
+      "latency_ms": 705,
+      "lane": "action",
+      "intent_hint": "COMPLAINT_OR_SAFETY"
+    },
+    {
+      "id": "DQ152",
+      "status": 200,
+      "latency_ms": 603,
+      "lane": "action",
+      "intent_hint": "COMPLAINT_OR_SAFETY"
+    },
+    {
+      "id": "DQ153",
+      "status": 200,
+      "latency_ms": 681,
+      "lane": "safety",
+      "intent_hint": "COMPLAINT_OR_SAFETY"
+    },
+    {
+      "id": "DQ154",
+      "status": 200,
+      "latency_ms": 1857,
+      "lane": "smalltalk",
+      "intent_hint": "COMPLAINT_OR_SAFETY"
+    },
+    {
+      "id": "DQ155",
+      "status": 200,
+      "latency_ms": 671,
+      "lane": "action",
+      "intent_hint": "COMPLAINT_OR_SAFETY"
+    },
+    {
+      "id": "DQ156",
+      "status": 200,
+      "latency_ms": 1841,
+      "lane": "smalltalk",
+      "intent_hint": "COMPLAINT_OR_SAFETY"
+    },
+    {
+      "id": "DQ157",
+      "status": 200,
+      "latency_ms": 1778,
+      "lane": "smalltalk",
+      "intent_hint": "COMPLAINT_OR_SAFETY"
+    },
+    {
+      "id": "DQ158",
+      "status": 200,
+      "latency_ms": 1695,
+      "lane": "smalltalk",
+      "intent_hint": "COMPLAINT_OR_SAFETY"
+    },
+    {
+      "id": "DQ159",
+      "status": 200,
+      "latency_ms": 630,
+      "lane": "action",
+      "intent_hint": "COMPLAINT_OR_SAFETY"
+    },
+    {
+      "id": "DQ160",
+      "status": 200,
+      "latency_ms": 695,
+      "lane": "action",
+      "intent_hint": "COMPLAINT_OR_SAFETY"
+    },
+    {
+      "id": "DQ161",
+      "status": 200,
+      "latency_ms": 609,
+      "lane": "smalltalk",
+      "intent_hint": "CLARIFY_OR_POLICY"
+    },
+    {
+      "id": "DQ162",
+      "status": 200,
+      "latency_ms": 1902,
+      "lane": "smalltalk",
+      "intent_hint": "CLARIFY_OR_POLICY"
+    },
+    {
+      "id": "DQ163",
+      "status": 200,
+      "latency_ms": 710,
+      "lane": "action",
+      "intent_hint": "CLARIFY_OR_POLICY"
+    },
+    {
+      "id": "DQ164",
+      "status": 200,
+      "latency_ms": 697,
+      "lane": "smalltalk",
+      "intent_hint": "CLARIFY_OR_POLICY"
+    },
+    {
+      "id": "DQ165",
+      "status": 200,
+      "latency_ms": 1952,
+      "lane": "smalltalk",
+      "intent_hint": "CLARIFY_OR_POLICY"
+    },
+    {
+      "id": "DQ166",
+      "status": 200,
+      "latency_ms": 663,
+      "lane": "smalltalk",
+      "intent_hint": "CLARIFY_OR_POLICY"
+    },
+    {
+      "id": "DQ220",
+      "status": 200,
+      "latency_ms": 720,
+      "lane": "action",
+      "intent_hint": "COMPLAINT_OR_SAFETY"
+    },
+    {
+      "id": "DQ221",
+      "status": 200,
+      "latency_ms": 1761,
+      "lane": "smalltalk",
+      "intent_hint": "CLARIFY_OR_POLICY"
+    },
+    {
+      "id": "DQ222",
+      "status": 200,
+      "latency_ms": 1735,
+      "lane": "smalltalk",
+      "intent_hint": "CLARIFY_OR_POLICY"
+    },
+    {
+      "id": "DQ223",
+      "status": 200,
+      "latency_ms": 1776,
+      "lane": "smalltalk",
+      "intent_hint": "CLARIFY_OR_POLICY"
+    },
+    {
+      "id": "DQ224",
+      "status": 200,
+      "latency_ms": 1911,
+      "lane": "smalltalk",
+      "intent_hint": "CLARIFY_OR_POLICY"
+    },
+    {
+      "id": "DQ225",
+      "status": 200,
+      "latency_ms": 1835,
+      "lane": "smalltalk",
+      "intent_hint": "CLARIFY_OR_POLICY"
+    },
+    {
+      "id": "DQ226",
+      "status": 200,
+      "latency_ms": 1848,
+      "lane": "smalltalk",
+      "intent_hint": "CLARIFY_OR_POLICY"
+    },
+    {
+      "id": "DQ227",
+      "status": 200,
+      "latency_ms": 1663,
+      "lane": "smalltalk",
+      "intent_hint": "CLARIFY_OR_POLICY"
+    },
+    {
+      "id": "DQ228",
+      "status": 200,
+      "latency_ms": 1636,
+      "lane": "smalltalk",
+      "intent_hint": "CLARIFY_OR_POLICY"
+    },
+    {
+      "id": "DQ229",
+      "status": 200,
+      "latency_ms": 1785,
+      "lane": "smalltalk",
+      "intent_hint": "CLARIFY_OR_POLICY"
+    },
+    {
+      "id": "DQ230",
+      "status": 200,
+      "latency_ms": 1784,
+      "lane": "smalltalk",
+      "intent_hint": "CLARIFY_OR_POLICY"
+    },
+    {
+      "id": "DQ231",
+      "status": 200,
+      "latency_ms": 1824,
+      "lane": "smalltalk",
+      "intent_hint": "CLARIFY_OR_POLICY"
+    },
+    {
+      "id": "DQ232",
+      "status": 200,
+      "latency_ms": 1813,
+      "lane": "smalltalk",
+      "intent_hint": "CLARIFY_OR_POLICY"
+    },
+    {
+      "id": "DQ233",
+      "status": 200,
+      "latency_ms": 1789,
+      "lane": "smalltalk",
+      "intent_hint": "CLARIFY_OR_POLICY"
+    },
+    {
+      "id": "DQ234",
+      "status": 200,
+      "latency_ms": 1786,
+      "lane": "smalltalk",
+      "intent_hint": "CLARIFY_OR_POLICY"
+    },
+    {
+      "id": "DQ235",
+      "status": 200,
+      "latency_ms": 1848,
+      "lane": "smalltalk",
+      "intent_hint": "CLARIFY_OR_POLICY"
+    },
+    {
+      "id": "DQ236",
+      "status": 200,
+      "latency_ms": 1960,
+      "lane": "smalltalk",
+      "intent_hint": "CLARIFY_OR_POLICY"
+    },
+    {
+      "id": "DQ237",
+      "status": 200,
+      "latency_ms": 1841,
+      "lane": "smalltalk",
+      "intent_hint": "CLARIFY_OR_POLICY"
+    },
+    {
+      "id": "DQ238",
+      "status": 200,
+      "latency_ms": 1713,
+      "lane": "smalltalk",
+      "intent_hint": "CLARIFY_OR_POLICY"
+    },
+    {
+      "id": "DQ239",
+      "status": 200,
+      "latency_ms": 1865,
+      "lane": "smalltalk",
+      "intent_hint": "CLARIFY_OR_POLICY"
+    },
+    {
+      "id": "DQ240",
+      "status": 200,
+      "latency_ms": 1798,
+      "lane": "smalltalk",
+      "intent_hint": "CLARIFY_OR_POLICY"
+    },
+    {
+      "id": "DQ241",
+      "status": 200,
+      "latency_ms": 1868,
+      "lane": "smalltalk",
+      "intent_hint": "CLARIFY_OR_POLICY"
+    },
+    {
+      "id": "DQ242",
+      "status": 200,
+      "latency_ms": 1806,
+      "lane": "smalltalk",
+      "intent_hint": "CLARIFY_OR_POLICY"
+    },
+    {
+      "id": "DQ243",
+      "status": 200,
+      "latency_ms": 1789,
+      "lane": "smalltalk",
+      "intent_hint": "CLARIFY_OR_POLICY"
+    },
+    {
+      "id": "DQ244",
+      "status": 200,
+      "latency_ms": 1886,
+      "lane": "smalltalk",
+      "intent_hint": "CLARIFY_OR_POLICY"
+    },
+    {
+      "id": "DQ245",
+      "status": 200,
+      "latency_ms": 1726,
+      "lane": "smalltalk",
+      "intent_hint": "CLARIFY_OR_POLICY"
+    },
+    {
+      "id": "DQ246",
+      "status": 200,
+      "latency_ms": 1762,
+      "lane": "smalltalk",
+      "intent_hint": "CLARIFY_OR_POLICY"
+    },
+    {
+      "id": "DQ247",
+      "status": 200,
+      "latency_ms": 1718,
+      "lane": "smalltalk",
+      "intent_hint": "CLARIFY_OR_POLICY"
+    },
+    {
+      "id": "DQ248",
+      "status": 200,
+      "latency_ms": 1836,
+      "lane": "smalltalk",
+      "intent_hint": "CLARIFY_OR_POLICY"
+    },
+    {
+      "id": "DQ249",
+      "status": 200,
+      "latency_ms": 1870,
+      "lane": "smalltalk",
+      "intent_hint": "CLARIFY_OR_POLICY"
+    },
+    {
+      "id": "DQ250",
+      "status": 200,
+      "latency_ms": 1887,
+      "lane": "smalltalk",
+      "intent_hint": "CLARIFY_OR_POLICY"
+    }
+  ]
+}

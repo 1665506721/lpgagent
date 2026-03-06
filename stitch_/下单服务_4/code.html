@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html class="light" lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>下单服务 - LPG 服务平台</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        body {
+            font-family: 'Inter', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .time-slot-strike {
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#111418] dark:text-gray-100 transition-colors duration-200">
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 px-10 py-3 sticky top-0 z-50">
+<div class="flex items-center gap-4 text-primary">
+<div class="size-6">
+<svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M24 4C25.7818 14.2173 33.7827 22.2182 44 24C33.7827 25.7818 25.7818 33.7827 24 44C22.2182 33.7827 14.2173 25.7818 4 24C14.2173 22.2182 22.2182 14.2173 24 4Z" fill="currentColor"></path>
+</svg>
+</div>
+<h2 class="text-[#111418] dark:text-white text-xl font-bold leading-tight tracking-[-0.015em]">LPG 服务平台</h2>
+</div>
+<div class="flex flex-1 justify-end gap-8">
+<nav class="flex items-center gap-9">
+<a class="text-[#111418] dark:text-gray-300 text-sm font-medium hover:text-primary transition-colors" href="#">首页</a>
+<a class="text-primary text-sm font-bold border-b-2 border-primary py-1" href="#">下单服务</a>
+<a class="text-[#111418] dark:text-gray-300 text-sm font-medium hover:text-primary transition-colors" href="#">订单管理</a>
+<a class="text-[#111418] dark:text-gray-300 text-sm font-medium hover:text-primary transition-colors" href="#">账户中心</a>
+</nav>
+<div class="flex gap-2">
+<button class="flex items-center justify-center rounded-lg h-10 w-10 bg-gray-100 dark:bg-gray-800 text-[#111418] dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+</button>
+<button class="flex items-center justify-center rounded-lg h-10 w-10 bg-gray-100 dark:bg-gray-800 text-[#111418] dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+<span class="material-symbols-outlined text-[20px]">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<main class="flex flex-1 justify-center py-10 px-4">
+<div class="layout-content-container flex flex-col max-w-[1000px] flex-1 gap-8">
+<div class="bg-white dark:bg-gray-900 rounded-xl p-6 border border-gray-200 dark:border-gray-800 shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-3">
+<span class="flex items-center justify-center size-8 rounded-full bg-primary text-white font-bold text-sm">1</span>
+<p class="text-[#111418] dark:text-white text-base font-semibold">选择服务类型</p>
+</div>
+<div class="flex-1 h-px bg-gray-200 dark:bg-gray-800 mx-6"></div>
+<div class="flex items-center gap-3">
+<span class="flex items-center justify-center size-8 rounded-full bg-primary text-white font-bold text-sm">2</span>
+<p class="text-[#111418] dark:text-white text-base font-semibold">填写详细信息</p>
+</div>
+</div>
+<div class="w-full bg-gray-100 dark:bg-gray-800 rounded-full h-1.5 overflow-hidden">
+<div class="bg-primary h-full transition-all duration-500" style="width: 100%;"></div>
+</div>
+</div>
+<section class="bg-white dark:bg-gray-900 rounded-xl p-8 border border-gray-200 dark:border-gray-800 shadow-sm">
+<div class="flex items-center justify-between mb-8">
+<h2 class="text-[#111418] dark:text-white text-xl font-bold">填写配送与联系信息</h2>
+<span class="text-sm text-gray-500">已选择：气瓶配送</span>
+</div>
+<form class="space-y-8">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-gray-700 dark:text-gray-300">企业/单位名称</label>
+<input class="px-4 py-2.5 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-500 cursor-not-allowed focus:outline-none" readonly="" type="text" value="鼎盛餐饮管理有限公司"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-gray-700 dark:text-gray-300">配送地址</label>
+<div class="relative">
+<input class="w-full px-4 py-2.5 rounded-lg border border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent transition-all" placeholder="请输入详细配送地址" type="text" value="上海市徐汇区虹漕路461号58号楼"/>
+<button class="absolute right-2 top-1.5 px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded hover:bg-primary/20 transition-colors" type="button">地址簿</button>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-gray-700 dark:text-gray-300">联系人姓名</label>
+<input class="px-4 py-2.5 rounded-lg border border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent transition-all" placeholder="如：王经理" type="text" value="张立功"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-gray-700 dark:text-gray-300">联系电话</label>
+<input class="px-4 py-2.5 rounded-lg border border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent transition-all" placeholder="请输入11位手机号码" type="tel" value="13812345678"/>
+</div>
+</div>
+<div class="flex flex-col gap-4 pt-4">
+<label class="text-sm font-semibold text-gray-700 dark:text-gray-300 flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">schedule</span>
+                                预约送达时间
+                            </label>
+<div class="border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden bg-white dark:bg-gray-900">
+<div class="bg-blue-50 dark:bg-blue-900/20 px-4 py-2 border-b border-blue-100 dark:border-blue-800/30 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm">info</span>
+<p class="text-xs text-primary font-medium">温馨提示：我们的标准服务时间为 08:00 - 20:00，其余时间为非营业时段。</p>
+</div>
+<div class="p-5 space-y-6">
+<div class="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
+<button class="flex-shrink-0 flex flex-col items-center justify-center w-24 h-16 rounded-lg border-2 border-primary bg-primary/5 text-primary" type="button">
+<span class="text-xs font-bold">今天</span>
+<span class="text-sm font-bold">5月20日</span>
+</button>
+<button class="flex-shrink-0 flex flex-col items-center justify-center w-24 h-16 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-primary/50 transition-colors" type="button">
+<span class="text-xs text-gray-500">明天</span>
+<span class="text-sm font-bold">5月21日</span>
+</button>
+<button class="flex-shrink-0 flex flex-col items-center justify-center w-24 h-16 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-primary/50 transition-colors" type="button">
+<span class="text-xs text-gray-500">周三</span>
+<span class="text-sm font-bold">5月22日</span>
+</button>
+<button class="flex-shrink-0 flex flex-col items-center justify-center w-24 h-16 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-primary/50 transition-colors" type="button">
+<span class="text-xs text-gray-500">周四</span>
+<span class="text-sm font-bold">5月23日</span>
+</button>
+<button class="flex-shrink-0 flex flex-col items-center justify-center w-24 h-16 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-primary/50 transition-colors" type="button">
+<span class="text-xs text-gray-500">周五</span>
+<span class="text-sm font-bold">5月24日</span>
+</button>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+<div class="relative group">
+<div class="flex flex-col items-center justify-center h-14 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-100 dark:border-gray-700 cursor-not-allowed opacity-60">
+<span class="text-sm text-gray-400 font-medium time-slot-strike">06:00-08:00</span>
+<span class="text-[10px] text-gray-400 mt-0.5">非营业时间</span>
+</div>
+</div>
+<button class="flex items-center justify-center h-14 rounded-lg border border-primary/40 text-primary hover:bg-primary/5 transition-all font-medium text-sm" type="button">
+                                            08:00-10:00
+                                        </button>
+<button class="flex items-center justify-center h-14 rounded-lg bg-primary text-white font-bold text-sm shadow-md shadow-primary/20" type="button">
+                                            10:00-12:00
+                                        </button>
+<button class="flex items-center justify-center h-14 rounded-lg border border-primary/40 text-primary hover:bg-primary/5 transition-all font-medium text-sm" type="button">
+                                            12:00-14:00
+                                        </button>
+<button class="flex items-center justify-center h-14 rounded-lg border border-primary/40 text-primary hover:bg-primary/5 transition-all font-medium text-sm" type="button">
+                                            14:00-16:00
+                                        </button>
+<button class="flex items-center justify-center h-14 rounded-lg border border-primary/40 text-primary hover:bg-primary/5 transition-all font-medium text-sm" type="button">
+                                            16:00-18:00
+                                        </button>
+<button class="flex items-center justify-center h-14 rounded-lg border border-primary/40 text-primary hover:bg-primary/5 transition-all font-medium text-sm" type="button">
+                                            18:00-20:00
+                                        </button>
+<div class="relative">
+<div class="flex flex-col items-center justify-center h-14 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-100 dark:border-gray-700 cursor-not-allowed opacity-60">
+<span class="text-sm text-gray-400 font-medium time-slot-strike">20:00-22:00</span>
+<span class="text-[10px] text-gray-400 mt-0.5">非营业时间</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-gray-700 dark:text-gray-300">服务优先级</label>
+<div class="flex items-center h-[46px] gap-4">
+<label class="inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div>
+<span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">加急处理 <span class="text-xs text-orange-500">(预计 1 小时内送达，额外加收 ¥20.00)</span></span>
+</label>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-gray-700 dark:text-gray-300">备注信息</label>
+<textarea class="px-4 py-2.5 rounded-lg border border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent transition-all" placeholder="如有特殊要求请注明（如：请带一个减压阀，送到3楼等）" rows="1"></textarea>
+</div>
+</div>
+<div class="pt-8 border-t border-gray-100 dark:border-gray-800 flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-xs text-gray-500 dark:text-gray-400">总计费用 (包含基础运费)</span>
+<div class="text-xl font-bold text-primary">¥ 135.00 <span class="text-sm font-normal text-gray-400 ml-2">(气价 ¥120 + 运费 ¥15)</span></div>
+</div>
+<div class="flex gap-4">
+<button class="px-8 py-3 rounded-lg border border-gray-300 dark:border-gray-700 font-bold text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors" type="button">返回修改</button>
+<button class="px-10 py-3 rounded-lg bg-primary text-white font-bold shadow-lg shadow-primary/30 hover:bg-primary/90 transition-all flex items-center gap-2" type="submit">
+                                    确认下单
+                                    <span class="material-symbols-outlined text-lg">arrow_forward</span>
+</button>
+</div>
+</div>
+</form>
+</section>
+<div class="flex items-center justify-center gap-12 py-6 opacity-60 grayscale hover:grayscale-0 transition-all">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-blue-600">verified_user</span>
+<span class="text-sm font-medium">安检合格认证</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-blue-600">support_agent</span>
+<span class="text-sm font-medium">24小时客服支持</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-blue-600">payments</span>
+<span class="text-sm font-medium">官方统一定价</span>
+</div>
+</div>
+</div>
+</main>
+<footer class="bg-white dark:bg-gray-950 border-t border-gray-200 dark:border-gray-800 py-10 px-10 text-center text-sm text-gray-500">
+<p>© 2024 LPG 能源智慧服务平台. 沪ICP备12345678号</p>
+<div class="flex justify-center gap-6 mt-4">
+<a class="hover:text-primary transition-colors" href="#">服务协议</a>
+<a class="hover:text-primary transition-colors" href="#">隐私政策</a>
+<a class="hover:text-primary transition-colors" href="#">联系我们</a>
+</div>
+</footer>
+</div>
+</div>
+
+</body></html>

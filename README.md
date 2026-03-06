@@ -1,177 +1,187 @@
-# 高并发请求受理系统demo（Redis Lua 原子校验 + Kafka 削峰）
+﻿# LPG-AI-Agent-Platform
 
-面试级高并发请求受理与配额分配系统示例工程，重点展示高并发入口、Redis Lua 原子操作、消息队列削峰与工程化结构。
+基于 `Django + DRF + React(Vite)` 的LPG客服与用户门户系统。项目重心在 Agent 对话质量、可执行工具链路与安全可控的业务编排。
 
-## 背景与目标
+## 1. 项目结构
+- `backend/`: Django 服务端（API、Agent 编排、Portal 业务、知识库检索）
+- `frontend/`: React 前端（Portal 页面、聊天界面、订单/地址管理）
+- `docs/`: 方案、API、测试与架构文档
+- `spec/`: 规范与质量分析文档
+- `lpg_qwen25_7b_lora_adapter/`: 附带的 LoRA 微调适配器（实验用途）
+- `qwen25_7b_lpg_train_data_1000.jsonl`: 微调训练样本（脱敏示例数据）
+- `qwen25_7b_lpg_train_data_quality_report.json`: 训练数据质量报告
 
-在高并发场景下（如限量资源分配、预约名额、活动资格发放），
-直接将请求同步写入数据库容易造成数据库过载与严重的并发一致性问题。
+## 2. 附带微调模型说明
+仓库里附带了一个轻量微调资产，主要用于客服语气与领域表达实验，不作为生产默认模型强依赖。
 
-本项目的目标是：
-- 在高并发入口快速判定请求是否具备“受理资格”
-- 使用 Redis Lua 实现原子化校验与配额扣减
-- 通过 Kafka 对受理成功的请求进行削峰异步处理
-- 提供可查询的请求状态，形成完整工程闭环
+- 类型：Qwen2.5-7B 的 LoRA 适配器（目录：`lpg_qwen25_7b_lora_adapter/`），只用了1000条训练样本，效果有限（qwen25_7b_lpg_train_data_1000.jsonl），该模型适用于v1路径，有较多的兜底策略，效果不佳
+- 用途：增强燃气客服场景下的术语表达、回复风格一致性
+- 当前定位：可选实验组件。线上主链路仍以规则编排 + 工具调用 + 可替换 LLM 为主
+- 建议：把微调模型作为“回复风格增强层”，不要绕过业务规则和写操作确认机制
 
-## 当前阶段说明
+## 3. 智能客服功能（当前可用）
+- 查询类：地址列表、订单列表/详情、通知、资料
+- 办理类：下单、改址、支付、取消、地址管理、购物车操作
+- 组合需求：支持“配件 + 上门服务”一条消息识别并串行执行
+- 安全问答：区分日常安全、检漏判断、高风险应急
+- 人工客服：支持人工排队状态（前方人数/预计时长）与排队中继续问答
+- 记忆能力：保留对话上下文与 pending action 状态，实现多轮补充后执行
 
-本阶段为开发/单机环境验证版本，聚焦流程闭环与工程化结构。生产化仍需进一步压测、多实例部署、容量评估与故障演练。
+## 4. 智能客服设计详解
+### 4.1 设计目标
+- 对话不只“能聊”，而是“能办事”
+- 写操作必须确认，避免误操作
+- 高风险安全场景优先级最高
+- 全链路可审计、可复盘
 
-## 核心设计
+### 4.2 编排主链路（Portal V2）
+入口是 `/api/chat`，核心在 `backend/agent/portal_orchestrator.py`。
 
-### Redis Lua 原子校验
-- 所有配额校验与扣减在 Lua 中完成
-- 避免“先查后改”导致的并发竞态
-- 防止超发/超卖
+主流程：
+1. 预处理与安全/策略检查（只读兜底、禁操作拦截等）
+2. Query-First 与意图路由（先判任务类型，再判实体）
+3. 若存在 `pending_action`，进入收集/确认/执行状态机
+4. 需要工具时走 `backend/agent/tools.py`
+5. 非动作问答走 LLM 直答或 RAG（按主题与风险选择）
+6. 输出 `routing` + `pending_action` + `final_response`
 
-### 异步削峰
-- 受理成功的请求写入 Kafka
-- 下游通过 Worker 平滑消费并落库
-- 数据库只承受稳定写入压力
+### 4.3 状态机与“能办理”机制
+通过 `pending_action` 驱动办理流程，而不是一次性自由生成：
+- `COLLECTING`: 收集缺失槽位（地址、联系方式、服务类型等）
+- `AWAIT_CONFIRM`: 已整理摘要，等待“确认/取消”
+- `PARTIAL_DONE`: 组合动作部分成功，支持只重试未完成步骤
 
-### 幂等与一致性
-- request_id 作为全链路幂等键
-- 数据库对 request_id 建立唯一约束
-- 重复消费不会产生重复数据
+这套机制保证：
+- 用户一句话可发起复杂任务
+- 多轮补充后仍保持目标不丢失
+- 写操作必须确认
 
-### 请求状态管理
-- Redis 维护 req_status:{request_id}
-- 客户端可通过接口查询处理进度
+### 4.4 路由策略
+- Query-First：强查询句优先走工具，避免掉到泛化回答
+- Ambiguity 管理：不明确时做定向澄清，明确后立刻执行
+- Topic continuation：如“燃气安全 -> 餐饮”，短回复会按上文主题续答，不再回退通用分流
 
-## 快速开始（本地运行）
+### 4.5 RAG 与知识边界
+知识库按域分离：
+- `safety_docs/`: 安全与应急规范
+- `biz_docs/`: 业务规则（价格、发票、年检、服务时段等）
 
-### 前置条件
-- Docker & Docker Compose
-- Python 3.11 + Poetry
-- curl（jq 可选）
+策略：
+- 强事实问题优先检索
+- 非高风险通用问题可 LLM 直答
+- 高风险安全问题走应急模板与热线提醒
 
-### 启动基础设施
-```bash
-cd /home/host-13/projects/hcrs
+### 4.6 风控与安全优先
+- 高风险关键词触发应急链路（先安全动作，再热线）
+- 危险操作建议（拆改、绕过安全装置）做明确拒答
+- 地址/订单等写操作全部要求显式确认
 
-docker compose -f deploy/docker-compose.yml up -d
+### 4.7 可观测性
+每次对话会记录 run/event，用于回放与审计：
+- 路由选择
+- 工具调用输入输出
+- 回答来源（LLM/RAG/模板兜底）
+- 状态转移
 
-docker ps
+### 4.8 前端页面说明
+当前前端页面是“功能优先”的实现，视觉层较简单，主要用于快速验证 Agent 能力与业务闭环。
+
+页面现状：
+- 覆盖核心流程（聊天、订单、地址、通知）
+- 便于联调和回归测试
+- 交互和视觉仍可继续工程化优化（设计系统、组件统一、可访问性、移动端细节）
+
+### 4.9 Agent 架构设计（消息处理流程）
+核心组件分层：
+- `API 接入层`：接收 `/api/chat` 请求，校验用户态与参数。
+- `编排层 (portal_orchestrator)`：统一做路由、状态机推进、策略控制。
+- `能力层 (tools + services)`：执行查询和写操作（地址、订单、购物车、通知等）。
+- `知识层 (RAG)`：在需要事实依据时检索业务/安全知识库。
+- `生成层 (LLM)`：负责自然语言表达，不直接越权执行写操作。
+- `记忆与审计`：会话记忆（memory_json）与 AgentEvent 事件链回放。
+
+下面是收到一条用户消息后的处理流程（Mermaid）：
+
+```mermaid
+flowchart TD
+    A["用户消息 /api/chat"] --> B["预处理与安全检查<br/>认证/策略/高风险拦截"]
+    B --> C{"是否存在 pending_action"}
+    C -->|是| D["Pending 状态机<br/>COLLECTING / AWAIT_CONFIRM / PARTIAL_DONE"]
+    D --> E{"用户是否确认执行"}
+    E -->|确认| F["调用 Tools 执行写操作<br/>按顺序落地并记录事件"]
+    E -->|未确认| G["继续收集缺失槽位或允许修改草稿"]
+
+    C -->|否| H["Query-First 路由<br/>任务类型 + 实体识别"]
+    H --> I{"查询强命中?"}
+    I -->|是| J["查询执行器<br/>调用工具并结构化返回"]
+    I -->|否| K{"是否动作意图?"}
+    K -->|是| L["创建 pending_action<br/>进入确认式办理流程"]
+    K -->|否| M["非动作问答链路"]
+
+    M --> N{"安全高风险?"}
+    N -->|是| O["应急模板 + 热线提醒"]
+    N -->|否| P{"需要 RAG?"}
+    P -->|是| Q["RAG 检索 safety/biz 知识库"]
+    Q --> R["LLM 组织答案（带证据语义）"]
+    P -->|否| S["LLM 直答（人格与风格约束）"]
+
+    F --> T["统一响应封装<br/>final_response + routing + pending_action"]
+    G --> T
+    J --> T
+    L --> T
+    O --> T
+    R --> T
+    S --> T
+    T --> U["写入 AgentEvent 与会话记忆<br/>返回前端展示"]
 ```
 
-### 启动 API 服务
+## 5. 快速启动（本地）
+### 5.1 后端
 ```bash
-cd /home/host-13/projects/hcrs/services/admission_api
+cd backend
+python -m venv .venv
+# Windows:
+.venv\Scripts\activate
+# macOS/Linux:
+# source .venv/bin/activate
 
-KAFKA_BOOTSTRAP_SERVERS=localhost:9092 \
-ADMIN_TOKEN=dev-token-123 \
-REDIS_HOST=localhost \
-REDIS_PORT=6379 \
-REDIS_DB=0 \
-KAFKA_TOPIC_ORDER_CREATE=order_create \
-poetry run uvicorn app.main:app --host 0.0.0.0 --port 8000
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py runserver
 ```
 
-### 启动 Worker
+### 5.2 前端
 ```bash
-cd /home/host-13/projects/hcrs/services/order_worker
-
-export KAFKA_BOOTSTRAP_SERVERS=localhost:9092
-export KAFKA_TOPIC_ORDER_CREATE=order_create
-export KAFKA_CONSUMER_GROUP=order_worker
-export DATABASE_URL=postgresql+psycopg://seckill:seckill@localhost:5432/seckill
-export REDIS_HOST=localhost
-export REDIS_PORT=6379
-export REDIS_DB=0
-
-poetry run python app/main.py
+cd frontend
+npm install
+npm run dev
 ```
 
-### 冒烟验证
+默认本地地址：
+- 后端：`http://localhost:8000`
+- 前端：`http://localhost:5173`
 
-重置配额（需要 X-Admin-Token）：
+## 6. 测试命令（推荐）
 ```bash
-curl -X POST http://localhost:8000/admin/quota/reset \
-  -H "Content-Type: application/json" \
-  -H "X-Admin-Token: dev-token-123" \
-  -d '{"resource_id":"sku123","stock":1000}'
+python backend/manage.py test
 ```
 
-发起受理请求：
+只验证 Portal V2 关键链路：
 ```bash
-curl -X POST http://localhost:8000/admission/requests \
-  -H "Content-Type: application/json" \
-  -d '{"user_id":"u1","sku_id":"sku123"}'
+python backend/manage.py test agent.tests.test_portal_mode_chat agent.tests.test_portal_mode_chat_rag_memory
 ```
 
-查询状态（替换为上一步返回的 request_id）：
+## 7. RAG / 知识库
+重建索引示例：
 ```bash
-curl http://localhost:8000/admission/requests/{request_id}
+cd backend
+python manage.py rebuild_kb --domain safety --force
+python manage.py rebuild_kb --domain biz --force
 ```
 
-## 返回码说明
 
-| code | 含义 |
-|----|----|
-| 0 | 受理成功，已进入异步处理 |
-| 1 | 配额不足 |
-| 2 | 重复请求（幂等拦截） |
-| 3 | 触发限流 |
-| 4 | Kafka 入队失败 |
-
-## 常见问题
-
-### Kafka 连接失败 / code=4
-- 确认 KAFKA_BOOTSTRAP_SERVERS 在启动 uvicorn 的终端中设置
-- 若日志出现 kafka:9092 无法解析，需检查 Kafka advertised.listeners 配置
-
-### Worker 启动后回放历史消息
-- Kafka 按 consumer group 维护 offset
-- 可通过更换 KAFKA_CONSUMER_GROUP 或使用 latest 策略避免回放
-
-### jq 未安装
-- 可直接去掉 `| jq`
-- 或使用 `python -m json.tool` 查看 JSON
-
-## 接口
-
-### 请求受理
-
-- POST /admission/requests
-- GET  /admission/requests/{request_id}
-
-### 管理侧配额
-
-- POST /admin/quota/load
-- GET  /admin/quota/{resource_id}
-- POST /admin/quota/reset
-
-## 压测
-
-使用 Locust 对请求受理入口进行压测，覆盖：
-- POST /admission/requests
-- GET /admission/requests/{request_id}（轻量轮询）
-
-压测前会自动调用管理接口重置配额（默认 stock=200000）。
-
-### 一键运行（推荐）
-
-```bash
-export ADMIN_TOKEN=dev-token-123
-export BASE_URL=http://localhost:8000
-export SKU_ID=sku123
-export PRELOAD_STOCK=200000
-export USERS=200
-export SPAWN_RATE=50
-export RUN_TIME=2m
-
-./scripts/run_locust.sh
-```
-
-### 直接运行 Locust
-
-```bash
-export ADMIN_TOKEN=dev-token-123
-export BASE_URL=http://localhost:8000
-export SKU_ID=sku123
-export PRELOAD_STOCK=200000
-
-locust -f scripts/locustfile.py --headless -u 200 -r 50 -t 2m --host http://localhost:8000
-```
-
-压测结束后会在控制台输出按 code 统计的汇总信息，并可在 Locust 输出中看到 /admission/requests 的 RPS 与失败率。
+## 10. 相关文档
+- Portal API：`docs/portal_api.md`
+- 路由/对话改造方案：`docs/agent_routing_v2_plan.md`
+- 测试与质量：`docs/dialog_quality_testkit.md`
+- 后端说明：`backend/README.md`

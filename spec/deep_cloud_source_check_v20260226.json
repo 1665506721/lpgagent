@@ -1,0 +1,151 @@
+{
+  "summary": {
+    "total_steps": 17,
+    "ok_steps": 17,
+    "model_source_distribution": {
+      "cloud": 17
+    },
+    "lane_distribution": {
+      "action": 12,
+      "policy_guard": 5
+    }
+  },
+  "items": [
+    {
+      "scenario": "E001",
+      "step": 1,
+      "status": 200,
+      "model_source": "cloud",
+      "lane": "action",
+      "latency_ms": 890
+    },
+    {
+      "scenario": "E001",
+      "step": 2,
+      "status": 200,
+      "model_source": "cloud",
+      "lane": "action",
+      "latency_ms": 878
+    },
+    {
+      "scenario": "E001",
+      "step": 3,
+      "status": 200,
+      "model_source": "cloud",
+      "lane": "action",
+      "latency_ms": 890
+    },
+    {
+      "scenario": "E001",
+      "step": 4,
+      "status": 200,
+      "model_source": "cloud",
+      "lane": "action",
+      "latency_ms": 874
+    },
+    {
+      "scenario": "E002",
+      "step": 1,
+      "status": 200,
+      "model_source": "cloud",
+      "lane": "action",
+      "latency_ms": 835
+    },
+    {
+      "scenario": "E002",
+      "step": 2,
+      "status": 200,
+      "model_source": "cloud",
+      "lane": "action",
+      "latency_ms": 873
+    },
+    {
+      "scenario": "E003",
+      "step": 1,
+      "status": 200,
+      "model_source": "cloud",
+      "lane": "action",
+      "latency_ms": 783
+    },
+    {
+      "scenario": "E003",
+      "step": 2,
+      "status": 200,
+      "model_source": "cloud",
+      "lane": "action",
+      "latency_ms": 837
+    },
+    {
+      "scenario": "E003",
+      "step": 3,
+      "status": 200,
+      "model_source": "cloud",
+      "lane": "action",
+      "latency_ms": 877
+    },
+    {
+      "scenario": "E003",
+      "step": 4,
+      "status": 200,
+      "model_source": "cloud",
+      "lane": "action",
+      "latency_ms": 820
+    },
+    {
+      "scenario": "E003",
+      "step": 5,
+      "status": 200,
+      "model_source": "cloud",
+      "lane": "action",
+      "latency_ms": 861
+    },
+    {
+      "scenario": "E004",
+      "step": 1,
+      "status": 200,
+      "model_source": "cloud",
+      "lane": "action",
+      "latency_ms": 826
+    },
+    {
+      "scenario": "S001",
+      "step": 1,
+      "status": 200,
+      "model_source": "cloud",
+      "lane": "policy_guard",
+      "latency_ms": 772
+    },
+    {
+      "scenario": "S002",
+      "step": 1,
+      "status": 200,
+      "model_source": "cloud",
+      "lane": "policy_guard",
+      "latency_ms": 789
+    },
+    {
+      "scenario": "S003",
+      "step": 1,
+      "status": 200,
+      "model_source": "cloud",
+      "lane": "policy_guard",
+      "latency_ms": 738
+    },
+    {
+      "scenario": "S004",
+      "step": 1,
+      "status": 200,
+      "model_source": "cloud",
+      "lane": "policy_guard",
+      "latency_ms": 721
+    },
+    {
+      "scenario": "S005",
+      "step": 1,
+      "status": 200,
+      "model_source": "cloud",
+      "lane": "policy_guard",
+      "latency_ms": 809
+    }
+  ]
+}

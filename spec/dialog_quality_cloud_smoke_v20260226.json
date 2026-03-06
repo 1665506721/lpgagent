@@ -1,0 +1,339 @@
+{
+  "summary": {
+    "total": 40,
+    "ok": 40,
+    "cloud_calls": 40,
+    "local_calls": 0,
+    "none_calls": 0,
+    "cloud_ratio_pct": 100.0,
+    "lane_distribution": {
+      "smalltalk": 22,
+      "action": 16,
+      "rag": 2
+    },
+    "avg_latency_ms": 1109.85,
+    "p95_latency_ms": 1882
+  },
+  "items": [
+    {
+      "id": "DQ001",
+      "status": 200,
+      "model_source": "cloud",
+      "lane": "smalltalk",
+      "confirm_required": false,
+      "latency_ms": 821
+    },
+    {
+      "id": "DQ002",
+      "status": 200,
+      "model_source": "cloud",
+      "lane": "smalltalk",
+      "confirm_required": false,
+      "latency_ms": 593
+    },
+    {
+      "id": "DQ003",
+      "status": 200,
+      "model_source": "cloud",
+      "lane": "action",
+      "confirm_required": false,
+      "latency_ms": 656
+    },
+    {
+      "id": "DQ004",
+      "status": 200,
+      "model_source": "cloud",
+      "lane": "smalltalk",
+      "confirm_required": false,
+      "latency_ms": 1668
+    },
+    {
+      "id": "DQ005",
+      "status": 200,
+      "model_source": "cloud",
+      "lane": "smalltalk",
+      "confirm_required": false,
+      "latency_ms": 1777
+    },
+    {
+      "id": "DQ006",
+      "status": 200,
+      "model_source": "cloud",
+      "lane": "smalltalk",
+      "confirm_required": false,
+      "latency_ms": 638
+    },
+    {
+      "id": "DQ007",
+      "status": 200,
+      "model_source": "cloud",
+      "lane": "action",
+      "confirm_required": false,
+      "latency_ms": 616
+    },
+    {
+      "id": "DQ008",
+      "status": 200,
+      "model_source": "cloud",
+      "lane": "action",
+      "confirm_required": false,
+      "latency_ms": 613
+    },
+    {
+      "id": "DQ009",
+      "status": 200,
+      "model_source": "cloud",
+      "lane": "action",
+      "confirm_required": false,
+      "latency_ms": 596
+    },
+    {
+      "id": "DQ010",
+      "status": 200,
+      "model_source": "cloud",
+      "lane": "smalltalk",
+      "confirm_required": false,
+      "latency_ms": 630
+    },
+    {
+      "id": "DQ011",
+      "status": 200,
+      "model_source": "cloud",
+      "lane": "action",
+      "confirm_required": false,
+      "latency_ms": 616
+    },
+    {
+      "id": "DQ012",
+      "status": 200,
+      "model_source": "cloud",
+      "lane": "smalltalk",
+      "confirm_required": false,
+      "latency_ms": 697
+    },
+    {
+      "id": "DQ013",
+      "status": 200,
+      "model_source": "cloud",
+      "lane": "smalltalk",
+      "confirm_required": false,
+      "latency_ms": 1753
+    },
+    {
+      "id": "DQ014",
+      "status": 200,
+      "model_source": "cloud",
+      "lane": "smalltalk",
+      "confirm_required": false,
+      "latency_ms": 1792
+    },
+    {
+      "id": "DQ015",
+      "status": 200,
+      "model_source": "cloud",
+      "lane": "smalltalk",
+      "confirm_required": false,
+      "latency_ms": 1747
+    },
+    {
+      "id": "DQ016",
+      "status": 200,
+      "model_source": "cloud",
+      "lane": "smalltalk",
+      "confirm_required": false,
+      "latency_ms": 694
+    },
+    {
+      "id": "DQ017",
+      "status": 200,
+      "model_source": "cloud",
+      "lane": "action",
+      "confirm_required": false,
+      "latency_ms": 663
+    },
+    {
+      "id": "DQ018",
+      "status": 200,
+      "model_source": "cloud",
+      "lane": "action",
+      "confirm_required": false,
+      "latency_ms": 666
+    },
+    {
+      "id": "DQ019",
+      "status": 200,
+      "model_source": "cloud",
+      "lane": "action",
+      "confirm_required": false,
+      "latency_ms": 595
+    },
+    {
+      "id": "DQ020",
+      "status": 200,
+      "model_source": "cloud",
+      "lane": "action",
+      "confirm_required": false,
+      "latency_ms": 613
+    },
+    {
+      "id": "DQ021",
+      "status": 200,
+      "model_source": "cloud",
+      "lane": "action",
+      "confirm_required": false,
+      "latency_ms": 619
+    },
+    {
+      "id": "DQ022",
+      "status": 200,
+      "model_source": "cloud",
+      "lane": "action",
+      "confirm_required": false,
+      "latency_ms": 603
+    },
+    {
+      "id": "DQ023",
+      "status": 200,
+      "model_source": "cloud",
+      "lane": "smalltalk",
+      "confirm_required": false,
+      "latency_ms": 1866
+    },
+    {
+      "id": "DQ024",
+      "status": 200,
+      "model_source": "cloud",
+      "lane": "action",
+      "confirm_required": false,
+      "latency_ms": 693
+    },
+    {
+      "id": "DQ025",
+      "status": 200,
+      "model_source": "cloud",
+      "lane": "smalltalk",
+      "confirm_required": false,
+      "latency_ms": 1735
+    },
+    {
+      "id": "DQ026",
+      "status": 200,
+      "model_source": "cloud",
+      "lane": "smalltalk",
+      "confirm_required": false,
+      "latency_ms": 1845
+    },
+    {
+      "id": "DQ027",
+      "status": 200,
+      "model_source": "cloud",
+      "lane": "smalltalk",
+      "confirm_required": false,
+      "latency_ms": 1694
+    },
+    {
+      "id": "DQ028",
+      "status": 200,
+      "model_source": "cloud",
+      "lane": "smalltalk",
+      "confirm_required": false,
+      "latency_ms": 1865
+    },
+    {
+      "id": "DQ029",
+      "status": 200,
+      "model_source": "cloud",
+      "lane": "action",
+      "confirm_required": false,
+      "latency_ms": 656
+    },
+    {
+      "id": "DQ030",
+      "status": 200,
+      "model_source": "cloud",
+      "lane": "smalltalk",
+      "confirm_required": false,
+      "latency_ms": 1935
+    },
+    {
+      "id": "DQ031",
+      "status": 200,
+      "model_source": "cloud",
+      "lane": "action",
+      "confirm_required": false,
+      "latency_ms": 644
+    },
+    {
+      "id": "DQ032",
+      "status": 200,
+      "model_source": "cloud",
+      "lane": "smalltalk",
+      "confirm_required": false,
+      "latency_ms": 1882
+    },
+    {
+      "id": "DQ033",
+      "status": 200,
+      "model_source": "cloud",
+      "lane": "rag",
+      "confirm_required": false,
+      "latency_ms": 630
+    },
+    {
+      "id": "DQ034",
+      "status": 200,
+      "model_source": "cloud",
+      "lane": "rag",
+      "confirm_required": false,
+      "latency_ms": 615
+    },
+    {
+      "id": "DQ035",
+      "status": 200,
+      "model_source": "cloud",
+      "lane": "smalltalk",
+      "confirm_required": false,
+      "latency_ms": 1905
+    },
+    {
+      "id": "DQ036",
+      "status": 200,
+      "model_source": "cloud",
+      "lane": "smalltalk",
+      "confirm_required": false,
+      "latency_ms": 1878
+    },
+    {
+      "id": "DQ037",
+      "status": 200,
+      "model_source": "cloud",
+      "lane": "action",
+      "confirm_required": false,
+      "latency_ms": 692
+    },
+    {
+      "id": "DQ038",
+      "status": 200,
+      "model_source": "cloud",
+      "lane": "smalltalk",
+      "confirm_required": false,
+      "latency_ms": 1830
+    },
+    {
+      "id": "DQ039",
+      "status": 200,
+      "model_source": "cloud",
+      "lane": "action",
+      "confirm_required": false,
+      "latency_ms": 653
+    },
+    {
+      "id": "DQ040",
+      "status": 200,
+      "model_source": "cloud",
+      "lane": "smalltalk",
+      "confirm_required": false,
+      "latency_ms": 1710
+    }
+  ]
+}

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>在线客服 - 安燃LPG服务平台</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "Noto Sans SC", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', "Noto Sans SC", sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#111418] dark:text-white transition-colors duration-200">
+<div class="relative flex min-h-screen flex-col overflow-x-hidden">
+<!-- Navigation Bar -->
+<header class="flex items-center justify-between border-b border-solid border-[#f0f2f4] dark:border-gray-800 bg-white dark:bg-[#1a242d] px-6 py-3 lg:px-40">
+<div class="flex items-center gap-4">
+<div class="size-8 text-primary">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M39.475 21.6262C40.358 21.4363 40.6863 21.5589 40.7581 21.5934C40.7876 21.655 40.8547 21.857 40.8082 22.3336C40.7408 23.0255 40.4502 24.0046 39.8572 25.2301C38.6799 27.6631 36.5085 30.6631 33.5858 33.5858C30.6631 36.5085 27.6632 38.6799 25.2301 39.8572C24.0046 40.4502 23.0255 40.7407 22.3336 40.8082C21.8571 40.8547 21.6551 40.7875 21.5934 40.7581C21.5589 40.6863 21.4363 40.358 21.6262 39.475C21.8562 38.4054 22.4689 36.9657 23.5038 35.2817C24.7575 33.2417 26.5497 30.9744 28.7621 28.762C30.9744 26.5497 33.2417 24.7574 35.2817 23.5037C36.9657 22.4689 38.4054 21.8562 39.475 21.6262ZM4.41189 29.2403L18.7597 43.5881C19.8813 44.7097 21.4027 44.9179 22.7217 44.7893C24.0585 44.659 25.5148 44.1631 26.9723 43.4579C29.9052 42.0387 33.2618 39.5667 36.4142 36.4142C39.5667 33.2618 42.0387 29.9052 43.4579 26.9723C44.1631 25.5148 44.659 24.0585 44.7893 22.7217C44.9179 21.4027 44.7097 19.8813 43.5881 18.7597L29.2403 4.41187C27.8527 3.02428 25.8765 3.02573 24.2861 3.36776C22.6081 3.72863 20.7334 4.58419 18.8396 5.74801C16.4978 7.18716 13.9881 9.18353 11.5858 11.5858C9.18354 13.988 7.18717 16.4978 5.74802 18.8396C4.58421 20.7334 3.72865 22.6081 3.36778 24.2861C3.02574 25.8765 3.02429 27.8527 4.41189 29.2403Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h2 class="text-lg font-bold leading-tight tracking-tight">安燃LPG服务平台</h2>
+</div>
+<div class="flex flex-1 justify-end items-center gap-8">
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">首页</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">配送服务</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">设备维护</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">商城</a>
+<a class="text-primary text-sm font-bold border-b-2 border-primary py-1" href="#">在线客服</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="flex items-center justify-center rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold transition-opacity hover:opacity-90">
+                        退出登录
+                    </button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border border-gray-200" data-alt="User profile avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDzim3NEPcRwCDtY0j1g2Q3m8ymj4vu06kXr_vC-URL8XQvv4oLKXfLWJE0VzKyVrSj2jiGKHktrAzIwEK5gdXstKAwyb-mleqFWaclk0nC2Q-3FTqzpsj9EIcYN5fwWhoFHxzG2_RkSOBERx56Q0ZUQeLpIAF9-NqM2_e0uZYUx13S7QZTQ50AGqVIXzlHSbgnTne_jCMHipugzZ-kUCqmFDeGQqbttxzNwsZnSplcnlRYY3SUpmojc8L5pIcMwhg-wkrjicOuXAk");'></div>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col max-w-[1200px] mx-auto w-full px-4 lg:px-6 py-4 md:py-8 overflow-hidden">
+<div class="flex items-center gap-2 mb-6 text-[#617589]">
+<a class="hover:text-primary transition-colors" href="#">首页</a>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<span class="text-[#111418] dark:text-gray-300 font-medium">在线客服</span>
+</div>
+<div class="flex flex-1 gap-6 min-h-[600px] max-h-[800px]">
+<!-- Left Sidebar: Chat Categories -->
+<aside class="hidden lg:flex w-64 flex-col bg-white dark:bg-[#1a242d] rounded-xl border border-[#f0f2f4] dark:border-gray-800 p-4 shrink-0">
+<div class="mb-6">
+<h3 class="text-lg font-bold mb-1">客服中心</h3>
+<p class="text-xs text-[#617589]">7×24小时在线为您服务</p>
+</div>
+<div class="space-y-2">
+<button class="flex items-center gap-3 w-full px-3 py-3 rounded-lg bg-primary/10 text-primary font-bold">
+<span class="material-symbols-outlined text-[20px]">chat</span>
+<span class="text-sm">安燃助手</span>
+</button>
+<button class="flex items-center gap-3 w-full px-3 py-3 rounded-lg text-[#617589] hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+<span class="material-symbols-outlined text-[20px]">local_shipping</span>
+<span class="text-sm">配送咨询</span>
+</button>
+<button class="flex items-center gap-3 w-full px-3 py-3 rounded-lg text-[#617589] hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+<span class="material-symbols-outlined text-[20px]">construction</span>
+<span class="text-sm">售后维保</span>
+</button>
+<button class="flex items-center gap-3 w-full px-3 py-3 rounded-lg text-[#617589] hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+<span class="material-symbols-outlined text-[20px]">assignment</span>
+<span class="text-sm">业务办理</span>
+</button>
+<button class="flex items-center gap-3 w-full px-3 py-3 rounded-lg text-[#617589] hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+<span class="material-symbols-outlined text-[20px]">contact_support</span>
+<span class="text-sm">常见问题</span>
+</button>
+</div>
+<div class="mt-auto pt-6 border-t border-gray-100 dark:border-gray-800">
+<div class="bg-primary/5 rounded-lg p-3">
+<p class="text-xs text-[#617589] mb-2 font-medium">紧急热线</p>
+<p class="text-primary font-bold">400-888-0000</p>
+</div>
+</div>
+</aside>
+<!-- Center: Chat Window -->
+<section class="flex-1 flex flex-col bg-white dark:bg-[#1a242d] rounded-xl border border-[#f0f2f4] dark:border-gray-800 shadow-sm overflow-hidden">
+<!-- Chat Header -->
+<div class="px-6 py-4 border-b border-[#f0f2f4] dark:border-gray-800 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="relative">
+<div class="size-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">smart_toy</span>
+</div>
+<div class="absolute bottom-0 right-0 size-3 bg-green-500 border-2 border-white rounded-full"></div>
+</div>
+<div>
+<h3 class="font-bold text-base">安燃助手 (AnRan Assistant)</h3>
+<p class="text-xs text-green-500">在线为您提供智能服务</p>
+</div>
+</div>
+<div class="flex gap-4 text-[#617589]">
+<button class="hover:text-primary"><span class="material-symbols-outlined">search</span></button>
+<button class="hover:text-primary"><span class="material-symbols-outlined">settings</span></button>
+</div>
+</div>
+<!-- Messages Area -->
+<div class="flex-1 overflow-y-auto p-6 space-y-6 bg-gray-50/50 dark:bg-[#151d26]">
+<!-- System Time -->
+<div class="flex justify-center">
+<span class="px-3 py-1 bg-gray-200/50 dark:bg-gray-800 rounded-full text-[10px] text-[#617589] uppercase font-medium tracking-wider">今日 14:30</span>
+</div>
+<!-- Assistant Message -->
+<div class="flex gap-3 max-w-[85%]">
+<div class="size-8 rounded-full bg-primary shrink-0 flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-sm">smart_toy</span>
+</div>
+<div class="flex flex-col gap-1">
+<div class="bg-white dark:bg-gray-800 p-4 rounded-xl rounded-tl-none shadow-sm border border-gray-100 dark:border-gray-700">
+<p class="text-sm leading-relaxed">
+                                        您好！我是您的安燃助手。请问今天有什么可以帮您？您可以咨询液化气配送或预约设备维护。
+                                    </p>
+</div>
+<span class="text-[10px] text-[#617589] ml-1">14:30</span>
+</div>
+</div>
+<!-- User Message -->
+<div class="flex gap-3 max-w-[85%] ml-auto flex-row-reverse">
+<div class="size-8 rounded-full bg-gray-200 shrink-0 overflow-hidden">
+<img alt="User" data-alt="User profile avatar small" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrZWOzUozEbs4rjySuK7TM982fQlZ1f3YW7OfJdC8IU4AOaJOIUZtUy45PY7E_F5RLG2_sJCKLCTOHrknW_cwAUS6btWL9Eut1wwd3SMvOQPJeOBwwOypbE-NSUHkXnCurWjPovJ6hPTREdkaSXy1Amob9fYstDK8FQAsYnyzGBw-EQhBgI5qSnRH6bdS69G6ImPMRS1L3Djcc_sLMNtotJaT4N9bgH6smB0dUpG8lE5GrbR2nzfcVgplc26uW8YkzwXxP6DPvVpE"/>
+</div>
+<div class="flex flex-col gap-1 items-end">
+<div class="bg-primary text-white p-4 rounded-xl rounded-tr-none shadow-sm">
+<p class="text-sm leading-relaxed">
+                                        你好，我需要预定一罐15kg的液化气，送到朝阳区幸福大街10号。
+                                    </p>
+</div>
+<span class="text-[10px] text-[#617589] mr-1">14:32</span>
+</div>
+</div>
+<!-- Assistant Thinking/Response -->
+<div class="flex gap-3 max-w-[85%]">
+<div class="size-8 rounded-full bg-primary shrink-0 flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-sm">smart_toy</span>
+</div>
+<div class="flex flex-col gap-1">
+<div class="bg-white dark:bg-gray-800 p-4 rounded-xl rounded-tl-none shadow-sm border border-gray-100 dark:border-gray-700">
+<p class="text-sm leading-relaxed mb-3">
+                                        收到您的需求！我已经识别到您的地址信息。您可以选择以下操作：
+                                    </p>
+<div class="flex flex-col gap-2">
+<div class="bg-gray-50 dark:bg-gray-700 p-3 rounded-lg border border-dashed border-gray-300 dark:border-gray-600">
+<p class="text-xs font-bold text-[#111418] dark:text-gray-200 mb-1">订单预览</p>
+<p class="text-xs text-[#617589]">商品：15kg 液化气 x 1</p>
+<p class="text-xs text-[#617589]">地址：朝阳区幸福大街10号</p>
+</div>
+</div>
+</div>
+<span class="text-[10px] text-[#617589] ml-1">14:32</span>
+</div>
+</div>
+</div>
+<!-- Action Area -->
+<div class="px-6 py-4 bg-white dark:bg-[#1a242d] border-t border-[#f0f2f4] dark:border-gray-800">
+<!-- Quick Actions -->
+<div class="flex gap-3 mb-4 overflow-x-auto pb-2 scrollbar-hide">
+<button class="flex-none flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-bold hover:bg-primary/20 transition-colors border border-primary/20">
+<span class="material-symbols-outlined text-[18px]">edit_note</span>
+                                我来填写表单
+                            </button>
+<button class="flex-none flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-full text-sm font-bold hover:opacity-90 transition-opacity shadow-sm">
+<span class="material-symbols-outlined text-[18px]">auto_fix_high</span>
+                                让助手帮我下单
+                            </button>
+<button class="flex-none flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-800 text-[#111418] dark:text-gray-300 rounded-full text-sm font-medium hover:bg-gray-200 transition-colors">
+                                配送状态查询
+                            </button>
+</div>
+<!-- Input Field -->
+<div class="relative">
+<div class="absolute left-3 top-3 flex gap-2 text-[#617589]">
+<button class="hover:text-primary transition-colors">
+<span class="material-symbols-outlined">image</span>
+</button>
+<button class="hover:text-primary transition-colors">
+<span class="material-symbols-outlined">attach_file</span>
+</button>
+<button class="hover:text-primary transition-colors">
+<span class="material-symbols-outlined">mood</span>
+</button>
+</div>
+<textarea class="w-full pl-32 pr-12 py-3 rounded-xl border-[#f0f2f4] dark:border-gray-800 bg-gray-50 dark:bg-[#151d26] dark:text-white focus:ring-primary focus:border-primary resize-none placeholder:text-gray-400 text-sm" placeholder="输入您想咨询的问题..." rows="3"></textarea>
+<button class="absolute right-3 bottom-3 size-10 bg-primary text-white rounded-lg flex items-center justify-center shadow-lg hover:opacity-90 transition-all">
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+<div class="mt-2 flex justify-between items-center">
+<p class="text-[10px] text-[#617589]">按下 Enter 发送，Shift + Enter 换行</p>
+<div class="flex items-center gap-1 text-[10px] text-green-500 font-medium">
+<div class="size-1.5 bg-green-500 rounded-full animate-pulse"></div>
+                                加密连接已建立
+                            </div>
+</div>
+</div>
+</section>
+<!-- Right Sidebar: Helpers -->
+<aside class="hidden xl:flex w-72 flex-col gap-6">
+<!-- Safety Card -->
+<div class="bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-900/20 dark:to-orange-950/20 p-5 rounded-xl border border-orange-200 dark:border-orange-900/40">
+<div class="flex items-center gap-2 mb-3 text-orange-600 dark:text-orange-400">
+<span class="material-symbols-outlined text-[20px]">warning</span>
+<h4 class="font-bold text-sm">安全提醒</h4>
+</div>
+<p class="text-xs text-orange-800 dark:text-orange-300 leading-relaxed">
+                            发现燃气泄漏？请立即关闭气瓶阀门，打开窗户通风，并在室外空旷处拨打紧急电话。
+                        </p>
+</div>
+<!-- FAQs -->
+<div class="bg-white dark:bg-[#1a242d] p-5 rounded-xl border border-[#f0f2f4] dark:border-gray-800">
+<h4 class="font-bold text-sm mb-4">猜你想问</h4>
+<ul class="space-y-3">
+<li><a class="text-sm text-[#111418] dark:text-gray-300 hover:text-primary transition-colors flex items-center justify-between" href="#">
+<span>今日液化气价格</span>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+</a></li>
+<li><a class="text-sm text-[#111418] dark:text-gray-300 hover:text-primary transition-colors flex items-center justify-between" href="#">
+<span>如何自助下单？</span>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+</a></li>
+<li><a class="text-sm text-[#111418] dark:text-gray-300 hover:text-primary transition-colors flex items-center justify-between" href="#">
+<span>气瓶年检时间查询</span>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+</a></li>
+<li><a class="text-sm text-[#111418] dark:text-gray-300 hover:text-primary transition-colors flex items-center justify-between" href="#">
+<span>企业开票流程</span>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+</a></li>
+</ul>
+</div>
+<!-- Recent Service -->
+<div class="bg-white dark:bg-[#1a242d] p-5 rounded-xl border border-[#f0f2f4] dark:border-gray-800">
+<h4 class="font-bold text-sm mb-4">最近服务记录</h4>
+<div class="space-y-4">
+<div class="flex gap-3">
+<div class="size-8 rounded bg-gray-100 dark:bg-gray-800 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-sm text-[#617589]">gas_meter</span>
+</div>
+<div>
+<p class="text-xs font-bold">15kg 配送订单</p>
+<p class="text-[10px] text-[#617589]">2023-11-20 已完成</p>
+</div>
+</div>
+<div class="flex gap-3">
+<div class="size-8 rounded bg-gray-100 dark:bg-gray-800 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-sm text-[#617589]">build</span>
+</div>
+<div>
+<p class="text-xs font-bold">燃气灶接口维保</p>
+<p class="text-[10px] text-[#617589]">2023-10-15 已完成</p>
+</div>
+</div>
+</div>
+</div>
+</aside>
+</div>
+</main>
+<!-- Mobile Quick Navigation (Floating for mobile feel) -->
+<div class="lg:hidden fixed bottom-6 right-6 z-50">
+<button class="size-14 bg-primary text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-3xl">chat_bubble</span>
+</button>
+</div>
+</div>
+</body></html>

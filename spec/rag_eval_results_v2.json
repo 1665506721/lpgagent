@@ -1,0 +1,210 @@
+{
+  "summary": {
+    "total": 20,
+    "top1_hit_rate": 0.9,
+    "keyword_hit_rate": 0.8,
+    "mrr": 0.95
+  },
+  "results": [
+    {
+      "id": "RAG001",
+      "query": "今日液化气价格",
+      "domain": "biz",
+      "expect_topic": "price",
+      "top1_topic": "price",
+      "top1_ok": true,
+      "keyword_hit": true,
+      "mrr_component": 1.0
+    },
+    {
+      "id": "RAG002",
+      "query": "15kg现在多少钱一瓶",
+      "domain": "biz",
+      "expect_topic": "price",
+      "top1_topic": "price",
+      "top1_ok": true,
+      "keyword_hit": true,
+      "mrr_component": 1.0
+    },
+    {
+      "id": "RAG003",
+      "query": "企业开票流程",
+      "domain": "biz",
+      "expect_topic": "invoice",
+      "top1_topic": "invoice",
+      "top1_ok": true,
+      "keyword_hit": true,
+      "mrr_component": 1.0
+    },
+    {
+      "id": "RAG004",
+      "query": "历史订单补开发票怎么弄",
+      "domain": "biz",
+      "expect_topic": "invoice",
+      "top1_topic": "invoice",
+      "top1_ok": true,
+      "keyword_hit": true,
+      "mrr_component": 1.0
+    },
+    {
+      "id": "RAG005",
+      "query": "如何自助下单",
+      "domain": "biz",
+      "expect_topic": "order_guide",
+      "top1_topic": "order_guide",
+      "top1_ok": true,
+      "keyword_hit": true,
+      "mrr_component": 1.0
+    },
+    {
+      "id": "RAG006",
+      "query": "不会操作网页，你可以代下单吗",
+      "domain": "biz",
+      "expect_topic": "order_guide",
+      "top1_topic": "order_guide",
+      "top1_ok": true,
+      "keyword_hit": true,
+      "mrr_component": 1.0
+    },
+    {
+      "id": "RAG007",
+      "query": "气瓶年检周期是多少",
+      "domain": "biz",
+      "expect_topic": "inspection",
+      "top1_topic": "inspection",
+      "top1_ok": true,
+      "keyword_hit": false,
+      "mrr_component": 1.0
+    },
+    {
+      "id": "RAG008",
+      "query": "我的钢瓶什么时候到期年检",
+      "domain": "biz",
+      "expect_topic": "inspection",
+      "top1_topic": "inspection",
+      "top1_ok": true,
+      "keyword_hit": true,
+      "mrr_component": 1.0
+    },
+    {
+      "id": "RAG009",
+      "query": "客服几点上班",
+      "domain": "biz",
+      "expect_topic": "service_hours",
+      "top1_topic": "service_hours",
+      "top1_ok": true,
+      "keyword_hit": false,
+      "mrr_component": 1.0
+    },
+    {
+      "id": "RAG010",
+      "query": "夜里能送气吗",
+      "domain": "biz",
+      "expect_topic": "service_hours",
+      "top1_topic": "service_hours",
+      "top1_ok": true,
+      "keyword_hit": true,
+      "mrr_component": 1.0
+    },
+    {
+      "id": "RAG011",
+      "query": "我要投诉线上客服回复太慢",
+      "domain": "biz",
+      "expect_topic": "complaint",
+      "top1_topic": "complaint",
+      "top1_ok": true,
+      "keyword_hit": true,
+      "mrr_component": 1.0
+    },
+    {
+      "id": "RAG012",
+      "query": "投诉提交后在哪里查进度",
+      "domain": "biz",
+      "expect_topic": "complaint",
+      "top1_topic": "complaint",
+      "top1_ok": true,
+      "keyword_hit": true,
+      "mrr_component": 1.0
+    },
+    {
+      "id": "RAG013",
+      "query": "煤气有些漏了怎么判断",
+      "domain": "safety",
+      "expect_topic": "safety_leak",
+      "top1_topic": "safety_emergency",
+      "top1_ok": false,
+      "keyword_hit": true,
+      "mrr_component": 0.5
+    },
+    {
+      "id": "RAG014",
+      "query": "闻到煤气味怎么办",
+      "domain": "safety",
+      "expect_topic": "safety_emergency",
+      "top1_topic": "safety_emergency",
+      "top1_ok": true,
+      "keyword_hit": false,
+      "mrr_component": 1.0
+    },
+    {
+      "id": "RAG015",
+      "query": "报警器一直响怎么处理",
+      "domain": "safety",
+      "expect_topic": "safety_emergency",
+      "top1_topic": "safety_leak",
+      "top1_ok": false,
+      "keyword_hit": true,
+      "mrr_component": 0.5
+    },
+    {
+      "id": "RAG016",
+      "query": "软管多久更换一次",
+      "domain": "safety",
+      "expect_topic": "hose_regulator",
+      "top1_topic": "hose_regulator",
+      "top1_ok": true,
+      "keyword_hit": false,
+      "mrr_component": 1.0
+    },
+    {
+      "id": "RAG017",
+      "query": "钢瓶能不能放卧室",
+      "domain": "safety",
+      "expect_topic": "cylinder_env",
+      "top1_topic": "cylinder_env",
+      "top1_ok": true,
+      "keyword_hit": true,
+      "mrr_component": 1.0
+    },
+    {
+      "id": "RAG018",
+      "query": "50kg钢瓶楼上可以用吗",
+      "domain": "safety",
+      "expect_topic": "cylinder_env",
+      "top1_topic": "cylinder_env",
+      "top1_ok": true,
+      "keyword_hit": true,
+      "mrr_component": 1.0
+    },
+    {
+      "id": "RAG019",
+      "query": "买气时怎么判断钢瓶合格",
+      "domain": "safety",
+      "expect_topic": "purchase_inspection",
+      "top1_topic": "purchase_inspection",
+      "top1_ok": true,
+      "keyword_hit": true,
+      "mrr_component": 1.0
+    },
+    {
+      "id": "RAG020",
+      "query": "超期未检钢瓶还能继续用吗",
+      "domain": "safety",
+      "expect_topic": "purchase_inspection",
+      "top1_topic": "purchase_inspection",
+      "top1_ok": true,
+      "keyword_hit": true,
+      "mrr_component": 1.0
+    }
+  ]
+}

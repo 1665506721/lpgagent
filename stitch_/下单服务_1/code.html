@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>下单服务 - LPG 服务平台</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#111418] dark:text-gray-100 transition-colors duration-200">
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<!-- Top Navigation Bar -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 px-10 py-3 sticky top-0 z-50">
+<div class="flex items-center gap-4 text-primary">
+<div class="size-6">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M24 4C25.7818 14.2173 33.7827 22.2182 44 24C33.7827 25.7818 25.7818 33.7827 24 44C22.2182 33.7827 14.2173 25.7818 4 24C14.2173 22.2182 22.2182 14.2173 24 4Z" fill="currentColor"></path>
+</svg>
+</div>
+<h2 class="text-[#111418] dark:text-white text-xl font-bold leading-tight tracking-[-0.015em]">LPG 服务平台</h2>
+</div>
+<div class="flex flex-1 justify-end gap-8">
+<nav class="flex items-center gap-9">
+<a class="text-[#111418] dark:text-gray-300 text-sm font-medium hover:text-primary transition-colors" href="#">首页</a>
+<a class="text-primary text-sm font-bold border-b-2 border-primary py-1" href="#">下单服务</a>
+<a class="text-[#111418] dark:text-gray-300 text-sm font-medium hover:text-primary transition-colors" href="#">订单管理</a>
+<a class="text-[#111418] dark:text-gray-300 text-sm font-medium hover:text-primary transition-colors" href="#">账户中心</a>
+</nav>
+<div class="flex gap-2">
+<button class="flex items-center justify-center rounded-lg h-10 w-10 bg-gray-100 dark:bg-gray-800 text-[#111418] dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+</button>
+<button class="flex items-center justify-center rounded-lg h-10 w-10 bg-gray-100 dark:bg-gray-800 text-[#111418] dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+<span class="material-symbols-outlined text-[20px]">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<main class="flex flex-1 justify-center py-10 px-4">
+<div class="layout-content-container flex flex-col max-w-[1000px] flex-1 gap-8">
+<!-- Progress Stepper -->
+<div class="bg-white dark:bg-gray-900 rounded-xl p-6 border border-gray-200 dark:border-gray-800 shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-3">
+<span class="flex items-center justify-center size-8 rounded-full bg-primary text-white font-bold text-sm">1</span>
+<p class="text-[#111418] dark:text-white text-base font-semibold">选择服务类型</p>
+</div>
+<div class="flex-1 h-px bg-gray-200 dark:bg-gray-800 mx-6"></div>
+<div class="flex items-center gap-3">
+<span class="flex items-center justify-center size-8 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500 font-bold text-sm">2</span>
+<p class="text-gray-400 dark:text-gray-500 text-base font-medium">填写详细信息</p>
+</div>
+</div>
+<div class="w-full bg-gray-100 dark:bg-gray-800 rounded-full h-1.5 overflow-hidden">
+<div class="bg-primary h-full transition-all duration-500" style="width: 50%;"></div>
+</div>
+</div>
+<!-- Step 1: Service Type Selection -->
+<section>
+<h2 class="text-[#111418] dark:text-white text-2xl font-bold mb-6">第一步：请选择您需要的服务</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Card 1 -->
+<div class="group cursor-pointer border-2 border-primary bg-white dark:bg-gray-900 rounded-xl overflow-hidden hover:shadow-lg transition-all">
+<div class="h-40 bg-cover bg-center" data-alt="Blue industrial LPG gas cylinders delivery" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDvPasP7Uy3t2Em0cQeXU9jc6mm0xgV0yrw7_Ko2hreXh5IDc4s-JXmePmF68TIaCPiCV6xCabzHt6E70HTXDb9O_d0GdUCAZa0Z54w8uQukJqkOAEH20EGyZ_ye8lI7nBi-gAkc34zzK31XosJ1I-bCL6dL6e2Euy4N1Sy9XnklA2Am7USbvrKDN99Ox_J-g_BSWOCsao9OLQfVo6WJ8f7vX_2m0_su_EFLfdwHI3ldAObqh_1WvWOrRiQY0pnzZwgkaZXhGRJUTE');"></div>
+<div class="p-5">
+<div class="flex items-center gap-2 mb-2 text-primary">
+<span class="material-symbols-outlined">local_shipping</span>
+<h3 class="font-bold text-lg">气瓶配送</h3>
+</div>
+<p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">提供住宅及商用快速送气服务，支持预约及加急派送。</p>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="group cursor-pointer border-2 border-transparent bg-white dark:bg-gray-900 rounded-xl overflow-hidden hover:border-primary/50 hover:shadow-lg transition-all">
+<div class="h-40 bg-cover bg-center" data-alt="Technician repairing gas equipment pipeline" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAoClLyEDzClHiBfAADKoxOHg-nor_PE3H0fvfz65MCtnX_1OaU55Cs75x5s_5bOtkE1EoYBJounUxY_pr8BMBCNDJyey2bsENXDf4kgLR2TDLAYoFENSyOQ1t7JI58bizXU2dlnsJMVnqKyIsuDMZL92Uzp2R3VeMI4aL_Y7ZgVI9Oe6cRT16RFX7yjCs8QtNkpp5-80Z4N9uiNQkpAf-K36OChe0LgQA-0NSl8Mo59KQxcWLJg41J_hf_Ep0r-3GpBoIDZQIgPKQ');"></div>
+<div class="p-5">
+<div class="flex items-center gap-2 mb-2 text-gray-700 dark:text-gray-200 group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined">construction</span>
+<h3 class="font-bold text-lg">设备维保</h3>
+</div>
+<p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">定期安全检查、燃气管道维护及终端设备维修服务。</p>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="group cursor-pointer border-2 border-transparent bg-white dark:bg-gray-900 rounded-xl overflow-hidden hover:border-primary/50 hover:shadow-lg transition-all">
+<div class="h-40 bg-cover bg-center" data-alt="Modern gas stove burner and kitchen accessories" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB9OCOqV6KkhcNkhq_4vym9BUOzm3j5gnvDZ1FiaYf64PupPNbplPux81q5ddmAMgEPcx00uKDDX8vKSBTm8B2akyAr6gYXkR0BcZCMYj6uIy2BBmX3_A_ZhDYqho44iDHwxar53hkCg2HkvlEP8-3-bZFmxMdptp9EhSdzmDe_dk5u0_kJxzaSQG1ZWCqyyajFVa0JIT4sdRq8xUpgP2uRD0r_8_ls399Ba7t1bt9F1s6ippS-GxgOqjG3TDU46psVsA6FtpOS_qk');"></div>
+<div class="p-5">
+<div class="flex items-center gap-2 mb-2 text-gray-700 dark:text-gray-200 group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined">shopping_basket</span>
+<h3 class="font-bold text-lg">配件购买</h3>
+</div>
+<p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">选购符合国标的灶具、减压阀、胶管等高品质配件。</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Step 2: Form Details -->
+<section class="bg-white dark:bg-gray-900 rounded-xl p-8 border border-gray-200 dark:border-gray-800 shadow-sm">
+<h2 class="text-[#111418] dark:text-white text-xl font-bold mb-8">第二步：填写配送与联系信息</h2>
+<form class="space-y-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Company Name (Auto-fill mock) -->
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-gray-700 dark:text-gray-300">企业/单位名称</label>
+<input class="px-4 py-2.5 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-500 cursor-not-allowed focus:outline-none" readonly="" type="text" value="鼎盛餐饮管理有限公司"/>
+</div>
+<!-- Address Input -->
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-gray-700 dark:text-gray-300">配送地址</label>
+<div class="relative">
+<input class="w-full px-4 py-2.5 rounded-lg border border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent transition-all" placeholder="请输入详细配送地址" type="text"/>
+<button class="absolute right-2 top-1.5 px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded hover:bg-primary/20 transition-colors" type="button">
+                                        地址簿
+                                    </button>
+</div>
+</div>
+<!-- Contact Person -->
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-gray-700 dark:text-gray-300">联系人姓名</label>
+<input class="px-4 py-2.5 rounded-lg border border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent transition-all" placeholder="如：王经理" type="text"/>
+</div>
+<!-- Phone Number -->
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-gray-700 dark:text-gray-300">联系电话</label>
+<input class="px-4 py-2.5 rounded-lg border border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent transition-all" placeholder="请输入11位手机号码" type="tel"/>
+</div>
+<!-- Schedule Time -->
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-gray-700 dark:text-gray-300">预约送达时间</label>
+<div class="relative">
+<input class="w-full px-4 py-2.5 rounded-lg border border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent transition-all" type="datetime-local"/>
+</div>
+</div>
+<!-- Urgent Toggle -->
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-gray-700 dark:text-gray-300">服务优先级</label>
+<div class="flex items-center h-[46px] gap-4">
+<label class="inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div>
+<span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">加急处理 <span class="text-xs text-orange-500">(额外加收配送费)</span></span>
+</label>
+</div>
+</div>
+</div>
+<!-- Remarks -->
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-gray-700 dark:text-gray-300">备注信息</label>
+<textarea class="px-4 py-2.5 rounded-lg border border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent transition-all" placeholder="如有特殊要求请注明（如：请带一个减压阀，送到3楼等）" rows="3"></textarea>
+</div>
+<!-- Form Footer Actions -->
+<div class="pt-6 border-t border-gray-100 dark:border-gray-800 flex items-center justify-between">
+<div class="text-sm text-gray-500 dark:text-gray-400">
+<p>当前选择: <span class="font-bold text-primary">气瓶配送</span> | 基础运费: <span class="font-bold">¥15.00</span></p>
+</div>
+<div class="flex gap-4">
+<button class="px-8 py-3 rounded-lg border border-gray-300 dark:border-gray-700 font-bold text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors" type="button">取消</button>
+<button class="px-10 py-3 rounded-lg bg-primary text-white font-bold shadow-lg shadow-primary/30 hover:bg-primary/90 transition-all" type="submit">确认并下单</button>
+</div>
+</div>
+</form>
+</section>
+<!-- Support Section -->
+<div class="flex items-center justify-center gap-8 py-6 opacity-60 grayscale hover:grayscale-0 transition-all">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">verified_user</span>
+<span class="text-xs font-medium">安检合格认证</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">support_agent</span>
+<span class="text-xs font-medium">24小时客服支持</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">payments</span>
+<span class="text-xs font-medium">官方统一定价</span>
+</div>
+</div>
+</div>
+</main>
+<footer class="bg-white dark:bg-gray-950 border-t border-gray-200 dark:border-gray-800 py-10 px-10 text-center text-sm text-gray-500">
+<p>© 2024 LPG 能源智慧服务平台. 沪ICP备12345678号</p>
+<div class="flex justify-center gap-6 mt-4">
+<a class="hover:text-primary" href="#">服务协议</a>
+<a class="hover:text-primary" href="#">隐私政策</a>
+<a class="hover:text-primary" href="#">联系我们</a>
+</div>
+</footer>
+</div>
+</div>
+</body></html>

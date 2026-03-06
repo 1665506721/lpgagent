@@ -1,0 +1,101 @@
+{
+  "qwen25_7b_lpg_train_data_batch_01.jsonl": {
+    "lines": 100,
+    "json_ok": 100,
+    "fields_ok": 100,
+    "redline_ok": 100,
+    "term_ok": 100,
+    "empathy_ok": 100,
+    "similarity_rate_percent": 0.1616
+  },
+  "qwen25_7b_lpg_train_data_batch_02.jsonl": {
+    "lines": 100,
+    "json_ok": 100,
+    "fields_ok": 100,
+    "redline_ok": 100,
+    "term_ok": 100,
+    "empathy_ok": 100,
+    "similarity_rate_percent": 0.101
+  },
+  "qwen25_7b_lpg_train_data_batch_03.jsonl": {
+    "lines": 100,
+    "json_ok": 100,
+    "fields_ok": 100,
+    "redline_ok": 100,
+    "term_ok": 100,
+    "empathy_ok": 100,
+    "similarity_rate_percent": 0.0606
+  },
+  "qwen25_7b_lpg_train_data_batch_04.jsonl": {
+    "lines": 100,
+    "json_ok": 100,
+    "fields_ok": 100,
+    "redline_ok": 100,
+    "term_ok": 100,
+    "empathy_ok": 100,
+    "similarity_rate_percent": 0.0606
+  },
+  "qwen25_7b_lpg_train_data_batch_05.jsonl": {
+    "lines": 100,
+    "json_ok": 100,
+    "fields_ok": 100,
+    "redline_ok": 100,
+    "term_ok": 100,
+    "empathy_ok": 100,
+    "similarity_rate_percent": 0.0
+  },
+  "qwen25_7b_lpg_train_data_batch_06.jsonl": {
+    "lines": 100,
+    "json_ok": 100,
+    "fields_ok": 100,
+    "redline_ok": 100,
+    "term_ok": 100,
+    "empathy_ok": 100,
+    "similarity_rate_percent": 0.0808
+  },
+  "qwen25_7b_lpg_train_data_batch_07.jsonl": {
+    "lines": 100,
+    "json_ok": 100,
+    "fields_ok": 100,
+    "redline_ok": 100,
+    "term_ok": 100,
+    "empathy_ok": 100,
+    "similarity_rate_percent": 0.101
+  },
+  "qwen25_7b_lpg_train_data_batch_08.jsonl": {
+    "lines": 100,
+    "json_ok": 100,
+    "fields_ok": 100,
+    "redline_ok": 100,
+    "term_ok": 100,
+    "empathy_ok": 100,
+    "similarity_rate_percent": 0.0404
+  },
+  "qwen25_7b_lpg_train_data_batch_09.jsonl": {
+    "lines": 100,
+    "json_ok": 100,
+    "fields_ok": 100,
+    "redline_ok": 100,
+    "term_ok": 100,
+    "empathy_ok": 100,
+    "similarity_rate_percent": 0.0606
+  },
+  "qwen25_7b_lpg_train_data_batch_10.jsonl": {
+    "lines": 100,
+    "json_ok": 100,
+    "fields_ok": 100,
+    "redline_ok": 100,
+    "term_ok": 100,
+    "empathy_ok": 100,
+    "similarity_rate_percent": 0.0606
+  },
+  "qwen25_7b_lpg_train_data_1000.jsonl": {
+    "lines": 1000,
+    "json_ok": 1000,
+    "fields_ok": 1000,
+    "redline_ok": 1000,
+    "term_ok": 1000,
+    "empathy_ok": 1000,
+    "similarity_rate_percent": 0.0815
+  }
+}

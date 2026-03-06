@@ -1,0 +1,250 @@
+{"id": "DQ001", "category": "能力与流程", "message": "在吗？我第一次用这个系统，你大概能帮我干啥？", "intent_hint": "CLARIFY_OR_POLICY", "expectation": "语气自然，先说明能力边界；涉及执行动作时提示需确认。"}
+{"id": "DQ002", "category": "能力与流程", "message": "我不太会点网页，你能像真人客服那样一步一步带我吗？", "intent_hint": "CLARIFY_OR_POLICY", "expectation": "语气自然，先说明能力边界；涉及执行动作时提示需确认。"}
+{"id": "DQ003", "category": "能力与流程", "message": "你这边是只管下单，还是投诉、改地址这些都能办？", "intent_hint": "CLARIFY_OR_POLICY", "expectation": "语气自然，先说明能力边界；涉及执行动作时提示需确认。"}
+{"id": "DQ004", "category": "能力与流程", "message": "我是门店店长，平时最常用哪些功能你先给我讲讲。", "intent_hint": "CLARIFY_OR_POLICY", "expectation": "语气自然，先说明能力边界；涉及执行动作时提示需确认。"}
+{"id": "DQ005", "category": "能力与流程", "message": "我说话可能比较碎，你能自己整理重点吗？", "intent_hint": "CLARIFY_OR_POLICY", "expectation": "语气自然，先说明能力边界；涉及执行动作时提示需确认。"}
+{"id": "DQ006", "category": "能力与流程", "message": "我要是只说‘帮我处理一下’，你会先问我什么？", "intent_hint": "CLARIFY_OR_POLICY", "expectation": "语气自然，先说明能力边界；涉及执行动作时提示需确认。"}
+{"id": "DQ007", "category": "能力与流程", "message": "先别下单，我想知道取消规则和改址规则，简单说重点。", "intent_hint": "CLARIFY_OR_POLICY", "expectation": "语气自然，先说明能力边界；涉及执行动作时提示需确认。"}
+{"id": "DQ008", "category": "能力与流程", "message": "你会不会直接给我下单？我希望先确认再动手。", "intent_hint": "CLARIFY_OR_POLICY", "expectation": "语气自然，先说明能力边界；涉及执行动作时提示需确认。"}
+{"id": "DQ009", "category": "能力与流程", "message": "你查订单是按订单号，还是按我这个账号就能查？", "intent_hint": "CLARIFY_OR_POLICY", "expectation": "语气自然，先说明能力边界；涉及执行动作时提示需确认。"}
+{"id": "DQ010", "category": "能力与流程", "message": "我不想每次都重复地址电话，你能默认带出来吗？", "intent_hint": "CLARIFY_OR_POLICY", "expectation": "语气自然，先说明能力边界；涉及执行动作时提示需确认。"}
+{"id": "DQ011", "category": "能力与流程", "message": "你这边是24小时都能下单吗，夜里会怎么安排？", "intent_hint": "CLARIFY_OR_POLICY", "expectation": "语气自然，先说明能力边界；涉及执行动作时提示需确认。"}
+{"id": "DQ012", "category": "能力与流程", "message": "我比较着急，你回答能不能短一点，别太官方。", "intent_hint": "CLARIFY_OR_POLICY", "expectation": "语气自然，先说明能力边界；涉及执行动作时提示需确认。"}
+{"id": "DQ013", "category": "能力与流程", "message": "如果我说错了服务类型，你会提醒我改吗？", "intent_hint": "CLARIFY_OR_POLICY", "expectation": "语气自然，先说明能力边界；涉及执行动作时提示需确认。"}
+{"id": "DQ014", "category": "能力与流程", "message": "我有时候会发语音转文字，错别字挺多，你能看懂吗？", "intent_hint": "CLARIFY_OR_POLICY", "expectation": "语气自然，先说明能力边界；涉及执行动作时提示需确认。"}
+{"id": "DQ015", "category": "能力与流程", "message": "你是机器人我知道，但回复能不能别那么模板化。", "intent_hint": "CLARIFY_OR_POLICY", "expectation": "语气自然，先说明能力边界；涉及执行动作时提示需确认。"}
+{"id": "DQ016", "category": "能力与流程", "message": "先告诉我：你现在能做、不能做的各三条就行。", "intent_hint": "CLARIFY_OR_POLICY", "expectation": "语气自然，先说明能力边界；涉及执行动作时提示需确认。"}
+{"id": "DQ017", "category": "下单-瓶装配送", "message": "我要叫气，今天能送吗？", "intent_hint": "ORDER_CREATE", "expectation": "先补齐缺失信息再执行；给出可选时间；下单前展示确认摘要。"}
+{"id": "DQ018", "category": "下单-瓶装配送", "message": "帮我送两瓶15公斤的，越快越好。", "intent_hint": "ORDER_CREATE", "expectation": "先补齐缺失信息再执行；给出可选时间；下单前展示确认摘要。"}
+{"id": "DQ019", "category": "下单-瓶装配送", "message": "我这边后厨快没气了，先来一瓶45kg顶着用。", "intent_hint": "ORDER_CREATE", "expectation": "先补齐缺失信息再执行；给出可选时间；下单前展示确认摘要。"}
+{"id": "DQ020", "category": "下单-瓶装配送", "message": "15kg来2瓶，地址先用我默认的。", "intent_hint": "ORDER_CREATE", "expectation": "先补齐缺失信息再执行；给出可选时间；下单前展示确认摘要。"}
+{"id": "DQ021", "category": "下单-瓶装配送", "message": "给我送个小瓶，5kg那种，一瓶就行。", "intent_hint": "ORDER_CREATE", "expectation": "先补齐缺失信息再执行；给出可选时间；下单前展示确认摘要。"}
+{"id": "DQ022", "category": "下单-瓶装配送", "message": "晚上十点还能送不？我要两瓶15kg。", "intent_hint": "ORDER_CREATE", "expectation": "先补齐缺失信息再执行；给出可选时间；下单前展示确认摘要。"}
+{"id": "DQ023", "category": "下单-瓶装配送", "message": "明早能送吗？大概9点到11点那段。", "intent_hint": "ORDER_CREATE", "expectation": "先补齐缺失信息再执行；给出可选时间；下单前展示确认摘要。"}
+{"id": "DQ024", "category": "下单-瓶装配送", "message": "我就一句话：送煤气来。你继续问我吧。", "intent_hint": "ORDER_CREATE", "expectation": "先补齐缺失信息再执行；给出可选时间；下单前展示确认摘要。"}
+{"id": "DQ025", "category": "下单-瓶装配送", "message": "我赶时间，能走加急就走加急。", "intent_hint": "ORDER_CREATE", "expectation": "先补齐缺失信息再执行；给出可选时间；下单前展示确认摘要。"}
+{"id": "DQ026", "category": "下单-瓶装配送", "message": "备注一下：到门口别按铃，打电话就行。", "intent_hint": "ORDER_CREATE", "expectation": "先补齐缺失信息再执行；给出可选时间；下单前展示确认摘要。"}
+{"id": "DQ027", "category": "下单-瓶装配送", "message": "联系人改成王师傅，电话13800138000。", "intent_hint": "ORDER_CREATE", "expectation": "先补齐缺失信息再执行；给出可选时间；下单前展示确认摘要。"}
+{"id": "DQ028", "category": "下单-瓶装配送", "message": "我手机快没电了，你先把需要我确认的都一次性说完。", "intent_hint": "ORDER_CREATE", "expectation": "先补齐缺失信息再执行；给出可选时间；下单前展示确认摘要。"}
+{"id": "DQ029", "category": "下单-瓶装配送", "message": "下单但先别创建，我想先看看订单内容有没有错。", "intent_hint": "ORDER_CREATE", "expectation": "先补齐缺失信息再执行；给出可选时间；下单前展示确认摘要。"}
+{"id": "DQ030", "category": "下单-瓶装配送", "message": "我要两罐气，型号我不懂，你给我推荐最常用的。", "intent_hint": "ORDER_CREATE", "expectation": "先补齐缺失信息再执行；给出可选时间；下单前展示确认摘要。"}
+{"id": "DQ031", "category": "下单-瓶装配送", "message": "ASAP下单，地址不变，电话不变，直接帮我补完流程。", "intent_hint": "ORDER_CREATE", "expectation": "先补齐缺失信息再执行；给出可选时间；下单前展示确认摘要。"}
+{"id": "DQ032", "category": "下单-瓶装配送", "message": "今天19-21点要能到，能安排就下。", "intent_hint": "ORDER_CREATE", "expectation": "先补齐缺失信息再执行；给出可选时间；下单前展示确认摘要。"}
+{"id": "DQ033", "category": "下单-瓶装配送", "message": "我要开发票，抬头是‘上海禾川餐饮有限公司’。", "intent_hint": "ORDER_CREATE", "expectation": "先补齐缺失信息再执行；给出可选时间；下单前展示确认摘要。"}
+{"id": "DQ034", "category": "下单-瓶装配送", "message": "开票税号我等会发，你先把其他信息问完。", "intent_hint": "ORDER_CREATE", "expectation": "先补齐缺失信息再执行；给出可选时间；下单前展示确认摘要。"}
+{"id": "DQ035", "category": "下单-瓶装配送", "message": "送到仓库北门，司机到了给我打电话。", "intent_hint": "ORDER_CREATE", "expectation": "先补齐缺失信息再执行；给出可选时间；下单前展示确认摘要。"}
+{"id": "DQ036", "category": "下单-瓶装配送", "message": "我这个单子不加急，正常排就行。", "intent_hint": "ORDER_CREATE", "expectation": "先补齐缺失信息再执行；给出可选时间；下单前展示确认摘要。"}
+{"id": "DQ037", "category": "下单-瓶装配送", "message": "先帮我算个总价，我确认后你再下。", "intent_hint": "ORDER_CREATE", "expectation": "先补齐缺失信息再执行；给出可选时间；下单前展示确认摘要。"}
+{"id": "DQ038", "category": "下单-瓶装配送", "message": "我想‘尽快’，但别太晚，超过21点就明天吧。", "intent_hint": "ORDER_CREATE", "expectation": "先补齐缺失信息再执行；给出可选时间；下单前展示确认摘要。"}
+{"id": "DQ039", "category": "下单-瓶装配送", "message": "我要1瓶45kg，最好今天下午能到。", "intent_hint": "ORDER_CREATE", "expectation": "先补齐缺失信息再执行；给出可选时间；下单前展示确认摘要。"}
+{"id": "DQ040", "category": "下单-瓶装配送", "message": "你先问我缺什么，不要一上来给我长表格。", "intent_hint": "ORDER_CREATE", "expectation": "先补齐缺失信息再执行；给出可选时间；下单前展示确认摘要。"}
+{"id": "DQ041", "category": "下单-瓶装配送", "message": "下单信息你帮我复述一下，我怕说漏了。", "intent_hint": "ORDER_CREATE", "expectation": "先补齐缺失信息再执行；给出可选时间；下单前展示确认摘要。"}
+{"id": "DQ042", "category": "下单-瓶装配送", "message": "现在下，时间你按系统最早可达安排。", "intent_hint": "ORDER_CREATE", "expectation": "先补齐缺失信息再执行；给出可选时间；下单前展示确认摘要。"}
+{"id": "DQ043", "category": "下单-瓶装配送", "message": "送气+开票一起办，别让我分两次说。", "intent_hint": "ORDER_CREATE", "expectation": "先补齐缺失信息再执行；给出可选时间；下单前展示确认摘要。"}
+{"id": "DQ044", "category": "下单-瓶装配送", "message": "来两瓶15kg，备注‘从后门进，前厅忙’。", "intent_hint": "ORDER_CREATE", "expectation": "先补齐缺失信息再执行；给出可选时间；下单前展示确认摘要。"}
+{"id": "DQ045", "category": "下单-瓶装配送", "message": "如果今天排不上，你给我一个明早最早时间。", "intent_hint": "ORDER_CREATE", "expectation": "先补齐缺失信息再执行；给出可选时间；下单前展示确认摘要。"}
+{"id": "DQ046", "category": "下单-瓶装配送", "message": "我就一句：给我来气。你来主导提问。", "intent_hint": "ORDER_CREATE", "expectation": "先补齐缺失信息再执行；给出可选时间；下单前展示确认摘要。"}
+{"id": "DQ047", "category": "下单-瓶装配送", "message": "数量先按1瓶，你再问我要不要改。", "intent_hint": "ORDER_CREATE", "expectation": "先补齐缺失信息再执行；给出可选时间；下单前展示确认摘要。"}
+{"id": "DQ048", "category": "下单-瓶装配送", "message": "我地址有门禁，备注加一句‘到门口电话联系’。", "intent_hint": "ORDER_CREATE", "expectation": "先补齐缺失信息再执行；给出可选时间；下单前展示确认摘要。"}
+{"id": "DQ049", "category": "下单-瓶装配送", "message": "给我下单，联系人用李姐，别用账号默认名字。", "intent_hint": "ORDER_CREATE", "expectation": "先补齐缺失信息再执行；给出可选时间；下单前展示确认摘要。"}
+{"id": "DQ050", "category": "下单-瓶装配送", "message": "我这个是公司用气，发票必须开普票。", "intent_hint": "ORDER_CREATE", "expectation": "先补齐缺失信息再执行；给出可选时间；下单前展示确认摘要。"}
+{"id": "DQ051", "category": "下单-瓶装配送", "message": "你先把关键字段确认好，再说创建订单。", "intent_hint": "ORDER_CREATE", "expectation": "先补齐缺失信息再执行；给出可选时间；下单前展示确认摘要。"}
+{"id": "DQ052", "category": "下单-瓶装配送", "message": "15公斤两瓶，别加急，明天下午。", "intent_hint": "ORDER_CREATE", "expectation": "先补齐缺失信息再执行；给出可选时间；下单前展示确认摘要。"}
+{"id": "DQ053", "category": "下单-瓶装配送", "message": "我想边聊边改参数，别每次都重头再来。", "intent_hint": "ORDER_CREATE", "expectation": "先补齐缺失信息再执行；给出可选时间；下单前展示确认摘要。"}
+{"id": "DQ054", "category": "下单-瓶装配送", "message": "下单后如果发现地址错了，你要提醒我改址时限。", "intent_hint": "ORDER_CREATE", "expectation": "先补齐缺失信息再执行；给出可选时间；下单前展示确认摘要。"}
+{"id": "DQ055", "category": "下单-安装安检报修换瓶", "message": "我要预约安装，明天下午有空档吗？", "intent_hint": "ORDER_CREATE", "expectation": "识别具体服务类型并补问服务项目；执行前确认。"}
+{"id": "DQ056", "category": "下单-安装安检报修换瓶", "message": "做个安检，本周内都行，你帮我排。", "intent_hint": "ORDER_CREATE", "expectation": "识别具体服务类型并补问服务项目；执行前确认。"}
+{"id": "DQ057", "category": "下单-安装安检报修换瓶", "message": "报修，灶台点火老是失败。", "intent_hint": "ORDER_CREATE", "expectation": "识别具体服务类型并补问服务项目；执行前确认。"}
+{"id": "DQ058", "category": "下单-安装安检报修换瓶", "message": "我要换瓶，15kg一瓶，旧瓶要回收。", "intent_hint": "ORDER_CREATE", "expectation": "识别具体服务类型并补问服务项目；执行前确认。"}
+{"id": "DQ059", "category": "下单-安装安检报修换瓶", "message": "安装都能装啥？先给我几个常见项目。", "intent_hint": "ORDER_CREATE", "expectation": "识别具体服务类型并补问服务项目；执行前确认。"}
+{"id": "DQ060", "category": "下单-安装安检报修换瓶", "message": "安检可以做后厨全套检查吗，我们是餐饮店。", "intent_hint": "ORDER_CREATE", "expectation": "识别具体服务类型并补问服务项目；执行前确认。"}
+{"id": "DQ061", "category": "下单-安装安检报修换瓶", "message": "报修先上门看，费用大概从多少起？", "intent_hint": "ORDER_CREATE", "expectation": "识别具体服务类型并补问服务项目；执行前确认。"}
+{"id": "DQ062", "category": "下单-安装安检报修换瓶", "message": "我要装报警器+切断阀联动，按流程来。", "intent_hint": "ORDER_CREATE", "expectation": "识别具体服务类型并补问服务项目；执行前确认。"}
+{"id": "DQ063", "category": "下单-安装安检报修换瓶", "message": "今天能安排安检加急吗？", "intent_hint": "ORDER_CREATE", "expectation": "识别具体服务类型并补问服务项目；执行前确认。"}
+{"id": "DQ064", "category": "下单-安装安检报修换瓶", "message": "我想换瓶顺带做一次安检，能一起下吗？", "intent_hint": "ORDER_CREATE", "expectation": "识别具体服务类型并补问服务项目；执行前确认。"}
+{"id": "DQ065", "category": "下单-安装安检报修换瓶", "message": "地址默认，联系人改成张工，做安装服务。", "intent_hint": "ORDER_CREATE", "expectation": "识别具体服务类型并补问服务项目；执行前确认。"}
+{"id": "DQ066", "category": "下单-安装安检报修换瓶", "message": "疑似漏气，但还不确定，报修怎么下最稳妥？", "intent_hint": "ORDER_CREATE", "expectation": "识别具体服务类型并补问服务项目；执行前确认。"}
+{"id": "DQ067", "category": "下单-安装安检报修换瓶", "message": "我要INSTALLATION，你直接按中文问我就好。", "intent_hint": "ORDER_CREATE", "expectation": "识别具体服务类型并补问服务项目；执行前确认。"}
+{"id": "DQ068", "category": "下单-安装安检报修换瓶", "message": "我要SAFETY_CHECK，先别急着创建，先确认。", "intent_hint": "ORDER_CREATE", "expectation": "识别具体服务类型并补问服务项目；执行前确认。"}
+{"id": "DQ069", "category": "下单-安装安检报修换瓶", "message": "我要REPAIR，问题是火焰发黄还偶尔回火。", "intent_hint": "ORDER_CREATE", "expectation": "识别具体服务类型并补问服务项目；执行前确认。"}
+{"id": "DQ070", "category": "下单-安装安检报修换瓶", "message": "服务类型我说错了，改成换瓶，不是配送。", "intent_hint": "ORDER_CREATE", "expectation": "识别具体服务类型并补问服务项目；执行前确认。"}
+{"id": "DQ071", "category": "下单-安装安检报修换瓶", "message": "安装能指定10点到12点这个窗口吗？", "intent_hint": "ORDER_CREATE", "expectation": "识别具体服务类型并补问服务项目；执行前确认。"}
+{"id": "DQ072", "category": "下单-安装安检报修换瓶", "message": "我这个门店上午忙，尽量下午上门。", "intent_hint": "ORDER_CREATE", "expectation": "识别具体服务类型并补问服务项目；执行前确认。"}
+{"id": "DQ073", "category": "下单-安装安检报修换瓶", "message": "报修备注：设备品牌是XX，型号我一会补。", "intent_hint": "ORDER_CREATE", "expectation": "识别具体服务类型并补问服务项目；执行前确认。"}
+{"id": "DQ074", "category": "下单-安装安检报修换瓶", "message": "安检要开发票，抬头用公司全称。", "intent_hint": "ORDER_CREATE", "expectation": "识别具体服务类型并补问服务项目；执行前确认。"}
+{"id": "DQ075", "category": "下单-安装安检报修换瓶", "message": "安装前需要准备什么，你顺便提醒我下。", "intent_hint": "ORDER_CREATE", "expectation": "识别具体服务类型并补问服务项目；执行前确认。"}
+{"id": "DQ076", "category": "下单-安装安检报修换瓶", "message": "换瓶数量先1，等会我可能改2。", "intent_hint": "ORDER_CREATE", "expectation": "识别具体服务类型并补问服务项目；执行前确认。"}
+{"id": "DQ077", "category": "下单-安装安检报修换瓶", "message": "报修单你先出个确认单，我看完再点头。", "intent_hint": "ORDER_CREATE", "expectation": "识别具体服务类型并补问服务项目；执行前确认。"}
+{"id": "DQ078", "category": "下单-安装安检报修换瓶", "message": "我说得比较乱，你帮我整理成可下单的信息。", "intent_hint": "ORDER_CREATE", "expectation": "识别具体服务类型并补问服务项目；执行前确认。"}
+{"id": "DQ079", "category": "下单-安装安检报修换瓶", "message": "能不能别让我选太多项，你按必要项提问就行。", "intent_hint": "ORDER_CREATE", "expectation": "识别具体服务类型并补问服务项目；执行前确认。"}
+{"id": "DQ080", "category": "下单-安装安检报修换瓶", "message": "我希望你像真人客服那样追问，不要机器话术。", "intent_hint": "ORDER_CREATE", "expectation": "识别具体服务类型并补问服务项目；执行前确认。"}
+{"id": "DQ081", "category": "下单-安装安检报修换瓶", "message": "我有点急，先帮我判断该走报修还是安检。", "intent_hint": "ORDER_CREATE", "expectation": "识别具体服务类型并补问服务项目；执行前确认。"}
+{"id": "DQ082", "category": "下单-安装安检报修换瓶", "message": "把‘安装+安检’拆成哪种更合理，你建议一下。", "intent_hint": "ORDER_CREATE", "expectation": "识别具体服务类型并补问服务项目；执行前确认。"}
+{"id": "DQ083", "category": "配件商城与购物车", "message": "商城里帮我找个适配15kg的减压阀。", "intent_hint": "ACCESSORIES_OR_CART", "expectation": "优先引导到购物车流程；补齐地址/时间/发票等订单要素。"}
+{"id": "DQ084", "category": "配件商城与购物车", "message": "我要买报警器和软管，先加购物车。", "intent_hint": "ACCESSORIES_OR_CART", "expectation": "优先引导到购物车流程；补齐地址/时间/发票等订单要素。"}
+{"id": "DQ085", "category": "配件商城与购物车", "message": "购物车现在几件了？总价给我看下。", "intent_hint": "ACCESSORIES_OR_CART", "expectation": "优先引导到购物车流程；补齐地址/时间/发票等订单要素。"}
+{"id": "DQ086", "category": "配件商城与购物车", "message": "把购物车里报警器数量改成2个。", "intent_hint": "ACCESSORIES_OR_CART", "expectation": "优先引导到购物车流程；补齐地址/时间/发票等订单要素。"}
+{"id": "DQ087", "category": "配件商城与购物车", "message": "最贵那件删掉，我预算不够。", "intent_hint": "ACCESSORIES_OR_CART", "expectation": "优先引导到购物车流程；补齐地址/时间/发票等订单要素。"}
+{"id": "DQ088", "category": "配件商城与购物车", "message": "配件也能选配送时间吧？我要明天下午。", "intent_hint": "ACCESSORIES_OR_CART", "expectation": "优先引导到购物车流程；补齐地址/时间/发票等订单要素。"}
+{"id": "DQ089", "category": "配件商城与购物车", "message": "配件单我要开票，抬头是苏州XX餐饮。", "intent_hint": "ACCESSORIES_OR_CART", "expectation": "优先引导到购物车流程；补齐地址/时间/发票等订单要素。"}
+{"id": "DQ090", "category": "配件商城与购物车", "message": "配件和服务单能一起结算吗？", "intent_hint": "ACCESSORIES_OR_CART", "expectation": "优先引导到购物车流程；补齐地址/时间/发票等订单要素。"}
+{"id": "DQ091", "category": "配件商城与购物车", "message": "我先不支付，先生成订单看看。", "intent_hint": "ACCESSORIES_OR_CART", "expectation": "优先引导到购物车流程；补齐地址/时间/发票等订单要素。"}
+{"id": "DQ092", "category": "配件商城与购物车", "message": "支付成功后订单列表能看到配件单吧？", "intent_hint": "ACCESSORIES_OR_CART", "expectation": "优先引导到购物车流程；补齐地址/时间/发票等订单要素。"}
+{"id": "DQ093", "category": "配件商城与购物车", "message": "给我推荐3个后厨常用配件，实用点。", "intent_hint": "ACCESSORIES_OR_CART", "expectation": "优先引导到购物车流程；补齐地址/时间/发票等订单要素。"}
+{"id": "DQ094", "category": "配件商城与购物车", "message": "买错了配件怎么取消，规则你说清楚。", "intent_hint": "ACCESSORIES_OR_CART", "expectation": "优先引导到购物车流程；补齐地址/时间/发票等订单要素。"}
+{"id": "DQ095", "category": "配件商城与购物车", "message": "我想一键清空购物车，保留收藏。", "intent_hint": "ACCESSORIES_OR_CART", "expectation": "优先引导到购物车流程；补齐地址/时间/发票等订单要素。"}
+{"id": "DQ096", "category": "配件商城与购物车", "message": "底部那个购物车按钮点完应该进入哪一步？", "intent_hint": "ACCESSORIES_OR_CART", "expectation": "优先引导到购物车流程；补齐地址/时间/发票等订单要素。"}
+{"id": "DQ097", "category": "配件商城与购物车", "message": "软管2米来两条，再加一个减压阀。", "intent_hint": "ACCESSORIES_OR_CART", "expectation": "优先引导到购物车流程；补齐地址/时间/发票等订单要素。"}
+{"id": "DQ098", "category": "配件商城与购物车", "message": "我只会说‘买点配件’，你来问我要买啥。", "intent_hint": "ACCESSORIES_OR_CART", "expectation": "优先引导到购物车流程；补齐地址/时间/发票等订单要素。"}
+{"id": "DQ099", "category": "配件商城与购物车", "message": "这个SKU我记不住，你按名称帮我下就行。", "intent_hint": "ACCESSORIES_OR_CART", "expectation": "优先引导到购物车流程；补齐地址/时间/发票等订单要素。"}
+{"id": "DQ100", "category": "配件商城与购物车", "message": "配件下单也用默认地址和手机号。", "intent_hint": "ACCESSORIES_OR_CART", "expectation": "优先引导到购物车流程；补齐地址/时间/发票等订单要素。"}
+{"id": "DQ101", "category": "配件商城与购物车", "message": "我不要直购，就走购物车统一下单。", "intent_hint": "ACCESSORIES_OR_CART", "expectation": "优先引导到购物车流程；补齐地址/时间/发票等订单要素。"}
+{"id": "DQ102", "category": "配件商城与购物车", "message": "配件下单前也请给我一个确认小结。", "intent_hint": "ACCESSORIES_OR_CART", "expectation": "优先引导到购物车流程；补齐地址/时间/发票等订单要素。"}
+{"id": "DQ103", "category": "订单查询", "message": "帮我看下最近一个月所有订单。", "intent_hint": "ORDER_QUERY", "expectation": "理解模糊描述并用登录态查询；结果应简洁可追问。"}
+{"id": "DQ104", "category": "订单查询", "message": "只看待付款的，别的先不看。", "intent_hint": "ORDER_QUERY", "expectation": "理解模糊描述并用登录态查询；结果应简洁可追问。"}
+{"id": "DQ105", "category": "订单查询", "message": "进行中的单子给我按最新排一下。", "intent_hint": "ORDER_QUERY", "expectation": "理解模糊描述并用登录态查询；结果应简洁可追问。"}
+{"id": "DQ106", "category": "订单查询", "message": "查一下LPG202602091135071866这单。", "intent_hint": "ORDER_QUERY", "expectation": "理解模糊描述并用登录态查询；结果应简洁可追问。"}
+{"id": "DQ107", "category": "订单查询", "message": "我昨天那单现在到哪一步了？", "intent_hint": "ORDER_QUERY", "expectation": "理解模糊描述并用登录态查询；结果应简洁可追问。"}
+{"id": "DQ108", "category": "订单查询", "message": "给我看下这单的地址快照和联系人快照。", "intent_hint": "ORDER_QUERY", "expectation": "理解模糊描述并用登录态查询；结果应简洁可追问。"}
+{"id": "DQ109", "category": "订单查询", "message": "预计送达窗口是几点到几点？", "intent_hint": "ORDER_QUERY", "expectation": "理解模糊描述并用登录态查询；结果应简洁可追问。"}
+{"id": "DQ110", "category": "订单查询", "message": "费用明细给我拆开看：小计、加急费、总价。", "intent_hint": "ORDER_QUERY", "expectation": "理解模糊描述并用登录态查询；结果应简洁可追问。"}
+{"id": "DQ111", "category": "订单查询", "message": "筛一下已完成的安装单。", "intent_hint": "ORDER_QUERY", "expectation": "理解模糊描述并用登录态查询；结果应简洁可追问。"}
+{"id": "DQ112", "category": "订单查询", "message": "订单多的话给我第2页。", "intent_hint": "ORDER_QUERY", "expectation": "理解模糊描述并用登录态查询；结果应简洁可追问。"}
+{"id": "DQ113", "category": "订单查询", "message": "最近三笔配件单拉一下。", "intent_hint": "ORDER_QUERY", "expectation": "理解模糊描述并用登录态查询；结果应简洁可追问。"}
+{"id": "DQ114", "category": "订单查询", "message": "帮我统计一下各状态有多少单。", "intent_hint": "ORDER_QUERY", "expectation": "理解模糊描述并用登录态查询；结果应简洁可追问。"}
+{"id": "DQ115", "category": "订单查询", "message": "我记不住订单号，你按最近下单时间找。", "intent_hint": "ORDER_QUERY", "expectation": "理解模糊描述并用登录态查询；结果应简洁可追问。"}
+{"id": "DQ116", "category": "订单查询", "message": "查下‘今天创建但还没支付’的单子。", "intent_hint": "ORDER_QUERY", "expectation": "理解模糊描述并用登录态查询；结果应简洁可追问。"}
+{"id": "DQ117", "category": "订单查询", "message": "我想看这周所有报修单进度。", "intent_hint": "ORDER_QUERY", "expectation": "理解模糊描述并用登录态查询；结果应简洁可追问。"}
+{"id": "DQ118", "category": "订单查询", "message": "这单谁接的、什么时候开始服务？", "intent_hint": "ORDER_QUERY", "expectation": "理解模糊描述并用登录态查询；结果应简洁可追问。"}
+{"id": "DQ119", "category": "订单查询", "message": "只给我看我账号名下的，不要混别人的。", "intent_hint": "ORDER_QUERY", "expectation": "理解模糊描述并用登录态查询；结果应简洁可追问。"}
+{"id": "DQ120", "category": "订单查询", "message": "我想按服务类型筛：只看安检。", "intent_hint": "ORDER_QUERY", "expectation": "理解模糊描述并用登录态查询；结果应简洁可追问。"}
+{"id": "DQ121", "category": "订单查询", "message": "订单列表里那条‘进行中’，点进去前先口头说下进度。", "intent_hint": "ORDER_QUERY", "expectation": "理解模糊描述并用登录态查询；结果应简洁可追问。"}
+{"id": "DQ122", "category": "订单查询", "message": "我就问一句：我还有没完成的单吗？", "intent_hint": "ORDER_QUERY", "expectation": "理解模糊描述并用登录态查询；结果应简洁可追问。"}
+{"id": "DQ123", "category": "取消改址支付", "message": "我想取消刚下的那笔订单。", "intent_hint": "ORDER_CHANGE", "expectation": "先校验规则再执行；明确失败原因与可替代方案。"}
+{"id": "DQ124", "category": "取消改址支付", "message": "这单还能取消吗？你先判断规则。", "intent_hint": "ORDER_CHANGE", "expectation": "先校验规则再执行；明确失败原因与可替代方案。"}
+{"id": "DQ125", "category": "取消改址支付", "message": "地址改成浦东新区XX路88号，能改就改。", "intent_hint": "ORDER_CHANGE", "expectation": "先校验规则再执行；明确失败原因与可替代方案。"}
+{"id": "DQ126", "category": "取消改址支付", "message": "离服务不到1小时了，还能改址不？", "intent_hint": "ORDER_CHANGE", "expectation": "先校验规则再执行；明确失败原因与可替代方案。"}
+{"id": "DQ127", "category": "取消改址支付", "message": "我超过30分钟没付款，这单是不是废了？", "intent_hint": "ORDER_CHANGE", "expectation": "先校验规则再执行；明确失败原因与可替代方案。"}
+{"id": "DQ128", "category": "取消改址支付", "message": "帮我把这笔待付款单直接支付掉（mock也行）。", "intent_hint": "ORDER_CHANGE", "expectation": "先校验规则再执行；明确失败原因与可替代方案。"}
+{"id": "DQ129", "category": "取消改址支付", "message": "支付后状态会怎么变，你说人话版就行。", "intent_hint": "ORDER_CHANGE", "expectation": "先校验规则再执行；明确失败原因与可替代方案。"}
+{"id": "DQ130", "category": "取消改址支付", "message": "要是支付失败了，你会怎么提示我？", "intent_hint": "ORDER_CHANGE", "expectation": "先校验规则再执行；明确失败原因与可替代方案。"}
+{"id": "DQ131", "category": "取消改址支付", "message": "已经在服务中了，我还能取消吗？", "intent_hint": "ORDER_CHANGE", "expectation": "先校验规则再执行；明确失败原因与可替代方案。"}
+{"id": "DQ132", "category": "取消改址支付", "message": "改址成功后，历史订单地址别被新地址覆盖。", "intent_hint": "ORDER_CHANGE", "expectation": "先校验规则再执行；明确失败原因与可替代方案。"}
+{"id": "DQ133", "category": "取消改址支付", "message": "我现在后悔了，想撤单，先告诉我能不能撤。", "intent_hint": "ORDER_CHANGE", "expectation": "先校验规则再执行；明确失败原因与可替代方案。"}
+{"id": "DQ134", "category": "取消改址支付", "message": "这单改地址不行的话，能不能新建一单替代？", "intent_hint": "ORDER_CHANGE", "expectation": "先校验规则再执行；明确失败原因与可替代方案。"}
+{"id": "DQ135", "category": "取消改址支付", "message": "取消失败请把原因说清楚，别只给错误码。", "intent_hint": "ORDER_CHANGE", "expectation": "先校验规则再执行；明确失败原因与可替代方案。"}
+{"id": "DQ136", "category": "取消改址支付", "message": "这笔单我现在付，付完你再帮我查状态。", "intent_hint": "ORDER_CHANGE", "expectation": "先校验规则再执行；明确失败原因与可替代方案。"}
+{"id": "DQ137", "category": "取消改址支付", "message": "我不确定单号，你按最近待付款那笔先试支付。", "intent_hint": "ORDER_CHANGE", "expectation": "先校验规则再执行；明确失败原因与可替代方案。"}
+{"id": "DQ138", "category": "取消改址支付", "message": "改址如果超时了，能不能转成投诉/工单处理？", "intent_hint": "ORDER_CHANGE", "expectation": "先校验规则再执行；明确失败原因与可替代方案。"}
+{"id": "DQ139", "category": "账户与地址", "message": "帮我看下我的个人资料现在是什么。", "intent_hint": "PROFILE_OR_ADDRESS", "expectation": "支持资料与地址管理；手机号等字段需做格式校验。"}
+{"id": "DQ140", "category": "账户与地址", "message": "把我的显示名改成‘张建国（采购）’。", "intent_hint": "PROFILE_OR_ADDRESS", "expectation": "支持资料与地址管理；手机号等字段需做格式校验。"}
+{"id": "DQ141", "category": "账户与地址", "message": "我想改登录密码，流程怎么走？", "intent_hint": "PROFILE_OR_ADDRESS", "expectation": "支持资料与地址管理；手机号等字段需做格式校验。"}
+{"id": "DQ142", "category": "账户与地址", "message": "新增地址：李华 13900001111 徐汇区XX路100号 3栋502。", "intent_hint": "PROFILE_OR_ADDRESS", "expectation": "支持资料与地址管理；手机号等字段需做格式校验。"}
+{"id": "DQ143", "category": "账户与地址", "message": "刚加的地址设成默认地址。", "intent_hint": "PROFILE_OR_ADDRESS", "expectation": "支持资料与地址管理；手机号等字段需做格式校验。"}
+{"id": "DQ144", "category": "账户与地址", "message": "手机号我填了123这种，应该拦截吧？", "intent_hint": "PROFILE_OR_ADDRESS", "expectation": "支持资料与地址管理；手机号等字段需做格式校验。"}
+{"id": "DQ145", "category": "账户与地址", "message": "我有两个地址，帮我确认哪个是默认。", "intent_hint": "PROFILE_OR_ADDRESS", "expectation": "支持资料与地址管理；手机号等字段需做格式校验。"}
+{"id": "DQ146", "category": "账户与地址", "message": "把默认地址联系人改成王姐，电话别动。", "intent_hint": "PROFILE_OR_ADDRESS", "expectation": "支持资料与地址管理；手机号等字段需做格式校验。"}
+{"id": "DQ147", "category": "账户与地址", "message": "地址备注加一句‘后门收货，白天有人’。", "intent_hint": "PROFILE_OR_ADDRESS", "expectation": "支持资料与地址管理；手机号等字段需做格式校验。"}
+{"id": "DQ148", "category": "账户与地址", "message": "我换手机号了，资料里也要同步改。", "intent_hint": "PROFILE_OR_ADDRESS", "expectation": "支持资料与地址管理；手机号等字段需做格式校验。"}
+{"id": "DQ149", "category": "账户与地址", "message": "账号密码相关操作要不要二次确认？", "intent_hint": "PROFILE_OR_ADDRESS", "expectation": "支持资料与地址管理；手机号等字段需做格式校验。"}
+{"id": "DQ150", "category": "账户与地址", "message": "个人中心里能不能直接跳最近订单列表？", "intent_hint": "PROFILE_OR_ADDRESS", "expectation": "支持资料与地址管理；手机号等字段需做格式校验。"}
+{"id": "DQ151", "category": "投诉与安全知识", "message": "我要投诉昨天配送员态度不好，关联最近那单。", "intent_hint": "COMPLAINT_OR_SAFETY", "expectation": "投诉需可关联订单；安全问答优先给可执行步骤。"}
+{"id": "DQ152", "category": "投诉与安全知识", "message": "我要提个建议：页面按钮太多，能不能简化。", "intent_hint": "COMPLAINT_OR_SAFETY", "expectation": "投诉需可关联订单；安全问答优先给可执行步骤。"}
+{"id": "DQ153", "category": "投诉与安全知识", "message": "燃气泄漏了先做什么？给我短句步骤，马上能照做。", "intent_hint": "COMPLAINT_OR_SAFETY", "expectation": "投诉需可关联订单；安全问答优先给可执行步骤。"}
+{"id": "DQ154", "category": "投诉与安全知识", "message": "闻到煤气味但不确定，先别吓我，按轻重缓急说。", "intent_hint": "COMPLAINT_OR_SAFETY", "expectation": "投诉需可关联订单；安全问答优先给可执行步骤。"}
+{"id": "DQ155", "category": "投诉与安全知识", "message": "我想投诉线上客服回复太慢，怎么提交？", "intent_hint": "COMPLAINT_OR_SAFETY", "expectation": "投诉需可关联订单；安全问答优先给可执行步骤。"}
+{"id": "DQ156", "category": "投诉与安全知识", "message": "这次服务我不满意，能帮我建个工单跟进吗？", "intent_hint": "COMPLAINT_OR_SAFETY", "expectation": "投诉需可关联订单；安全问答优先给可执行步骤。"}
+{"id": "DQ157", "category": "投诉与安全知识", "message": "紧急情况要不要先打电话？电话多少？", "intent_hint": "COMPLAINT_OR_SAFETY", "expectation": "投诉需可关联订单；安全问答优先给可执行步骤。"}
+{"id": "DQ158", "category": "投诉与安全知识", "message": "给我一版‘给员工看的’燃气应急提示，越短越好。", "intent_hint": "COMPLAINT_OR_SAFETY", "expectation": "投诉需可关联订单；安全问答优先给可执行步骤。"}
+{"id": "DQ159", "category": "投诉与安全知识", "message": "我想表扬今天师傅服务好，也能提交吗？", "intent_hint": "COMPLAINT_OR_SAFETY", "expectation": "投诉需可关联订单；安全问答优先给可执行步骤。"}
+{"id": "DQ160", "category": "投诉与安全知识", "message": "投诉提交后我怎么查处理进度？", "intent_hint": "COMPLAINT_OR_SAFETY", "expectation": "投诉需可关联订单；安全问答优先给可执行步骤。"}
+{"id": "DQ161", "category": "能力与流程", "message": "emmm 在吗？我第一次用这个系统，你大概能帮我干啥？", "intent_hint": "CLARIFY_OR_POLICY", "expectation": "语气自然，先说明能力边界；涉及执行动作时提示需确认。"}
+{"id": "DQ162", "category": "能力与流程", "message": "uh 我是门店店长，平时最常用哪些功能你先给我讲讲。, thanks", "intent_hint": "CLARIFY_OR_POLICY", "expectation": "语气自然，先说明能力边界；涉及执行动作时提示需确认。"}
+{"id": "DQ163", "category": "能力与流程", "message": "ok so 先别下单，我想知道取消规则和改址规则，简单说重点。, short pls", "intent_hint": "CLARIFY_OR_POLICY", "expectation": "语气自然，先说明能力边界；涉及执行动作时提示需确认。"}
+{"id": "DQ164", "category": "能力与流程", "message": "quick ask: 我不想每次都重复地址电话，你能默认带出来吗？, step by step", "intent_hint": "CLARIFY_OR_POLICY", "expectation": "语气自然，先说明能力边界；涉及执行动作时提示需确认。"}
+{"id": "DQ165", "category": "能力与流程", "message": "pls help: 如果我说错了服务类型，你会提醒我改吗？, dont execute yet", "intent_hint": "CLARIFY_OR_POLICY", "expectation": "语气自然，先说明能力边界；涉及执行动作时提示需确认。"}
+{"id": "DQ166", "category": "能力与流程", "message": "one-line req: 先告诉我：你现在能做、不能做的各三条就行。, confirm first", "intent_hint": "CLARIFY_OR_POLICY", "expectation": "语气自然，先说明能力边界；涉及执行动作时提示需确认。"}
+{"id": "DQ167", "category": "下单-瓶装配送", "message": "typing messy -> 我这边后厨快没气了，先来一瓶45kg顶着用。, im in a hurry", "intent_hint": "ORDER_CREATE", "expectation": "先补齐缺失信息再执行；给出可选时间；下单前展示确认摘要。"}
+{"id": "DQ168", "category": "下单-瓶装配送", "message": "voice2text: 晚上十点还能送不？我要两瓶15kg。", "intent_hint": "ORDER_CREATE", "expectation": "先补齐缺失信息再执行；给出可选时间；下单前展示确认摘要。"}
+{"id": "DQ169", "category": "下单-瓶装配送", "message": "emmm 我赶时间，能走加急就走加急。, thanks", "intent_hint": "ORDER_CREATE", "expectation": "先补齐缺失信息再执行；给出可选时间；下单前展示确认摘要。"}
+{"id": "DQ170", "category": "下单-瓶装配送", "message": "uh 我手机快没电了，你先把需要我确认的都一次性说完。, short pls", "intent_hint": "ORDER_CREATE", "expectation": "先补齐缺失信息再执行；给出可选时间；下单前展示确认摘要。"}
+{"id": "DQ171", "category": "下单-瓶装配送", "message": "ok so ASAP下单，地址不变，电话不变，直接帮我补完流程。, step by step", "intent_hint": "ORDER_CREATE", "expectation": "先补齐缺失信息再执行；给出可选时间；下单前展示确认摘要。"}
+{"id": "DQ172", "category": "下单-瓶装配送", "message": "quick ask: 开票税号我等会发，你先把其他信息问完。, dont execute yet", "intent_hint": "ORDER_CREATE", "expectation": "先补齐缺失信息再执行；给出可选时间；下单前展示确认摘要。"}
+{"id": "DQ173", "category": "下单-瓶装配送", "message": "pls help: 先帮我算个总价，我确认后你再下。, confirm first", "intent_hint": "ORDER_CREATE", "expectation": "先补齐缺失信息再执行；给出可选时间；下单前展示确认摘要。"}
+{"id": "DQ174", "category": "下单-瓶装配送", "message": "one-line req: 你先问我缺什么，不要一上来给我长表格。, im in a hurry", "intent_hint": "ORDER_CREATE", "expectation": "先补齐缺失信息再执行；给出可选时间；下单前展示确认摘要。"}
+{"id": "DQ175", "category": "下单-瓶装配送", "message": "typing messy -> 送气+开票一起办，别让我分两次说。", "intent_hint": "ORDER_CREATE", "expectation": "先补齐缺失信息再执行；给出可选时间；下单前展示确认摘要。"}
+{"id": "DQ176", "category": "下单-瓶装配送", "message": "voice2text: 我就一句：给我来气。你来主导提问。, thanks", "intent_hint": "ORDER_CREATE", "expectation": "先补齐缺失信息再执行；给出可选时间；下单前展示确认摘要。"}
+{"id": "DQ177", "category": "下单-瓶装配送", "message": "emmm 给我下单，联系人用李姐，别用账号默认名字。, short pls", "intent_hint": "ORDER_CREATE", "expectation": "先补齐缺失信息再执行；给出可选时间；下单前展示确认摘要。"}
+{"id": "DQ178", "category": "下单-瓶装配送", "message": "uh 15公斤两瓶，别加急，明天下午。, step by step", "intent_hint": "ORDER_CREATE", "expectation": "先补齐缺失信息再执行；给出可选时间；下单前展示确认摘要。"}
+{"id": "DQ179", "category": "下单-安装安检报修换瓶", "message": "ok so 我要预约安装，明天下午有空档吗？, dont execute yet", "intent_hint": "ORDER_CREATE", "expectation": "识别具体服务类型并补问服务项目；执行前确认。"}
+{"id": "DQ180", "category": "下单-安装安检报修换瓶", "message": "quick ask: 我要换瓶，15kg一瓶，旧瓶要回收。, confirm first", "intent_hint": "ORDER_CREATE", "expectation": "识别具体服务类型并补问服务项目；执行前确认。"}
+{"id": "DQ181", "category": "下单-安装安检报修换瓶", "message": "pls help: 报修先上门看，费用大概从多少起？, im in a hurry", "intent_hint": "ORDER_CREATE", "expectation": "识别具体服务类型并补问服务项目；执行前确认。"}
+{"id": "DQ182", "category": "下单-安装安检报修换瓶", "message": "one-line req: 我想换瓶顺带做一次安检，能一起下吗？", "intent_hint": "ORDER_CREATE", "expectation": "识别具体服务类型并补问服务项目；执行前确认。"}
+{"id": "DQ183", "category": "下单-安装安检报修换瓶", "message": "typing messy -> 我要INSTALLATION，你直接按中文问我就好。, thanks", "intent_hint": "ORDER_CREATE", "expectation": "识别具体服务类型并补问服务项目；执行前确认。"}
+{"id": "DQ184", "category": "下单-安装安检报修换瓶", "message": "voice2text: 服务类型我说错了，改成换瓶，不是配送。, short pls", "intent_hint": "ORDER_CREATE", "expectation": "识别具体服务类型并补问服务项目；执行前确认。"}
+{"id": "DQ185", "category": "下单-安装安检报修换瓶", "message": "emmm 报修备注：设备品牌是XX，型号我一会补。, step by step", "intent_hint": "ORDER_CREATE", "expectation": "识别具体服务类型并补问服务项目；执行前确认。"}
+{"id": "DQ186", "category": "下单-安装安检报修换瓶", "message": "uh 换瓶数量先1，等会我可能改2。, dont execute yet", "intent_hint": "ORDER_CREATE", "expectation": "识别具体服务类型并补问服务项目；执行前确认。"}
+{"id": "DQ187", "category": "下单-安装安检报修换瓶", "message": "ok so 能不能别让我选太多项，你按必要项提问就行。, confirm first", "intent_hint": "ORDER_CREATE", "expectation": "识别具体服务类型并补问服务项目；执行前确认。"}
+{"id": "DQ188", "category": "下单-安装安检报修换瓶", "message": "quick ask: 把‘安装+安检’拆成哪种更合理，你建议一下。, im in a hurry", "intent_hint": "ORDER_CREATE", "expectation": "识别具体服务类型并补问服务项目；执行前确认。"}
+{"id": "DQ189", "category": "配件商城与购物车", "message": "pls help: 购物车现在几件了？总价给我看下。", "intent_hint": "ACCESSORIES_OR_CART", "expectation": "优先引导到购物车流程；补齐地址/时间/发票等订单要素。"}
+{"id": "DQ190", "category": "配件商城与购物车", "message": "one-line req: 配件也能选配送时间吧？我要明天下午。, thanks", "intent_hint": "ACCESSORIES_OR_CART", "expectation": "优先引导到购物车流程；补齐地址/时间/发票等订单要素。"}
+{"id": "DQ191", "category": "配件商城与购物车", "message": "typing messy -> 我先不支付，先生成订单看看。, short pls", "intent_hint": "ACCESSORIES_OR_CART", "expectation": "优先引导到购物车流程；补齐地址/时间/发票等订单要素。"}
+{"id": "DQ192", "category": "配件商城与购物车", "message": "voice2text: 买错了配件怎么取消，规则你说清楚。, step by step", "intent_hint": "ACCESSORIES_OR_CART", "expectation": "优先引导到购物车流程；补齐地址/时间/发票等订单要素。"}
+{"id": "DQ193", "category": "配件商城与购物车", "message": "emmm 软管2米来两条，再加一个减压阀。, dont execute yet", "intent_hint": "ACCESSORIES_OR_CART", "expectation": "优先引导到购物车流程；补齐地址/时间/发票等订单要素。"}
+{"id": "DQ194", "category": "配件商城与购物车", "message": "uh 配件下单也用默认地址和手机号。, confirm first", "intent_hint": "ACCESSORIES_OR_CART", "expectation": "优先引导到购物车流程；补齐地址/时间/发票等订单要素。"}
+{"id": "DQ195", "category": "订单查询", "message": "ok so 帮我看下最近一个月所有订单。, im in a hurry", "intent_hint": "ORDER_QUERY", "expectation": "理解模糊描述并用登录态查询；结果应简洁可追问。"}
+{"id": "DQ196", "category": "订单查询", "message": "quick ask: 查一下LPG202602091135071866这单。", "intent_hint": "ORDER_QUERY", "expectation": "理解模糊描述并用登录态查询；结果应简洁可追问。"}
+{"id": "DQ197", "category": "订单查询", "message": "pls help: 预计送达窗口是几点到几点？, thanks", "intent_hint": "ORDER_QUERY", "expectation": "理解模糊描述并用登录态查询；结果应简洁可追问。"}
+{"id": "DQ198", "category": "订单查询", "message": "one-line req: 订单多的话给我第2页。, short pls", "intent_hint": "ORDER_QUERY", "expectation": "理解模糊描述并用登录态查询；结果应简洁可追问。"}
+{"id": "DQ199", "category": "订单查询", "message": "typing messy -> 我记不住订单号，你按最近下单时间找。, step by step", "intent_hint": "ORDER_QUERY", "expectation": "理解模糊描述并用登录态查询；结果应简洁可追问。"}
+{"id": "DQ200", "category": "订单查询", "message": "voice2text: 这单谁接的、什么时候开始服务？, dont execute yet", "intent_hint": "ORDER_QUERY", "expectation": "理解模糊描述并用登录态查询；结果应简洁可追问。"}
+{"id": "DQ201", "category": "下单-瓶装配送", "scenario_id": "SC001", "turn_index": 1, "message": "uh 15kg来2瓶，地址先用我默认的。", "intent_hint": "ORDER_CREATE", "expectation": "先补齐缺失信息再执行；给出可选时间；下单前展示确认摘要。"}
+{"id": "DQ202", "category": "下单-瓶装配送", "scenario_id": "SC001", "turn_index": 2, "message": "给我送个小瓶，5kg那种，一瓶就行。, thanks", "intent_hint": "ORDER_CREATE", "expectation": "先补齐缺失信息再执行；给出可选时间；下单前展示确认摘要。"}
+{"id": "DQ203", "category": "下单-瓶装配送", "scenario_id": "SC002", "turn_index": 1, "message": "ok so 晚上十点还能送不？我要两瓶15kg。", "intent_hint": "ORDER_CREATE", "expectation": "先补齐缺失信息再执行；给出可选时间；下单前展示确认摘要。"}
+{"id": "DQ204", "category": "下单-瓶装配送", "scenario_id": "SC002", "turn_index": 2, "message": "明早能送吗？大概9点到11点那段。, short pls", "intent_hint": "ORDER_CREATE", "expectation": "先补齐缺失信息再执行；给出可选时间；下单前展示确认摘要。"}
+{"id": "DQ205", "category": "下单-瓶装配送", "scenario_id": "SC003", "turn_index": 1, "message": "quick ask: 我就一句话：送煤气来。你继续问我吧。", "intent_hint": "ORDER_CREATE", "expectation": "先补齐缺失信息再执行；给出可选时间；下单前展示确认摘要。"}
+{"id": "DQ206", "category": "下单-瓶装配送", "scenario_id": "SC003", "turn_index": 2, "message": "我赶时间，能走加急就走加急。, step by step", "intent_hint": "ORDER_CREATE", "expectation": "先补齐缺失信息再执行；给出可选时间；下单前展示确认摘要。"}
+{"id": "DQ207", "category": "下单-瓶装配送", "scenario_id": "SC004", "turn_index": 1, "message": "pls help: 你先问我缺什么，不要一上来给我长表格。", "intent_hint": "ORDER_CREATE", "expectation": "先补齐缺失信息再执行；给出可选时间；下单前展示确认摘要。"}
+{"id": "DQ208", "category": "下单-瓶装配送", "scenario_id": "SC004", "turn_index": 2, "message": "下单信息你帮我复述一下，我怕说漏了。, dont execute yet", "intent_hint": "ORDER_CREATE", "expectation": "先补齐缺失信息再执行；给出可选时间；下单前展示确认摘要。"}
+{"id": "DQ209", "category": "下单-安装安检报修换瓶", "scenario_id": "SC005", "turn_index": 1, "message": "one-line req: 安检可以做后厨全套检查吗，我们是餐饮店。", "intent_hint": "ORDER_CREATE", "expectation": "识别具体服务类型并补问服务项目；执行前确认。"}
+{"id": "DQ210", "category": "下单-安装安检报修换瓶", "scenario_id": "SC005", "turn_index": 2, "message": "报修先上门看，费用大概从多少起？, confirm first", "intent_hint": "ORDER_CREATE", "expectation": "识别具体服务类型并补问服务项目；执行前确认。"}
+{"id": "DQ211", "category": "下单-安装安检报修换瓶", "scenario_id": "SC006", "turn_index": 1, "message": "typing messy -> 我希望你像真人客服那样追问，不要机器话术。", "intent_hint": "ORDER_CREATE", "expectation": "识别具体服务类型并补问服务项目；执行前确认。"}
+{"id": "DQ212", "category": "下单-安装安检报修换瓶", "scenario_id": "SC006", "turn_index": 2, "message": "我有点急，先帮我判断该走报修还是安检。, im in a hurry", "intent_hint": "ORDER_CREATE", "expectation": "识别具体服务类型并补问服务项目；执行前确认。"}
+{"id": "DQ213", "category": "配件商城与购物车", "scenario_id": "SC007", "turn_index": 1, "message": "voice2text: 配件下单也用默认地址和手机号。", "intent_hint": "ACCESSORIES_OR_CART", "expectation": "优先引导到购物车流程；补齐地址/时间/发票等订单要素。"}
+{"id": "DQ214", "category": "配件商城与购物车", "scenario_id": "SC007", "turn_index": 2, "message": "我不要直购，就走购物车统一下单。", "intent_hint": "ACCESSORIES_OR_CART", "expectation": "优先引导到购物车流程；补齐地址/时间/发票等订单要素。"}
+{"id": "DQ215", "category": "订单查询", "scenario_id": "SC008", "turn_index": 1, "message": "emmm 我想按服务类型筛：只看安检。", "intent_hint": "ORDER_QUERY", "expectation": "理解模糊描述并用登录态查询；结果应简洁可追问。"}
+{"id": "DQ216", "category": "订单查询", "scenario_id": "SC008", "turn_index": 2, "message": "订单列表里那条‘进行中’，点进去前先口头说下进度。, thanks", "intent_hint": "ORDER_QUERY", "expectation": "理解模糊描述并用登录态查询；结果应简洁可追问。"}
+{"id": "DQ217", "category": "账户与地址", "scenario_id": "SC009", "turn_index": 1, "message": "uh 把我的显示名改成‘张建国（采购）’。", "intent_hint": "PROFILE_OR_ADDRESS", "expectation": "支持资料与地址管理；手机号等字段需做格式校验。"}
+{"id": "DQ218", "category": "账户与地址", "scenario_id": "SC009", "turn_index": 2, "message": "我想改登录密码，流程怎么走？, short pls", "intent_hint": "PROFILE_OR_ADDRESS", "expectation": "支持资料与地址管理；手机号等字段需做格式校验。"}
+{"id": "DQ219", "category": "账户与地址", "scenario_id": "SC010", "turn_index": 1, "message": "ok so 个人中心里能不能直接跳最近订单列表？", "intent_hint": "PROFILE_OR_ADDRESS", "expectation": "支持资料与地址管理；手机号等字段需做格式校验。"}
+{"id": "DQ220", "category": "投诉与安全知识", "scenario_id": "SC010", "turn_index": 2, "message": "我要投诉昨天配送员态度不好，关联最近那单。, step by step", "intent_hint": "COMPLAINT_OR_SAFETY", "expectation": "投诉需可关联订单；安全问答优先给可执行步骤。"}
+{"id": "DQ221", "category": "????-????", "message": "???????????????9?????", "intent_hint": "CLARIFY_OR_POLICY", "expectation": "???????????????????????????"}
+{"id": "DQ222", "category": "????-????", "message": "????????????50???????", "intent_hint": "CLARIFY_OR_POLICY", "expectation": "???????????????????????????"}
+{"id": "DQ223", "category": "????-????", "message": "????????????????????", "intent_hint": "CLARIFY_OR_POLICY", "expectation": "???????????????????????????"}
+{"id": "DQ224", "category": "????-????", "message": "??????????????????", "intent_hint": "CLARIFY_OR_POLICY", "expectation": "???????????????????????????"}
+{"id": "DQ225", "category": "????-????", "message": "?????????????????", "intent_hint": "CLARIFY_OR_POLICY", "expectation": "???????????????????????????"}
+{"id": "DQ226", "category": "????-????", "message": "????????????????", "intent_hint": "CLARIFY_OR_POLICY", "expectation": "???????????????????????????"}
+{"id": "DQ227", "category": "????-????", "message": "????????????????", "intent_hint": "CLARIFY_OR_POLICY", "expectation": "???????????????????????????"}
+{"id": "DQ228", "category": "????-????", "message": "??????????????30?", "intent_hint": "CLARIFY_OR_POLICY", "expectation": "???????????????????????????"}
+{"id": "DQ229", "category": "????-????", "message": "??????????????????", "intent_hint": "CLARIFY_OR_POLICY", "expectation": "???????????????????????????"}
+{"id": "DQ230", "category": "????-????", "message": "?????100???????????", "intent_hint": "CLARIFY_OR_POLICY", "expectation": "???????????????????????????"}
+{"id": "DQ231", "category": "????-??????", "message": "??????????????????", "intent_hint": "CLARIFY_OR_POLICY", "expectation": "?????????????/??????????????"}
+{"id": "DQ232", "category": "????-??????", "message": "?????????????", "intent_hint": "CLARIFY_OR_POLICY", "expectation": "?????????????/??????????????"}
+{"id": "DQ233", "category": "????-??????", "message": "????????????????", "intent_hint": "CLARIFY_OR_POLICY", "expectation": "?????????????/??????????????"}
+{"id": "DQ234", "category": "????-??????", "message": "?????????????????", "intent_hint": "CLARIFY_OR_POLICY", "expectation": "?????????????/??????????????"}
+{"id": "DQ235", "category": "????-??????", "message": "??????????????", "intent_hint": "CLARIFY_OR_POLICY", "expectation": "?????????????/??????????????"}
+{"id": "DQ236", "category": "????-??????", "message": "???????????????", "intent_hint": "CLARIFY_OR_POLICY", "expectation": "?????????????/??????????????"}
+{"id": "DQ237", "category": "????-??????", "message": "???????????????", "intent_hint": "CLARIFY_OR_POLICY", "expectation": "?????????????/??????????????"}
+{"id": "DQ238", "category": "????-??????", "message": "?????????????????", "intent_hint": "CLARIFY_OR_POLICY", "expectation": "?????????????/??????????????"}
+{"id": "DQ239", "category": "????-??????", "message": "??????????????", "intent_hint": "CLARIFY_OR_POLICY", "expectation": "?????????????/??????????????"}
+{"id": "DQ240", "category": "????-??????", "message": "??????????????????", "intent_hint": "CLARIFY_OR_POLICY", "expectation": "?????????????/??????????????"}
+{"id": "DQ241", "category": "????-??????", "message": "???????????????????", "intent_hint": "CLARIFY_OR_POLICY", "expectation": "????????????????????????????????"}
+{"id": "DQ242", "category": "????-??????", "message": "???????????????120?", "intent_hint": "CLARIFY_OR_POLICY", "expectation": "????????????????????????????????"}
+{"id": "DQ243", "category": "????-??????", "message": "?????????????????????", "intent_hint": "CLARIFY_OR_POLICY", "expectation": "????????????????????????????????"}
+{"id": "DQ244", "category": "????-??????", "message": "?????????????????", "intent_hint": "CLARIFY_OR_POLICY", "expectation": "????????????????????????????????"}
+{"id": "DQ245", "category": "????-??????", "message": "?????????????????", "intent_hint": "CLARIFY_OR_POLICY", "expectation": "????????????????????????????????"}
+{"id": "DQ246", "category": "????-??????", "message": "??????????????????", "intent_hint": "CLARIFY_OR_POLICY", "expectation": "????????????????????????????????"}
+{"id": "DQ247", "category": "????-??????", "message": "?????????????????????", "intent_hint": "CLARIFY_OR_POLICY", "expectation": "????????????????????????????????"}
+{"id": "DQ248", "category": "????-??????", "message": "????????????????", "intent_hint": "CLARIFY_OR_POLICY", "expectation": "????????????????????????????????"}
+{"id": "DQ249", "category": "????-??????", "message": "???????????????????", "intent_hint": "CLARIFY_OR_POLICY", "expectation": "????????????????????????????????"}
+{"id": "DQ250", "category": "????-??????", "message": "?????????????????", "intent_hint": "CLARIFY_OR_POLICY", "expectation": "????????????????????????????????"}

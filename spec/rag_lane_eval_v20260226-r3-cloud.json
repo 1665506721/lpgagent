@@ -1,0 +1,462 @@
+{
+  "summary": {
+    "total_cases": 63,
+    "ok_cases": 63,
+    "http_success_rate": 100.0,
+    "model_source_distribution": {
+      "cloud": 63
+    },
+    "lane_distribution": {
+      "smalltalk": 50,
+      "action": 12,
+      "safety": 1
+    },
+    "rag_or_safety_hits": 1,
+    "rag_or_safety_hit_rate": 1.59,
+    "avg_latency_ms": 1331.6,
+    "p95_latency_ms": 1864
+  },
+  "items": [
+    {
+      "id": "DQ001",
+      "status": 200,
+      "lane": "smalltalk",
+      "model_source": "cloud",
+      "latency_ms": 958
+    },
+    {
+      "id": "DQ002",
+      "status": 200,
+      "lane": "smalltalk",
+      "model_source": "cloud",
+      "latency_ms": 731
+    },
+    {
+      "id": "DQ003",
+      "status": 200,
+      "lane": "action",
+      "model_source": "cloud",
+      "latency_ms": 721
+    },
+    {
+      "id": "DQ004",
+      "status": 200,
+      "lane": "smalltalk",
+      "model_source": "cloud",
+      "latency_ms": 1779
+    },
+    {
+      "id": "DQ005",
+      "status": 200,
+      "lane": "smalltalk",
+      "model_source": "cloud",
+      "latency_ms": 1892
+    },
+    {
+      "id": "DQ006",
+      "status": 200,
+      "lane": "smalltalk",
+      "model_source": "cloud",
+      "latency_ms": 720
+    },
+    {
+      "id": "DQ007",
+      "status": 200,
+      "lane": "action",
+      "model_source": "cloud",
+      "latency_ms": 763
+    },
+    {
+      "id": "DQ008",
+      "status": 200,
+      "lane": "action",
+      "model_source": "cloud",
+      "latency_ms": 651
+    },
+    {
+      "id": "DQ009",
+      "status": 200,
+      "lane": "action",
+      "model_source": "cloud",
+      "latency_ms": 621
+    },
+    {
+      "id": "DQ010",
+      "status": 200,
+      "lane": "smalltalk",
+      "model_source": "cloud",
+      "latency_ms": 577
+    },
+    {
+      "id": "DQ011",
+      "status": 200,
+      "lane": "action",
+      "model_source": "cloud",
+      "latency_ms": 674
+    },
+    {
+      "id": "DQ012",
+      "status": 200,
+      "lane": "smalltalk",
+      "model_source": "cloud",
+      "latency_ms": 606
+    },
+    {
+      "id": "DQ013",
+      "status": 200,
+      "lane": "smalltalk",
+      "model_source": "cloud",
+      "latency_ms": 1467
+    },
+    {
+      "id": "DQ014",
+      "status": 200,
+      "lane": "smalltalk",
+      "model_source": "cloud",
+      "latency_ms": 1783
+    },
+    {
+      "id": "DQ015",
+      "status": 200,
+      "lane": "smalltalk",
+      "model_source": "cloud",
+      "latency_ms": 1800
+    },
+    {
+      "id": "DQ016",
+      "status": 200,
+      "lane": "smalltalk",
+      "model_source": "cloud",
+      "latency_ms": 702
+    },
+    {
+      "id": "DQ151",
+      "status": 200,
+      "lane": "action",
+      "model_source": "cloud",
+      "latency_ms": 773
+    },
+    {
+      "id": "DQ152",
+      "status": 200,
+      "lane": "action",
+      "model_source": "cloud",
+      "latency_ms": 614
+    },
+    {
+      "id": "DQ153",
+      "status": 200,
+      "lane": "safety",
+      "model_source": "cloud",
+      "latency_ms": 638
+    },
+    {
+      "id": "DQ154",
+      "status": 200,
+      "lane": "smalltalk",
+      "model_source": "cloud",
+      "latency_ms": 1810
+    },
+    {
+      "id": "DQ155",
+      "status": 200,
+      "lane": "action",
+      "model_source": "cloud",
+      "latency_ms": 691
+    },
+    {
+      "id": "DQ156",
+      "status": 200,
+      "lane": "smalltalk",
+      "model_source": "cloud",
+      "latency_ms": 1366
+    },
+    {
+      "id": "DQ157",
+      "status": 200,
+      "lane": "smalltalk",
+      "model_source": "cloud",
+      "latency_ms": 1921
+    },
+    {
+      "id": "DQ158",
+      "status": 200,
+      "lane": "smalltalk",
+      "model_source": "cloud",
+      "latency_ms": 1785
+    },
+    {
+      "id": "DQ159",
+      "status": 200,
+      "lane": "action",
+      "model_source": "cloud",
+      "latency_ms": 743
+    },
+    {
+      "id": "DQ160",
+      "status": 200,
+      "lane": "action",
+      "model_source": "cloud",
+      "latency_ms": 728
+    },
+    {
+      "id": "DQ161",
+      "status": 200,
+      "lane": "smalltalk",
+      "model_source": "cloud",
+      "latency_ms": 691
+    },
+    {
+      "id": "DQ162",
+      "status": 200,
+      "lane": "smalltalk",
+      "model_source": "cloud",
+      "latency_ms": 1770
+    },
+    {
+      "id": "DQ163",
+      "status": 200,
+      "lane": "action",
+      "model_source": "cloud",
+      "latency_ms": 677
+    },
+    {
+      "id": "DQ164",
+      "status": 200,
+      "lane": "smalltalk",
+      "model_source": "cloud",
+      "latency_ms": 739
+    },
+    {
+      "id": "DQ165",
+      "status": 200,
+      "lane": "smalltalk",
+      "model_source": "cloud",
+      "latency_ms": 1529
+    },
+    {
+      "id": "DQ166",
+      "status": 200,
+      "lane": "smalltalk",
+      "model_source": "cloud",
+      "latency_ms": 702
+    },
+    {
+      "id": "DQ220",
+      "status": 200,
+      "lane": "action",
+      "model_source": "cloud",
+      "latency_ms": 656
+    },
+    {
+      "id": "DQ221",
+      "status": 200,
+      "lane": "smalltalk",
+      "model_source": "cloud",
+      "latency_ms": 1728
+    },
+    {
+      "id": "DQ222",
+      "status": 200,
+      "lane": "smalltalk",
+      "model_source": "cloud",
+      "latency_ms": 1501
+    },
+    {
+      "id": "DQ223",
+      "status": 200,
+      "lane": "smalltalk",
+      "model_source": "cloud",
+      "latency_ms": 1871
+    },
+    {
+      "id": "DQ224",
+      "status": 200,
+      "lane": "smalltalk",
+      "model_source": "cloud",
+      "latency_ms": 1787
+    },
+    {
+      "id": "DQ225",
+      "status": 200,
+      "lane": "smalltalk",
+      "model_source": "cloud",
+      "latency_ms": 880
+    },
+    {
+      "id": "DQ226",
+      "status": 200,
+      "lane": "smalltalk",
+      "model_source": "cloud",
+      "latency_ms": 1695
+    },
+    {
+      "id": "DQ227",
+      "status": 200,
+      "lane": "smalltalk",
+      "model_source": "cloud",
+      "latency_ms": 1966
+    },
+    {
+      "id": "DQ228",
+      "status": 200,
+      "lane": "smalltalk",
+      "model_source": "cloud",
+      "latency_ms": 1424
+    },
+    {
+      "id": "DQ229",
+      "status": 200,
+      "lane": "smalltalk",
+      "model_source": "cloud",
+      "latency_ms": 1767
+    },
+    {
+      "id": "DQ230",
+      "status": 200,
+      "lane": "smalltalk",
+      "model_source": "cloud",
+      "latency_ms": 1789
+    },
+    {
+      "id": "DQ231",
+      "status": 200,
+      "lane": "smalltalk",
+      "model_source": "cloud",
+      "latency_ms": 1545
+    },
+    {
+      "id": "DQ232",
+      "status": 200,
+      "lane": "smalltalk",
+      "model_source": "cloud",
+      "latency_ms": 1762
+    },
+    {
+      "id": "DQ233",
+      "status": 200,
+      "lane": "smalltalk",
+      "model_source": "cloud",
+      "latency_ms": 1864
+    },
+    {
+      "id": "DQ234",
+      "status": 200,
+      "lane": "smalltalk",
+      "model_source": "cloud",
+      "latency_ms": 1545
+    },
+    {
+      "id": "DQ235",
+      "status": 200,
+      "lane": "smalltalk",
+      "model_source": "cloud",
+      "latency_ms": 1789
+    },
+    {
+      "id": "DQ236",
+      "status": 200,
+      "lane": "smalltalk",
+      "model_source": "cloud",
+      "latency_ms": 1855
+    },
+    {
+      "id": "DQ237",
+      "status": 200,
+      "lane": "smalltalk",
+      "model_source": "cloud",
+      "latency_ms": 1582
+    },
+    {
+      "id": "DQ238",
+      "status": 200,
+      "lane": "smalltalk",
+      "model_source": "cloud",
+      "latency_ms": 1737
+    },
+    {
+      "id": "DQ239",
+      "status": 200,
+      "lane": "smalltalk",
+      "model_source": "cloud",
+      "latency_ms": 1844
+    },
+    {
+      "id": "DQ240",
+      "status": 200,
+      "lane": "smalltalk",
+      "model_source": "cloud",
+      "latency_ms": 931
+    },
+    {
+      "id": "DQ241",
+      "status": 200,
+      "lane": "smalltalk",
+      "model_source": "cloud",
+      "latency_ms": 1705
+    },
+    {
+      "id": "DQ242",
+      "status": 200,
+      "lane": "smalltalk",
+      "model_source": "cloud",
+      "latency_ms": 1819
+    },
+    {
+      "id": "DQ243",
+      "status": 200,
+      "lane": "smalltalk",
+      "model_source": "cloud",
+      "latency_ms": 1444
+    },
+    {
+      "id": "DQ244",
+      "status": 200,
+      "lane": "smalltalk",
+      "model_source": "cloud",
+      "latency_ms": 1707
+    },
+    {
+      "id": "DQ245",
+      "status": 200,
+      "lane": "smalltalk",
+      "model_source": "cloud",
+      "latency_ms": 1820
+    },
+    {
+      "id": "DQ246",
+      "status": 200,
+      "lane": "smalltalk",
+      "model_source": "cloud",
+      "latency_ms": 1471
+    },
+    {
+      "id": "DQ247",
+      "status": 200,
+      "lane": "smalltalk",
+      "model_source": "cloud",
+      "latency_ms": 1808
+    },
+    {
+      "id": "DQ248",
+      "status": 200,
+      "lane": "smalltalk",
+      "model_source": "cloud",
+      "latency_ms": 1751
+    },
+    {
+      "id": "DQ249",
+      "status": 200,
+      "lane": "smalltalk",
+      "model_source": "cloud",
+      "latency_ms": 1405
+    },
+    {
+      "id": "DQ250",
+      "status": 200,
+      "lane": "smalltalk",
+      "model_source": "cloud",
+      "latency_ms": 1821
+    }
+  ]
+}

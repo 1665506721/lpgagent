@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LPG 服务平台 首页</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "system-ui", "-apple-system", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-nav {
+            @apply bg-primary/10 text-primary;
+        }
+    </style>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-[#111418] dark:text-gray-100 antialiased">
+<div class="flex min-h-screen">
+<!-- Sidebar -->
+<aside class="w-64 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 flex flex-col fixed h-full z-20">
+<div class="p-6 flex items-center gap-3">
+<div class="bg-primary p-2 rounded-lg text-white">
+<span class="material-symbols-outlined text-2xl">propane_tank</span>
+</div>
+<h1 class="text-xl font-bold tracking-tight">LPG 服务平台</h1>
+</div>
+<nav class="flex-1 px-4 py-4 space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl bg-primary text-white font-medium" href="#">
+<span class="material-symbols-outlined">home</span>
+<span>首页</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors font-medium" href="#">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span>订气</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors font-medium" href="#">
+<span class="material-symbols-outlined">list_alt</span>
+<span>订单</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors font-medium" href="#">
+<span class="material-symbols-outlined">headset_mic</span>
+<span>客服</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors font-medium" href="#">
+<span class="material-symbols-outlined">person</span>
+<span>个人中心</span>
+</a>
+</nav>
+<div class="p-4 border-t border-gray-100 dark:border-gray-800">
+<div class="flex items-center gap-3 p-2">
+<div class="size-10 rounded-full bg-cover bg-center" data-alt="User profile avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAT7m839ukvUlosykROnPH-AIbG580zz8AzA5zIzKkyrnWscQCqA0u3xA4F-kQ-JCatBoMcvqJ3LDQGNnrqOXiyKLrBfpVeyMPnir9mdCdDpwJPDqdl3hDZThGdieVoXriD1qr35XEacEaGdFBIcT7JcpR4vcIz3z93Up464bRwY3-1AoAlXwLapSwCb01q-NejeErlAM7rv2aAO6swYP1sXdtzo-35n9GZ1LTqToRlc9-oUJoE6itT6P7ZXa-f6Iq8LfslGyYZcjU")'></div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-semibold truncate">张建国</p>
+<p class="text-xs text-gray-500 truncate">普通会员</p>
+</div>
+<span class="material-symbols-outlined text-gray-400">settings</span>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 ml-64 min-h-screen flex flex-col">
+<!-- Header -->
+<header class="h-16 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 flex items-center justify-between px-8 sticky top-0 z-10">
+<div class="max-w-md w-full">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">search</span>
+<input class="w-full bg-gray-100 dark:bg-gray-800 border-none rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary/50 transition-all" placeholder="搜索订单/服务/配件" type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 size-2 bg-red-500 rounded-full"></span>
+</button>
+<button class="p-2 text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg">
+<span class="material-symbols-outlined">dark_mode</span>
+</button>
+<div class="h-8 w-px bg-gray-200 dark:bg-gray-700 mx-2"></div>
+<button class="flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-primary/90 transition-colors">
+<span class="material-symbols-outlined text-sm">add</span>
+<span>快速下单</span>
+</button>
+</div>
+</header>
+<!-- Dashboard Content -->
+<div class="p-8 space-y-8">
+<!-- Welcome -->
+<section>
+<h2 class="text-2xl font-bold">你好，张先生</h2>
+<p class="text-gray-500 dark:text-gray-400 mt-1">欢迎回来，今天有什么可以帮您的？</p>
+</section>
+<!-- Common Services -->
+<section>
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-lg font-bold">常用服务</h3>
+<a class="text-primary text-sm font-medium hover:underline" href="#">查看全部</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
+<!-- Card 1 -->
+<div class="bg-white dark:bg-gray-900 p-6 rounded-2xl border border-gray-100 dark:border-gray-800 hover:shadow-lg transition-shadow cursor-pointer group">
+<div class="size-12 bg-blue-50 dark:bg-blue-900/30 text-primary rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl">gas_meter</span>
+</div>
+<h4 class="font-bold mb-1">瓶装气下单</h4>
+<p class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">极速送达，安全放心</p>
+</div>
+<!-- Card 2 -->
+<div class="bg-white dark:bg-gray-900 p-6 rounded-2xl border border-gray-100 dark:border-gray-800 hover:shadow-lg transition-shadow cursor-pointer group">
+<div class="size-12 bg-green-50 dark:bg-green-900/30 text-green-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl">autorenew</span>
+</div>
+<h4 class="font-bold mb-1">旧罐置换</h4>
+<p class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">以旧换新，合规处理</p>
+</div>
+<!-- Card 3 -->
+<div class="bg-white dark:bg-gray-900 p-6 rounded-2xl border border-gray-100 dark:border-gray-800 hover:shadow-lg transition-shadow cursor-pointer group">
+<div class="size-12 bg-purple-50 dark:bg-purple-900/30 text-purple-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl">build</span>
+</div>
+<h4 class="font-bold mb-1">安装预约</h4>
+<p class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">专业技师，上门安装</p>
+</div>
+<!-- Card 4 -->
+<div class="bg-white dark:bg-gray-900 p-6 rounded-2xl border border-gray-100 dark:border-gray-800 hover:shadow-lg transition-shadow cursor-pointer group">
+<div class="size-12 bg-orange-50 dark:bg-orange-900/30 text-orange-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl">gpp_maybe</span>
+</div>
+<h4 class="font-bold mb-1">安全检查</h4>
+<p class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">排查隐患，守护安全</p>
+</div>
+<!-- Card 5 -->
+<div class="bg-white dark:bg-gray-900 p-6 rounded-2xl border border-gray-100 dark:border-gray-800 hover:shadow-lg transition-shadow cursor-pointer group">
+<div class="size-12 bg-red-50 dark:bg-red-900/30 text-red-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl">construction</span>
+</div>
+<h4 class="font-bold mb-1">故障维修</h4>
+<p class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">快速响应，专业修缮</p>
+</div>
+<!-- Card 6 -->
+<div class="bg-white dark:bg-gray-900 p-6 rounded-2xl border border-gray-100 dark:border-gray-800 hover:shadow-lg transition-shadow cursor-pointer group">
+<div class="size-12 bg-cyan-50 dark:bg-cyan-900/30 text-cyan-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl">shopping_bag</span>
+</div>
+<h4 class="font-bold mb-1">配件商城</h4>
+<p class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">正品配件，质量保证</p>
+</div>
+</div>
+</section>
+<!-- Active Orders -->
+<section>
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-lg font-bold">正在进行的订单</h3>
+<span class="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full font-semibold">1 个进行中</span>
+</div>
+<div class="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 overflow-hidden shadow-sm">
+<div class="p-6">
+<div class="flex flex-col lg:flex-row gap-8">
+<!-- Order Status -->
+<div class="flex-1 flex items-start gap-4">
+<div class="size-14 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-2xl">local_shipping</span>
+</div>
+<div class="space-y-1">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 bg-blue-500 text-white text-[10px] rounded uppercase font-bold tracking-wider">正在派送</span>
+<span class="text-xs text-gray-400 font-mono">#ORD-2023082401</span>
+</div>
+<h4 class="text-xl font-bold">预计 30 分钟内送达</h4>
+<p class="text-sm text-gray-500 dark:text-gray-400">15kg 瓶装液化气 × 2</p>
+</div>
+</div>
+<!-- Driver Info -->
+<div class="flex items-center gap-4 lg:border-l border-gray-100 dark:border-gray-800 lg:pl-8">
+<div class="size-12 rounded-full bg-cover bg-center border-2 border-primary/20" data-alt="Delivery driver portrait" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB_HvAGx8MNxeV1uZwLA3sOjE0DvwnAjZSYD0dwjOxZeWbyWecO5IGpSXEt_mg675yuIsdryNBJfFR4sQr6T-ChGHHYqoOG9MfR0o1rEMQWGDPCuo6z28jkM_YASajom8lS95KlYlma-BZh06zNvYbn-fSTENQNEUqwwI_OSHyBAqVNoPG_NvSL57rtX-mhP5-988HSyUtVmfamCOT1nl7-2LIPKNyF0Zuow2IxarpZFOVc2TUSAaudIFjNmiEBG0URuJWzVRJjMCE")'></div>
+<div>
+<p class="text-xs text-gray-400">配送员</p>
+<p class="text-sm font-bold">李师傅 <span class="text-xs font-normal text-gray-400 ml-1">★ 4.9</span></p>
+</div>
+<div class="flex gap-2">
+<button class="p-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg text-primary transition-colors">
+<span class="material-symbols-outlined text-xl">call</span>
+</button>
+<button class="p-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg text-primary transition-colors">
+<span class="material-symbols-outlined text-xl">chat</span>
+</button>
+</div>
+</div>
+<!-- Quick Actions -->
+<div class="flex items-center gap-3 lg:border-l border-gray-100 dark:border-gray-800 lg:pl-8">
+<button class="px-6 py-2 border border-gray-200 dark:border-gray-700 rounded-lg text-sm font-semibold hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">查看详情</button>
+<button class="px-6 py-2 bg-primary text-white rounded-lg text-sm font-semibold hover:bg-primary/90 shadow-md shadow-primary/20 transition-all">确认收货</button>
+</div>
+</div>
+<!-- Progress Bar -->
+<div class="mt-8 pt-8 border-t border-gray-50 dark:border-gray-800/50">
+<div class="flex justify-between mb-4 px-2">
+<div class="flex flex-col items-center gap-2">
+<div class="size-4 rounded-full bg-primary border-4 border-primary/20"></div>
+<span class="text-[10px] text-gray-500 font-medium">下单成功</span>
+</div>
+<div class="flex-1 flex items-center px-2">
+<div class="h-1 flex-1 bg-primary rounded-full"></div>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="size-4 rounded-full bg-primary border-4 border-primary/20"></div>
+<span class="text-[10px] text-gray-500 font-medium">师傅接单</span>
+</div>
+<div class="flex-1 flex items-center px-2">
+<div class="h-1 flex-1 bg-primary rounded-full"></div>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="size-4 rounded-full bg-primary border-4 border-primary/20 relative">
+<div class="absolute -top-1 -left-1 size-6 bg-primary/20 rounded-full animate-ping"></div>
+</div>
+<span class="text-[10px] text-primary font-bold">正在派送</span>
+</div>
+<div class="flex-1 flex items-center px-2">
+<div class="h-1 flex-1 bg-gray-100 dark:bg-gray-800 rounded-full"></div>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="size-4 rounded-full bg-gray-200 dark:bg-gray-700 border-4 border-transparent"></div>
+<span class="text-[10px] text-gray-400 font-medium">已送达</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer Summary / Quick Stats -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-6 pb-8">
+<div class="bg-blue-600 rounded-2xl p-6 text-white relative overflow-hidden">
+<div class="relative z-10">
+<h4 class="text-sm font-medium opacity-80">本月用气量</h4>
+<div class="mt-2 flex items-baseline gap-2">
+<span class="text-3xl font-bold">45.8</span>
+<span class="text-sm opacity-80">kg</span>
+</div>
+<p class="mt-4 text-xs bg-white/20 inline-block px-2 py-1 rounded">同比上月下降 12%</p>
+</div>
+<span class="material-symbols-outlined absolute -right-4 -bottom-4 text-8xl opacity-10">monitoring</span>
+</div>
+<div class="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-6 flex items-center gap-4">
+<div class="size-12 bg-green-50 dark:bg-green-900/30 text-green-600 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined">verified</span>
+</div>
+<div>
+<h4 class="text-sm font-medium text-gray-500">安全评分</h4>
+<p class="text-2xl font-bold">优秀 (98)</p>
+<p class="text-[10px] text-gray-400 mt-1">下次安检日期：2024-03-20</p>
+</div>
+</div>
+<div class="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-6 flex items-center gap-4">
+<div class="size-12 bg-orange-50 dark:bg-orange-900/30 text-orange-600 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined">redeem</span>
+</div>
+<div>
+<h4 class="text-sm font-medium text-gray-500">积分余额</h4>
+<p class="text-2xl font-bold">1,240</p>
+<p class="text-[10px] text-primary mt-1 hover:underline cursor-pointer">兑换代金券 →</p>
+</div>
+</div>
+</section>
+</div>
+</main>
+</div>
+</body></html>

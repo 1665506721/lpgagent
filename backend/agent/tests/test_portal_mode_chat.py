@@ -9,7 +9,9 @@ from django.utils import timezone
 from customer_portal.constants import (
     DEFAULT_CURRENCY,
     ORDER_STATUS_COMPLETED,
+    ORDER_STATUS_PENDING_PAYMENT,
     ORDER_STATUS_PAID,
+    ORDER_STATUS_SCHEDULED,
     SERVICE_TYPE_ACCESSORIES,
     SERVICE_TYPE_LPG_CYLINDER_DELIVERY,
     SERVICE_TYPE_REPAIR,
@@ -72,8 +74,23 @@ class PortalModeChatTests(TestCase):
         self.assertEqual(response.status_code, 200)
         return response.json()
 
-    def _create_sample_order(self, order_no="LPG2026022500010001", payload_extra=None):
+    def _create_sample_order(
+        self,
+        order_no="LPG2026022500010001",
+        payload_extra=None,
+        *,
+        status=ORDER_STATUS_COMPLETED,
+        eta_start=None,
+        eta_end=None,
+        cancel_deadline=None,
+        address_edit_deadline=None,
+        is_urgent=False,
+    ):
         now = timezone.localtime(timezone.now())
+        resolved_eta_start = eta_start or (now - timedelta(days=1))
+        resolved_eta_end = eta_end or (resolved_eta_start + timedelta(hours=2))
+        resolved_cancel_deadline = cancel_deadline or (resolved_eta_start - timedelta(hours=1))
+        resolved_address_edit_deadline = address_edit_deadline or resolved_cancel_deadline
         service_payload = {"cylinder_type": "15kg", "quantity": 1}
         if isinstance(payload_extra, dict):
             service_payload.update(payload_extra)
@@ -81,12 +98,12 @@ class PortalModeChatTests(TestCase):
             order_no=order_no,
             user=self.user,
             service_type=SERVICE_TYPE_LPG_CYLINDER_DELIVERY,
-            status=ORDER_STATUS_COMPLETED,
-            eta_start=now - timedelta(days=1),
-            eta_end=now - timedelta(days=1) + timedelta(hours=2),
-            cancel_deadline=now - timedelta(days=1, hours=1),
-            address_edit_deadline=now - timedelta(days=1, hours=1),
-            is_urgent=False,
+            status=status,
+            eta_start=resolved_eta_start,
+            eta_end=resolved_eta_end,
+            cancel_deadline=resolved_cancel_deadline,
+            address_edit_deadline=resolved_address_edit_deadline,
+            is_urgent=is_urgent,
             notes="",
             amount_subtotal=Decimal("120.00"),
             amount_urgent_fee=Decimal("0.00"),
@@ -119,6 +136,96 @@ class PortalModeChatTests(TestCase):
         second = self._chat("今日液化气价格", run_id=first.get("run_id"))
         self.assertEqual((second.get("pending_action") or {}).get("type"), "CREATE_ORDER")
         self.assertIn("继续下单", second.get("final_response", ""))
+
+    def test_pending_order_invoice_toggle_updates_current_draft(self):
+        first = self._chat("我要下单 15kg 1瓶", force_new_run=True)
+        self.assertEqual((first.get("pending_action") or {}).get("type"), "CREATE_ORDER")
+
+        second = self._chat("开票改成是", run_id=first.get("run_id"))
+        pending2 = second.get("pending_action") or {}
+        draft2 = pending2.get("draft") or {}
+        self.assertEqual(pending2.get("type"), "CREATE_ORDER")
+        self.assertTrue(bool(draft2.get("need_invoice")))
+        self.assertIn("发票信息", str(draft2.get("notes") or ""))
+        self.assertIn("已将本单开票改为是", second.get("final_response", ""))
+        self.assertNotIn("企业开票流程", second.get("final_response", ""))
+
+        third = self._chat("不开票了", run_id=first.get("run_id"))
+        pending3 = third.get("pending_action") or {}
+        draft3 = pending3.get("draft") or {}
+        self.assertEqual(pending3.get("type"), "CREATE_ORDER")
+        self.assertFalse(bool(draft3.get("need_invoice")))
+        self.assertNotIn("发票信息", str(draft3.get("notes") or ""))
+        self.assertIn("已将本单开票改为否", third.get("final_response", ""))
+
+    def test_modify_address_without_order_no_auto_selects_latest_unshipped(self):
+        now = timezone.localtime(timezone.now())
+        self._create_sample_order(
+            order_no="LPG2026030600010001",
+            status=ORDER_STATUS_COMPLETED,
+            eta_start=now - timedelta(days=2),
+            eta_end=now - timedelta(days=2) + timedelta(hours=2),
+        )
+        paid = self._create_sample_order(
+            order_no="LPG2026030600010002",
+            status=ORDER_STATUS_PAID,
+            eta_start=now + timedelta(hours=5),
+            eta_end=now + timedelta(hours=7),
+            cancel_deadline=now + timedelta(hours=4),
+            address_edit_deadline=now + timedelta(hours=4),
+        )
+        scheduled = self._create_sample_order(
+            order_no="LPG2026030600010003",
+            status=ORDER_STATUS_SCHEDULED,
+            eta_start=now + timedelta(hours=8),
+            eta_end=now + timedelta(hours=10),
+            cancel_deadline=now + timedelta(hours=7),
+            address_edit_deadline=now + timedelta(hours=7),
+        )
+        PortalOrder.objects.filter(id=paid.id).update(created_at=now - timedelta(hours=2), updated_at=now - timedelta(hours=2))
+        PortalOrder.objects.filter(id=scheduled.id).update(created_at=now - timedelta(minutes=30), updated_at=now - timedelta(minutes=30))
+
+        data = self._chat("把这单改址到上海市徐汇区天钥桥路18号", force_new_run=True)
+        pending = data.get("pending_action") or {}
+        routing = data.get("routing") or {}
+        payload = pending.get("payload") or {}
+
+        self.assertEqual(pending.get("type"), "MODIFY_ADDRESS")
+        self.assertTrue(bool(data.get("confirm_required")))
+        self.assertTrue(bool(routing.get("default_order_selected")))
+        self.assertEqual(routing.get("default_order_no"), "LPG2026030600010003")
+        self.assertEqual(payload.get("order_no"), "LPG2026030600010003")
+        self.assertEqual((payload.get("payload") or {}).get("address_full"), "上海市徐汇区天钥桥路18号")
+        self.assertNotIn("把这单改址到", data.get("final_response", ""))
+
+    def test_modify_address_success_reply_contains_address_snapshot(self):
+        now = timezone.localtime(timezone.now())
+        order = self._create_sample_order(
+            order_no="LPG2026030600010004",
+            status=ORDER_STATUS_PENDING_PAYMENT,
+            eta_start=now + timedelta(hours=3),
+            eta_end=now + timedelta(hours=5),
+            cancel_deadline=now + timedelta(hours=2),
+            address_edit_deadline=now + timedelta(hours=2),
+        )
+        first = self._chat(
+            f"把订单号 {order.order_no} 改址到上海市长宁区仙霞路99号，联系人李华，电话18200001234",
+            force_new_run=True,
+        )
+        self.assertEqual((first.get("pending_action") or {}).get("type"), "MODIFY_ADDRESS")
+        self.assertTrue(bool(first.get("confirm_required")))
+
+        second = self._chat("确认", run_id=first.get("run_id"))
+        text = second.get("final_response", "")
+        self.assertIn("地址已更新", text)
+        self.assertIn("上海市长宁区仙霞路99号", text)
+        self.assertIn("李华", text)
+        self.assertIn("18200001234", text)
+
+        order.refresh_from_db()
+        self.assertIn("上海市长宁区仙霞路99号", (order.address_snapshot or {}).get("address_full", ""))
+        self.assertEqual((order.contact_snapshot or {}).get("contact_name"), "李华")
+        self.assertEqual((order.contact_snapshot or {}).get("contact_phone"), "18200001234")
 
     def test_inspection_query_returns_all_without_order_pick(self):
         self._create_sample_order(order_no="LPG2026022501110001")
@@ -233,6 +340,38 @@ class PortalModeChatTests(TestCase):
             is_default=False,
         )
         first = self._chat(f"删除地址ID {addr.id}")
+        self.assertTrue(first.get("confirm_required"))
+        self.assertEqual((first.get("pending_action") or {}).get("type"), "DELETE_ADDRESS")
+        second = self._chat("确认", run_id=first.get("run_id"))
+        self.assertIn("地址已删除", second.get("final_response", ""))
+        self.assertFalse(CustomerAddress.objects.filter(id=addr.id).exists())
+
+    def test_address_delete_accepts_id_colon_format(self):
+        addr = CustomerAddress.objects.create(
+            user=self.user,
+            contact_name="王五",
+            contact_phone="13900002222",
+            address_full="上海市杨浦区测试路66号",
+            door_note="5层",
+            is_default=False,
+        )
+        first = self._chat(f"删除地址ID: {addr.id}", force_new_run=True)
+        self.assertTrue(first.get("confirm_required"))
+        self.assertEqual((first.get("pending_action") or {}).get("type"), "DELETE_ADDRESS")
+        second = self._chat("确认", run_id=first.get("run_id"))
+        self.assertIn("地址已删除", second.get("final_response", ""))
+        self.assertFalse(CustomerAddress.objects.filter(id=addr.id).exists())
+
+    def test_address_delete_accepts_delete_id_without_address_word(self):
+        addr = CustomerAddress.objects.create(
+            user=self.user,
+            contact_name="赵六",
+            contact_phone="13900003333",
+            address_full="上海市普陀区测试路77号",
+            door_note="6层",
+            is_default=False,
+        )
+        first = self._chat(f"删除ID{addr.id}", force_new_run=True)
         self.assertTrue(first.get("confirm_required"))
         self.assertEqual((first.get("pending_action") or {}).get("type"), "DELETE_ADDRESS")
         second = self._chat("确认", run_id=first.get("run_id"))
@@ -565,6 +704,17 @@ class PortalModeChatTests(TestCase):
         self.assertEqual(routing.get("rag_topic_selected"), "safety_general")
         self.assertEqual(routing.get("safety_kind"), "general_qa")
         self.assertIn(routing.get("answer_source"), {"llm_direct", "typed_fallback"})
+
+    def test_safety_scene_short_followup_bypasses_general_ambiguity(self):
+        first = self._chat("燃气安全", force_new_run=True)
+        second = self._chat("餐饮", run_id=first.get("run_id"))
+        routing = second.get("routing") or {}
+        text = second.get("final_response", "")
+        self.assertFalse(bool(routing.get("clarify_needed")))
+        self.assertEqual(routing.get("safety_kind"), "general_qa")
+        self.assertIn(routing.get("answer_source"), {"llm_direct", "typed_fallback"})
+        self.assertNotIn("查询信息", text)
+        self.assertNotIn("直接办理业务", text)
 
     def test_safety_overview_request_can_use_general_five_points_template(self):
         data = self._chat("日常用气安全注意事项", force_new_run=True)
