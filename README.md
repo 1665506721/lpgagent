@@ -1,12 +1,13 @@
 ﻿# LPG-AI-Agent-Platform
 
-基于 `Django + DRF + React(Vite)` 的LPG客服与用户门户系统。项目重心在 Agent 对话质量、可执行工具链路与安全可控的业务编排。
+基于 `Django + DRF + React(Vite)` 的 LPG 客服与用户门户系统。项目重心在 Agent 对话质量、可执行工具链路、领域化 RAG，以及安全可控的业务编排。
 
 ## 1. 项目结构
-- `backend/`: Django 服务端（API、Agent 编排、Portal 业务、知识库检索）
+- `backend/`: Django 服务端（API、Agent 编排、Portal 业务、知识库检索与文档入库）
 - `frontend/`: React 前端（Portal 页面、聊天界面、订单/地址管理）
 - `docs/`: 方案、API、测试与架构文档
 - `spec/`: 规范与质量分析文档
+- `面试/`: 项目表达、RAG/Agent 构建路径、面试问答资料
 - `lpg_qwen25_7b_lora_adapter/`: 附带的 LoRA 微调适配器（实验用途）
 - `qwen25_7b_lpg_train_data_1000.jsonl`: 微调训练样本（脱敏示例数据）
 - `qwen25_7b_lpg_train_data_quality_report.json`: 训练数据质量报告
@@ -14,7 +15,7 @@
 ## 2. 附带微调模型说明
 仓库里附带了一个轻量微调资产，主要用于客服语气与领域表达实验，不作为生产默认模型强依赖。
 
-- 类型：Qwen2.5-7B 的 LoRA 适配器（目录：`lpg_qwen25_7b_lora_adapter/`），只用了1000条训练样本，效果有限（qwen25_7b_lpg_train_data_1000.jsonl），该模型适用于v1路径，有较多的兜底策略，效果不佳
+- 类型：Qwen2.5-7B 的 LoRA 适配器（目录：`lpg_qwen25_7b_lora_adapter/`），只用了 1000 条训练样本，效果有限
 - 用途：增强燃气客服场景下的术语表达、回复风格一致性
 - 当前定位：可选实验组件。线上主链路仍以规则编排 + 工具调用 + 可替换 LLM 为主
 - 建议：把微调模型作为“回复风格增强层”，不要绕过业务规则和写操作确认机制
@@ -83,60 +84,44 @@
 - 回答来源（LLM/RAG/模板兜底）
 - 状态转移
 
-### 4.8 前端页面说明
-当前前端页面是“功能优先”的实现，视觉层较简单，主要用于快速验证 Agent 能力与业务闭环。
+## 5. 当前 RAG / 知识库能力
+### 5.1 在线检索
+- 知识按 `biz` 和 `safety` 两个 domain 分 collection 管理
+- 向量库使用 `Chroma`
+- embedding 默认支持 `bge-m3 / Ollama / sentence-transformers fallback`
+- 在线链路包含 query rewrite、向量召回、轻量重排、LLM 证据型组织回答
 
-页面现状：
-- 覆盖核心流程（聊天、订单、地址、通知）
-- 便于联调和回归测试
-- 交互和视觉仍可继续工程化优化（设计系统、组件统一、可访问性、移动端细节）
+### 5.2 文档入库
+当前已支持：
+- PDF
+- DOCX
+- Markdown
+- TXT
+- XLSX
+- PNG / JPG / JPEG
 
-### 4.9 Agent 架构设计（消息处理流程）
-核心组件分层：
-- `API 接入层`：接收 `/api/chat` 请求，校验用户态与参数。
-- `编排层 (portal_orchestrator)`：统一做路由、状态机推进、策略控制。
-- `能力层 (tools + services)`：执行查询和写操作（地址、订单、购物车、通知等）。
-- `知识层 (RAG)`：在需要事实依据时检索业务/安全知识库。
-- `生成层 (LLM)`：负责自然语言表达，不直接越权执行写操作。
-- `记忆与审计`：会话记忆（memory_json）与 AgentEvent 事件链回放。
+当前入库链路包含：
+- 文档解析
+- OCR fallback（图片与扫描 PDF）
+- 文本清洗
+- 差异化 chunk（FAQ/QA、标题章节、段落 + overlap）
+- embedding 生成
+- 向量入库
+- 文档版本管理（`replace / keep_history`）
+- 删除与重建索引
 
-下面是收到一条用户消息后的处理流程（Mermaid）：
-
-```mermaid
-flowchart TD
-    A["用户消息 /api/chat"] --> B["预处理与安全检查<br/>认证/策略/高风险拦截"]
-    B --> C{"是否存在 pending_action"}
-    C -->|是| D["Pending 状态机<br/>COLLECTING / AWAIT_CONFIRM / PARTIAL_DONE"]
-    D --> E{"用户是否确认执行"}
-    E -->|确认| F["调用 Tools 执行写操作<br/>按顺序落地并记录事件"]
-    E -->|未确认| G["继续收集缺失槽位或允许修改草稿"]
-
-    C -->|否| H["Query-First 路由<br/>任务类型 + 实体识别"]
-    H --> I{"查询强命中?"}
-    I -->|是| J["查询执行器<br/>调用工具并结构化返回"]
-    I -->|否| K{"是否动作意图?"}
-    K -->|是| L["创建 pending_action<br/>进入确认式办理流程"]
-    K -->|否| M["非动作问答链路"]
-
-    M --> N{"安全高风险?"}
-    N -->|是| O["应急模板 + 热线提醒"]
-    N -->|否| P{"需要 RAG?"}
-    P -->|是| Q["RAG 检索 safety/biz 知识库"]
-    Q --> R["LLM 组织答案（带证据语义）"]
-    P -->|否| S["LLM 直答（人格与风格约束）"]
-
-    F --> T["统一响应封装<br/>final_response + routing + pending_action"]
-    G --> T
-    J --> T
-    L --> T
-    O --> T
-    R --> T
-    S --> T
-    T --> U["写入 AgentEvent 与会话记忆<br/>返回前端展示"]
+### 5.3 常用命令
+```bash
+cd backend
+python manage.py rebuild_kb --domain safety --force
+python manage.py rebuild_kb --domain biz --force
+python manage.py ingest_documents --file C:\docs\manual.pdf --domain biz
+python manage.py ingest_documents --dir C:\docs\kb --domain safety --versioning-strategy keep_history
+python manage.py reindex_document --doc-id doc_xxx
 ```
 
-## 5. 快速启动（本地）
-### 5.1 后端
+## 6. 快速启动（本地）
+### 6.1 后端
 ```bash
 cd backend
 python -m venv .venv
@@ -150,7 +135,7 @@ python manage.py migrate
 python manage.py runserver
 ```
 
-### 5.2 前端
+### 6.2 前端
 ```bash
 cd frontend
 npm install
@@ -161,9 +146,15 @@ npm run dev
 - 后端：`http://localhost:8000`
 - 前端：`http://localhost:5173`
 
-## 6. 测试命令（推荐）
+## 7. 测试命令（推荐）
 ```bash
 python backend/manage.py test
+```
+
+RAG / 入库最少验证：
+```bash
+python backend/manage.py check
+python backend/manage.py test knowledge_base.tests core.tests.test_tools_api --verbosity 1
 ```
 
 只验证 Portal V2 关键链路：
@@ -171,17 +162,12 @@ python backend/manage.py test
 python backend/manage.py test agent.tests.test_portal_mode_chat agent.tests.test_portal_mode_chat_rag_memory
 ```
 
-## 7. RAG / 知识库
-重建索引示例：
-```bash
-cd backend
-python manage.py rebuild_kb --domain safety --force
-python manage.py rebuild_kb --domain biz --force
-```
-
-
-## 10. 相关文档
+## 8. 文档导航
+- 后端说明：`backend/README.md`
+- 架构说明：`docs/rag_architecture.md`
+- 非结构化入库更新：`docs/rag_unstructured_ingestion_update_20260310.md`
+- 面试版 RAG 路径：`面试/13-RAG构建路径.md`
+- 面试版 Agent 路径：`面试/14-Agent构建路径.md`
 - Portal API：`docs/portal_api.md`
 - 路由/对话改造方案：`docs/agent_routing_v2_plan.md`
 - 测试与质量：`docs/dialog_quality_testkit.md`
-- 后端说明：`backend/README.md`

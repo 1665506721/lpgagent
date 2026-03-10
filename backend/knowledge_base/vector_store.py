@@ -29,6 +29,8 @@ COLLECTIONS = {
     SAFETY_DOMAIN: "safety_kb",
     BIZ_DOMAIN: "biz_kb",
 }
+LEGACY_RECORD_TYPE = "legacy_markdown"
+INGESTED_RECORD_TYPE = "ingested_document"
 
 
 class SimpleEmbeddingFunction:
@@ -170,10 +172,38 @@ def _get_collection(client, domain, embedding_function):
     collection_name = COLLECTIONS.get(domain)
     if not collection_name:
         raise ValueError(f"Unsupported domain: {domain}")
-    return client.get_or_create_collection(
-        name=collection_name,
-        embedding_function=embedding_function,
-    )
+    return client.get_or_create_collection(name=collection_name, embedding_function=embedding_function)
+
+
+def _persistent_client():
+    PERSIST_DIR.mkdir(parents=True, exist_ok=True)
+    return chromadb.PersistentClient(path=str(PERSIST_DIR))
+
+
+def _collection_ids(collection, where):
+    try:
+        result = collection.get(where=where)
+    except Exception:
+        return []
+    ids = result.get("ids") or []
+    return [item for item in ids if item]
+
+
+def _serialize_metadata_value(value):
+    if value is None:
+        return ""
+    if isinstance(value, bool):
+        return value
+    if isinstance(value, (int, float)):
+        return value
+    return str(value)
+
+
+def _prepare_metadata(metadata):
+    output = {}
+    for key, value in (metadata or {}).items():
+        output[key] = _serialize_metadata_value(value)
+    return output
 
 
 def _index_domain_docs(domain, collection):
@@ -187,28 +217,36 @@ def _index_domain_docs(domain, collection):
         chunks = chunk_document(doc)
         for index, chunk in enumerate(chunks):
             doc_id = doc["doc_id"]
-            chunk_id = f"{doc_id}::chunk::{index}"
+            chunk_id = f"legacy::{doc_id}::chunk::{index}"
             chunk_text = "\n".join(chunk)
             ids.append(chunk_id)
             texts.append(chunk_text)
             meta = doc.get("meta", {})
             metadatas.append(
-                {
-                    "doc_id": doc_id,
-                    "title": doc["title"],
-                    "bullets": chunk_text,
-                    "tags": ",".join(doc.get("tags", [])),
-                    "aliases": ",".join(doc.get("aliases", [])),
-                    "intent_tags": ",".join(doc.get("intent_tags", [])),
-                    "domain": domain,
-                    "topic": meta.get("topic", ""),
-                    "risk_level": meta.get("risk_level", ""),
-                    "policy_type": meta.get("policy_type", ""),
-                    "policy_level": meta.get("policy_level", ""),
-                    "source": meta.get("source", ""),
-                    "updated_at": meta.get("updated_at", ""),
-                    "chunk_index": index,
-                }
+                _prepare_metadata(
+                    {
+                        "doc_id": doc_id,
+                        "parent_doc_id": doc_id,
+                        "title": doc["title"],
+                        "bullets": chunk_text,
+                        "tags": ",".join(doc.get("tags", [])),
+                        "aliases": ",".join(doc.get("aliases", [])),
+                        "intent_tags": ",".join(doc.get("intent_tags", [])),
+                        "domain": domain,
+                        "topic": meta.get("topic", ""),
+                        "risk_level": meta.get("risk_level", ""),
+                        "policy_type": meta.get("policy_type", ""),
+                        "policy_level": meta.get("policy_level", ""),
+                        "source": meta.get("source", "") or doc_id,
+                        "file_name": f"{doc_id}.md",
+                        "doc_type": "markdown",
+                        "updated_at": meta.get("updated_at", ""),
+                        "chunk_index": index,
+                        "record_type": LEGACY_RECORD_TYPE,
+                        "version": 1,
+                        "is_active": True,
+                    }
+                )
             )
             chunk_count += 1
 
@@ -218,40 +256,63 @@ def _index_domain_docs(domain, collection):
 
 
 def build_or_load_vector_store(domain):
-    PERSIST_DIR.mkdir(parents=True, exist_ok=True)
-    client = chromadb.PersistentClient(path=str(PERSIST_DIR))
+    client = _persistent_client()
     embedding_function = _get_embedding_function()
     collection = _get_collection(client, domain, embedding_function)
-
     if collection.count() == 0:
+        _index_domain_docs(domain, collection)
+        return collection
+    legacy_ids = _collection_ids(collection, {"record_type": LEGACY_RECORD_TYPE})
+    if not legacy_ids:
         _index_domain_docs(domain, collection)
     return collection
 
 
 def rebuild_vector_store(domain, force=False):
-    PERSIST_DIR.mkdir(parents=True, exist_ok=True)
-    client = chromadb.PersistentClient(path=str(PERSIST_DIR))
+    client = _persistent_client()
     embedding_function = _get_embedding_function()
-    collection_name = COLLECTIONS.get(domain)
-    if not collection_name:
-        raise ValueError(f"Unsupported domain: {domain}")
-
-    if force:
-        try:
-            client.delete_collection(collection_name)
-        except Exception:
-            pass
-
     collection = _get_collection(client, domain, embedding_function)
+    legacy_ids = _collection_ids(collection, {"record_type": LEGACY_RECORD_TYPE})
+    if legacy_ids:
+        collection.delete(ids=legacy_ids)
     doc_count, chunk_count = _index_domain_docs(domain, collection)
     output = {
         "documents": doc_count,
         "chunks": chunk_count,
-        "collection": collection_name,
+        "collection": COLLECTIONS[domain],
         "persist_path": str(PERSIST_DIR),
     }
     output.update(_embedding_meta())
     return output
+
+
+def add_ingested_chunks(domain, chunks):
+    if not chunks:
+        return 0
+    collection = build_or_load_vector_store(domain)
+    ids = [chunk.chunk_id for chunk in chunks]
+    texts = [chunk.text for chunk in chunks]
+    metadatas = [_prepare_metadata(chunk.metadata) for chunk in chunks]
+    collection.add(ids=ids, documents=texts, metadatas=metadatas)
+    return len(ids)
+
+
+def delete_by_doc_id(domain, doc_id):
+    collection = build_or_load_vector_store(domain)
+    ids = _collection_ids(collection, {"parent_doc_id": doc_id})
+    if not ids:
+        ids = _collection_ids(collection, {"doc_id": doc_id})
+    if ids:
+        collection.delete(ids=ids)
+    return len(ids)
+
+
+def delete_by_source(domain, source):
+    collection = build_or_load_vector_store(domain)
+    ids = _collection_ids(collection, {"source": source})
+    if ids:
+        collection.delete(ids=ids)
+    return len(ids)
 
 
 def retrieve_knowledge(domain, query, top_k=4):
@@ -275,12 +336,16 @@ def retrieve_knowledge(domain, query, top_k=4):
             score = 1.0 / (1.0 + float(distance))
         meta = {}
         if metadata:
-            for key in ["risk_level", "policy_type", "policy_level", "source", "topic", "updated_at"]:
-                if metadata.get(key):
+            for key in ["risk_level", "policy_type", "policy_level", "source", "topic", "updated_at", "version", "doc_type", "file_name", "section", "page_num"]:
+                if metadata.get(key) not in (None, ""):
                     meta[key] = metadata.get(key)
         bullets = metadata.get("bullets", []) if metadata else []
         if isinstance(bullets, str):
             bullets = [item for item in bullets.splitlines() if item.strip()]
+        if not bullets:
+            doc_text = metadata.get("text", "") if metadata else ""
+            if isinstance(doc_text, str) and doc_text.strip():
+                bullets = [item for item in doc_text.splitlines() if item.strip()]
         tags = metadata.get("tags", "") if metadata else ""
         if isinstance(tags, str):
             tags = [item.strip() for item in tags.split(",") if item.strip()]
@@ -292,7 +357,7 @@ def retrieve_knowledge(domain, query, top_k=4):
             intent_tags = [item.strip() for item in intent_tags.split(",") if item.strip()]
         output.append(
             {
-                "doc_id": metadata.get("doc_id", doc_id),
+                "doc_id": metadata.get("doc_id", metadata.get("parent_doc_id", doc_id)),
                 "title": metadata.get("title", ""),
                 "bullets": bullets,
                 "score": round(score, 3),
@@ -310,7 +375,7 @@ def get_kb_status():
     if not PERSIST_DIR.exists():
         return {"ok": False, "domain": [], "error": "NOT_CONFIGURED"}
     try:
-        client = chromadb.PersistentClient(path=str(PERSIST_DIR))
+        client = _persistent_client()
         existing = {collection.name for collection in client.list_collections()}
         domains = [domain for domain, collection_name in COLLECTIONS.items() if collection_name in existing]
         if not domains:
@@ -320,3 +385,4 @@ def get_kb_status():
         return out
     except Exception as exc:
         return {"ok": False, "domain": [], "error": str(exc)}
+

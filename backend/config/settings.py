@@ -22,7 +22,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "core.apps.CoreConfig",
     "customer_portal.apps.CustomerPortalConfig",
-    "knowledge_base",
+    "knowledge_base.apps.KnowledgeBaseConfig",
 ]
 
 MIDDLEWARE = [
